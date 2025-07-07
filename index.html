@@ -7,87 +7,88 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Arial', sans-serif;
       background: url('./assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
-      color: white;
+      color: #fff;
       text-align: center;
-      padding: 2rem;
     }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    h2 {
-      font-size: 2rem;
-      margin-top: 0;
-    }
-
-    p {
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin: 0 auto 2rem;
-    }
-
     .login-container {
       background-color: rgba(0, 0, 0, 0.8);
+      max-width: 400px;
+      margin: 100px auto;
       padding: 2rem;
       border-radius: 12px;
-      max-width: 400px;
-      margin: 0 auto;
-      box-shadow: 0 0 20px #00ff88;
+      box-shadow: 0 0 12px #00ff88;
     }
-
-    input[type="email"],
-    input[type="password"] {
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    input {
       width: 100%;
       padding: 12px;
       margin: 0.5rem 0;
-      border-radius: 8px;
+      border-radius: 6px;
       border: none;
       font-size: 1rem;
     }
-
     button {
       width: 100%;
       padding: 12px;
       background-color: #00ff88;
       color: black;
-      font-weight: bold;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
+      font-weight: bold;
       font-size: 1rem;
-      margin-top: 1rem;
       cursor: pointer;
     }
-
-    .register-link {
-      margin-top: 1rem;
-      display: block;
-      font-size: 0.95rem;
-    }
-
-    .register-link a {
+    a {
       color: #00ff88;
       text-decoration: underline;
+      display: block;
+      margin-top: 1rem;
     }
   </style>
 </head>
 <body>
-  <h1>GrowEmpire</h1>
-  <h2>Willkommen bei GrowEmpire</h2>
-  <p>Baue dein virtuelles Hanf-Imperium auf – starte mit deiner Box, pflanze, ernte und verdiene. Alles vollautomatisch. Alles profitabel.</p>
-
   <div class="login-container">
-    <h2>GrowEmpire Login</h2>
-    <input type="email" placeholder="E-Mail" />
-    <input type="password" placeholder="Passwort" />
-    <button>Einloggen</button>
-    <div class="register-link">
-      Noch kein Account? <a href="register.html">Hier registrieren</a>
-    </div>
+    <h1>GrowEmpire Login</h1>
+    <input type="email" id="email" placeholder="E-Mail" />
+    <input type="password" id="password" placeholder="Passwort" />
+    <button onclick="login()">Einloggen</button>
+    <a href="register.html">Noch kein Account? Hier registrieren</a>
   </div>
+
+  <script>
+    async function login() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      if (!email || !password) {
+        alert("Bitte E-Mail und Passwort eingeben.");
+        return;
+      }
+
+      const res = await fetch("https://afquciketcteqqynucet.supabase.co/auth/v1/token?grant_type=password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXVjaWtldGN0ZXFxeW51Y2V0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE4NzQxODYsImV4cCI6MjA2NzQ1MDE4Nn0.Mg247BH4XribwIICKLHu1IUCX50nbSdmK34JniLBPzY"
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await res.json();
+
+      if (data.access_token) {
+        localStorage.setItem("user_email", email);
+        window.location.href = "dashboard.html";
+      } else {
+        alert("Login fehlgeschlagen. Bitte überprüfe deine Daten.");
+      }
+    }
+  </script>
 </body>
 </html>
