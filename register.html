@@ -39,15 +39,6 @@
       cursor: pointer;
       margin-top: 1rem;
     }
-    .agb-hinweis {
-      font-size: 0.9rem;
-      margin-top: 1rem;
-    }
-    .agb-hinweis a {
-      color: #00ff88;
-      text-decoration: underline;
-      cursor: pointer;
-    }
     .popup {
       position: fixed;
       top: 0;
@@ -60,21 +51,37 @@
       justify-content: center;
       align-items: center;
       padding: 2rem;
+      z-index: 9999;
     }
     .popup-content {
       background: black;
       border: 2px solid #00ff88;
       padding: 2rem;
       border-radius: 8px;
-      max-height: 80vh;
+      max-height: 90vh;
+      max-width: 90vw;
       overflow-y: auto;
-      max-width: 700px;
       text-align: left;
       color: #ccc;
+      box-sizing: border-box;
+    }
+    .popup-content h2 {
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .popup-content p {
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      line-height: 1.6;
     }
     .popup button {
       background: red;
       color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
       margin-top: 1rem;
     }
   </style>
@@ -95,57 +102,19 @@
 
   <div class="popup" id="agbPopup">
     <div class="popup-content">
-      <h2>Allgemeine Geschäftsbedingungen (AGB)</h2>
-      <p>
-        Willkommen bei GrowEmpire. Durch deine Registrierung und Nutzung unserer Plattform erklärst du dich mit den folgenden Bedingungen uneingeschränkt einverstanden.  
-        <br /><br />
-
-        <strong>1. Plattformcharakter</strong><br />
-        GrowEmpire ist eine digitale Plattform, die ausschließlich der Simulation eines symbolischen Pflanzensystems dient. Es handelt sich hierbei um ein virtuelles Unterhaltungs- und Simulationsmodell. Alle Inhalte, Erträge, Pflanzen und Flächen existieren ausschließlich in digitaler Form. Es findet zu keinem Zeitpunkt ein realer Pflanzenanbau oder physischer Warenaustausch statt.  
-        <br /><br />
-
-        <strong>2. Teilnahme & Nutzung</strong><br />
-        Die Registrierung ist freiwillig. Es besteht kein Anspruch auf Zugang zur Plattform. GrowEmpire kann Registrierungen ohne Angabe von Gründen verweigern oder löschen. Nutzer verpflichten sich, korrekte und vollständige Angaben zu machen. Die Nutzung erfolgt auf eigene Gefahr.  
-        <br /><br />
-
-        <strong>3. Lizenzmodelle & virtuelle Produkte</strong><br />
-        Die angebotenen Lizenzpakete (z. B. Lizenz, Pro, Premium) sind virtuelle Nutzungsrechte, die innerhalb der Plattform bestimmte Funktionen freischalten – etwa Anbauflächen, Ertragsoptionen, Reinvest-Funktionen oder Partner-Level. Diese Produkte stellen keine echten Investitionen oder materiellen Güter dar.  
-        <br /><br />
-
-        <strong>4. Ertragsdarstellung</strong><br />
-        Die angezeigten Erträge (z. B. 20 %, 30 %) symbolisieren das Wachstum virtueller Pflanzen. Sie basieren auf simulierten Zeitabläufen und Bedingungen innerhalb des Systems. Diese Erträge sind rein digital, nicht garantiert und abhängig von Lizenzstatus, Reinvestments, Downline-Aktivität und Systemkonfiguration. Es besteht kein rechtlicher Anspruch auf Erträge oder Wertsteigerungen.  
-        <br /><br />
-
-        <strong>5. Auszahlung</strong><br />
-        GrowEmpire ermöglicht unter gewissen Bedingungen die Auszahlung eines virtuellen Ertrages in Form echter Währung. Die Auszahlung ist jedoch nicht garantiert und erfolgt ausschließlich, wenn bestimmte systeminterne Bedingungen erfüllt sind – z. B. vollständige Deckung durch Reinvestments, geworbene Partner oder Umsatzaktivität in der eigenen Downline.  
-        GrowEmpire ist nicht verpflichtet, Auszahlungen durchzuführen, wenn diese Voraussetzungen nicht erfüllt sind. Nutzer erkennen an, dass Auszahlungen freiwillig gewährt werden können, aber keinen einklagbaren Anspruch darstellen.  
-        <br /><br />
-
-        <strong>6. Partnerprogramm</strong><br />
-        Nutzer können andere Nutzer über persönliche Empfehlungslinks werben. Dafür erhalten sie – je nach Lizenz – Provisionen oder Boni, die in Form virtueller Werte im Dashboard erscheinen. Das Partnerprogramm ist Teil des simulierten Systems und stellt keine gewerbliche oder lohnabhängige Tätigkeit dar.  
-        <br /><br />
-
-        <strong>7. Kontosperrung & Missbrauch</strong><br />
-        GrowEmpire behält sich das Recht vor, Konten ohne Vorankündigung zu sperren oder zu löschen, wenn Verstöße gegen diese AGB, Manipulationen, Falschangaben oder schädliches Verhalten festgestellt werden. Bei Missbrauch oder Umgehung von Systemmechanismen entfällt jeglicher Anspruch auf virtuelle oder reale Leistungen.  
-        <br /><br />
-
-        <strong>8. Datenschutz</strong><br />
-        Alle angegebenen Daten werden gemäß unserer Datenschutzrichtlinie verarbeitet. Daten werden nicht an Dritte weitergegeben, es sei denn, dies ist gesetzlich vorgeschrieben oder zur Abwicklung einer beantragten Auszahlung notwendig.  
-        <br /><br />
-
-        <strong>9. Haftungsausschluss</strong><br />
-        GrowEmpire übernimmt keine Haftung für technische Ausfälle, Datenverlust, Systemunterbrechungen oder unvollständige Informationen. Die Nutzung erfolgt in vollem Umfang auf eigenes Risiko.  
-        <br /><br />
-
-        <strong>10. Änderungen & Gültigkeit</strong><br />
-        GrowEmpire kann diese AGB jederzeit ändern. Die jeweils aktuelle Version ist für alle Nutzer verbindlich. Mit jeder Anmeldung erklären sich Nutzer automatisch mit der neuesten Fassung einverstanden.  
-        <br /><br />
-
-        <strong>11. Schlussbestimmungen</strong><br />
-        Diese AGB unterliegen – je nach Nutzungsland – dem lokal geltenden Recht. Sollten einzelne Punkte unwirksam sein, bleibt der Rest der AGB davon unberührt.  
-        <br /><br />
-        Mit der Registrierung erklärst du dich mit diesen Bedingungen einverstanden.
-      </p>
+      <h2>Allgemeine Geschäftsbedingungen</h2>
+      <p>1. Die Nutzung dieser Plattform erfolgt auf eigene Verantwortung. Nutzer akzeptieren alle Risiken im Zusammenhang mit der Teilnahme.</p>
+      <p>2. Die Inhalte und Angebote auf GrowEmpire stellen keine Finanzberatung oder Anlageempfehlung dar.</p>
+      <p>3. Es besteht keine rechtliche Garantie auf Gewinne. Unsere Ertragsmodelle sind auf mathematisch simulierten Szenarien aufgebaut. Dennoch werden bei aktiver Nutzung, Anbau und Reinvestition reale Auszahlungen ermöglicht – die Erfolgsquote ist abhängig von der Aktivität des Nutzers.</p>
+      <p>4. Alle getätigten Einzahlungen gelten als Zugang zu einer Lizenz oder Fläche. Diese sind virtuelle Module und dienen ausschließlich dem Zweck der Teilnahme innerhalb des Systems.</p>
+      <p>5. Bei Auszahlung wird eine Identitätsprüfung verlangt. Unvollständige oder falsche Angaben können zur Ablehnung oder Verzögerung führen.</p>
+      <p>6. Reinvestitionen sind freiwillig, beeinflussen aber den potenziellen Ertrag. Wer nicht reinvestiert, profitiert nicht von möglichen Boni.</p>
+      <p>7. GrowEmpire behält sich vor, Nutzerkonten jederzeit zu prüfen und ggf. zu deaktivieren, wenn Missbrauch oder schädliches Verhalten festgestellt wird.</p>
+      <p>8. Datenschutz: Alle personenbezogenen Daten werden DSGVO-konform gespeichert. Eine Weitergabe an Dritte erfolgt nicht, außer gesetzlich vorgeschrieben oder zur Auszahlung notwendig.</p>
+      <p>9. GrowEmpire übernimmt keine Haftung für technische Ausfälle, Datenverluste oder Systemausfälle. Die Nutzung erfolgt auf eigenes Risiko.</p>
+      <p>10. Änderungen der AGB können jederzeit vorgenommen werden. Die aktuellste Fassung ist für alle Nutzer verbindlich.</p>
+      <p>11. Diese AGB unterliegen dem schweizerischen Recht. Unwirksame Klauseln berühren nicht die Wirksamkeit der übrigen Regelungen.</p>
+      <p>Mit dem Setzen des Häkchens erklärst du dich mit diesen Bedingungen einverstanden.</p>
       <button onclick="closeAGB()">Schließen</button>
     </div>
   </div>
@@ -157,7 +126,6 @@
     function closeAGB() {
       document.getElementById('agbPopup').style.display = 'none';
     }
-
     function register() {
       const email = document.getElementById('email').value;
       const username = document.getElementById('username').value;
@@ -181,16 +149,16 @@
         },
         body: JSON.stringify({ email, password })
       })
-      .then(res => res.json())
-      .then(data => {
-        if (data.user) {
-          localStorage.setItem("user_email", email);
-          localStorage.setItem("username", username);
-          window.location.href = "index.html";
-        } else {
-          alert('Registrierung fehlgeschlagen.');
-        }
-      });
+        .then(res => res.json())
+        .then(data => {
+          if (data.user) {
+            localStorage.setItem("user_email", email);
+            localStorage.setItem("username", username);
+            window.location.href = "index.html";
+          } else {
+            alert('Registrierung fehlgeschlagen.');
+          }
+        });
     }
   </script>
 </body>
