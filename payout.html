@@ -2,107 +2,159 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GrowEmpire Ernteübersicht</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auszahlung – GrowEmpire</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body {
       margin: 0;
-      font-family: Orbitron, sans-serif;
-      background-image: url('assets/dashboard.png');
+      font-family: 'Inter', sans-serif;
+      background: url('./assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
-      background-position: center;
       color: #00ff88;
-      overflow-x: hidden;
     }
 
-    .container {
-      max-width: 420px;
-      margin: 60px auto;
-      padding: 30px;
-      background-color: rgba(0, 0, 0, 0.85);
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      border-bottom: 2px solid #00ff88;
+      box-shadow: 0 0 12px #00ff88;
+      z-index: 998;
+      display: flex;
+      align-items: center;
+      padding-left: 20px;
+      height: 100px;
+    }
+
+    .menu-icon {
+      background: rgba(0, 255, 136, 0.1);
+      color: #00ff88;
+      border: 2px solid #00ff88;
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00ff88;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.95);
+      border: 2px solid #00ff88;
+      border-radius: 12px;
+      padding: 0.5rem;
+      min-width: 200px;
+      box-shadow: 0 0 12px #00ff88;
+      z-index: 999;
+    }
+
+    .dropdown-menu a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 10px;
+      color: #00ff88;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+
+    .dropdown-menu a:hover {
+      background: rgba(0, 255, 136, 0.08);
+    }
+
+    .content {
+      max-width: 700px;
+      margin: 140px auto 40px;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.8);
       border-radius: 15px;
       border: 2px solid #00ff88;
-      box-shadow: 0 0 25px #00ff88;
+      box-shadow: 0 0 15px #00ff88;
       text-align: center;
-      position: relative;
     }
 
-    .container h2 {
-      font-size: 1.8rem;
-      margin-bottom: 20px;
-    }
-
-    .stats {
-      font-size: 1rem;
-      margin: 5px 0;
-      color: #ccc;
-    }
-
-    .highlight {
+    .content h1 {
+      margin-bottom: 1rem;
       color: #00ff88;
-      font-weight: bold;
     }
 
-    .message {
-      margin: 20px 0;
+    .content p {
       font-size: 1.1rem;
-      font-weight: bold;
-      color: #ffffff;
+      color: #eee;
     }
 
-    .button {
-      display: block;
-      width: 80%;
-      margin: 10px auto;
-      padding: 12px;
+    .btn {
       background-color: #00ff88;
-      color: #000;
-      font-weight: bold;
+      color: black;
+      padding: 12px 20px;
+      margin: 10px;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
       font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
     }
 
-    .button:hover {
-      background-color: #00ffaa;
-    }
-
-    .close-button {
-      position: absolute;
-      top: 12px;
-      right: 15px;
-      font-size: 1.5rem;
-      color: #00ff88;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
-
-    .close-button:hover {
-      transform: scale(1.2);
-      color: #00ffaa;
+    .btn:hover {
+      background-color: #00cc66;
     }
   </style>
 </head>
 <body>
-
-  <div class="container">
-    <div class="close-button" onclick="window.location.href='dashboard.html'">✖</div>
-
-    <h2><i class="fa-solid fa-money-bill-trend-up"></i> Deine Ernteübersicht</h2>
-    
-    <p class="stats">Du hast <span class="highlight">0</span> Pflanze(n) geerntet.</p>
-    <p class="stats">Gesamt-Ertrag: <span class="highlight">CHF 0.–</span></p>
-    <p class="stats">Gedeckt: <span class="highlight">CHF 0.–</span></p>
-    <p class="stats">Fehlbetrag: <span class="highlight">CHF 0.–</span></p>
-
-    <p class="message">🌱 Du hast aktuell keine erntebereiten Pflanzen.</p>
-
-    <button class="button">🔁 Reinvest</button>
-    <button class="button">💸 Auszahlung</button>
+  <!-- Menü -->
+  <div class="topbar">
+    <div class="menu-wrapper">
+      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+      <div class="dropdown-menu" id="dropdown">
+        <a href="dashboard.html">📈 Dashboard</a>
+        <a href="plants.html">🌱 Pflanzen</a>
+        <a href="partner.html">🧑‍🤝‍🧑 Partner</a>
+        <a href="lizenz.html">📦 Lizenz</a>
+        <a href="settings.html">⚙️ Einstellungen</a>
+        <a href="payout.html">💸 Auszahlung</a>
+        <a href="index.html">🔴 Logout</a>
+      </div>
+    </div>
   </div>
 
+  <!-- Hauptbereich -->
+  <div class="content">
+    <h1>💰 Auszahlung & Reinvest</h1>
+    <p>Du hast die Möglichkeit, deine Ernte auszuzahlen oder direkt reinvestieren.</p>
+
+    <button class="btn" onclick="zurBank()">🏦 Auszahlen</button>
+    <button class="btn" id="reinvestBtn">♻️ Reinvestieren mit Bonus</button>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("dropdown");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
+    window.addEventListener("click", function (e) {
+      const menu = document.getElementById("dropdown");
+      if (!e.target.closest(".menu-wrapper")) {
+        menu.style.display = "none";
+      }
+    });
+
+    function zurBank() {
+      alert("Auszahlung wird vorbereitet – bitte Bankdaten angeben.");
+      // hier kannst du später redirect zu einer Auszahlseite machen
+    }
+
+    document.getElementById("reinvestBtn").addEventListener("click", () => {
+      localStorage.setItem("reinvestAktiv", "true");
+      window.location.href = "plants.html";
+    });
+  </script>
 </body>
 </html>
