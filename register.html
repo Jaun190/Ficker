@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="de">
+<!DOCTYPE html><html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -60,21 +59,28 @@
       justify-content: center;
       align-items: center;
       padding: 2rem;
+      overflow: auto;
+      box-sizing: border-box;
     }
     .popup-content {
       background: black;
       border: 2px solid #00ff88;
       padding: 2rem;
       border-radius: 8px;
-      max-height: 80vh;
+      max-height: 90vh;
       overflow-y: auto;
       max-width: 600px;
       text-align: left;
+      box-sizing: border-box;
     }
     .popup button {
       background: red;
       color: white;
       margin-top: 1rem;
+      padding: 10px 20px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -90,14 +96,11 @@
     </label>
     <br />
     <button onclick="register()">Registrieren</button>
-  </div>
-
-  <div class="popup" id="agbPopup">
+  </div>  <div class="popup" id="agbPopup">
     <div class="popup-content">
       <h2>Allgemeine Geschäftsbedingungen</h2>
       <p>
-        Willkommen bei GrowEmpire. Durch das Erstellen eines Accounts erklärst du dich mit folgenden Bedingungen einverstanden:
-        <br /><br />
+        Willkommen bei GrowEmpire. Durch das Erstellen eines Accounts erklärst du dich mit folgenden Bedingungen einverstanden:<br /><br />
         1. Die Nutzung dieser Plattform erfolgt auf eigene Verantwortung.<br />
         2. Es besteht keine Garantie auf Gewinne, auch wenn potenzielle Erträge ausgewiesen werden.<br />
         3. Alle Erträge und Pflanzensimulationen sind rein virtuell und dienen ausschließlich der Teilnahme am System.<br />
@@ -105,26 +108,20 @@
         5. Auszahlungen erfolgen nur, wenn die im System festgelegten Bedingungen (z. B. Reinvest oder Werbung) erfüllt sind.<br />
         6. Nutzer verpflichten sich, nur echte, eigene E-Mail-Adressen zu verwenden.<br />
         7. GrowEmpire behält sich das Recht vor, Accounts zu sperren oder zu prüfen, wenn betrügerisches Verhalten vermutet wird.<br /><br />
-        Diese Plattform ist kein Anlageprodukt im rechtlichen Sinne. Der „Ertrag“ entsteht durch Teilnahme an virtuellen Wachstumszyklen. Durch Kauf und Reinvest erhältst du Zugang zu simulierten Wachstumseinheiten mit möglichen Rückvergütungen, wenn die Bedingungen erfüllt sind.<br /><br />
-        Änderungen dieser AGB sind jederzeit möglich. Bitte lies regelmäßig nach oder kontaktiere unseren Support.
+        Diese Plattform ist kein Anlageprodukt im rechtlichen Sinne. Der „Ertrag“ entsteht durch Teilnahme an virtuellen Wachstumszyklen. Durch Kauf und Reinvest erhältst du Zugang zu simulierten Wachstumseinheiten mit möglichen Rückvergütungen, wenn die Bedingungen erfüllt sind.
+        <br /><br />
+        Änderungen dieser AGB sind jederzeit möglich.
       </p>
       <button onclick="closeAGB()">Schließen</button>
     </div>
-  </div>
-
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const ref = urlParams.get('ref');
-
+  </div>  <script>
     function openAGB() {
       document.getElementById('agbPopup').style.display = 'flex';
     }
-
     function closeAGB() {
       document.getElementById('agbPopup').style.display = 'none';
     }
-
-    async function register() {
+    function register() {
       const email = document.getElementById('email').value;
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
@@ -140,41 +137,24 @@
       }
 
       // Supabase Registrierung
-      const res = await fetch('https://afquciketcteqqynucet.supabase.co/auth/v1/signup', {
+      fetch('https://afquciketcteqqynucet.supabase.co/auth/v1/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXVjaWtldGN0ZXFxeW51Y2V0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE4NzQxODYsImV4cCI6MjA2NzQ1MDE4Nn0.Mg247BH4XribwIICKLHu1IUCX50nbSdmK34JniLBPzY'
         },
         body: JSON.stringify({ email, password })
-      });
-
-      const data = await res.json();
-
-      if (data.user) {
-        localStorage.setItem("user_email", email);
-        localStorage.setItem("username", username);
-
-        if (ref) {
-          await fetch('https://afquciketcteqqynucet.supabase.co/rest/v1/referrals', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXVjaWtldGN0ZXFxeW51Y2V0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE4NzQxODYsImV4cCI6MjA2NzQ1MDE4Nn0.Mg247BH4XribwIICKLHu1IUCX50nbSdmK34JniLBPzY',
-              'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXVjaWtldGN0ZXFxeW51Y2V0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE4NzQxODYsImV4cCI6MjA2NzQ1MDE4Nn0.Mg247BH4XribwIICKLHu1IUCX50nbSdmK34JniLBPzY'
-            },
-            body: JSON.stringify({
-              referrer_email: ref,
-              referred_email: email
-            })
-          });
-        }
-
-        window.location.href = "index.html";
-      } else {
-        alert("Registrierung fehlgeschlagen.");
-      }
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.user) {
+            localStorage.setItem("user_email", email);
+            localStorage.setItem("username", username);
+            window.location.href = "index.html";
+          } else {
+            alert('Registrierung fehlgeschlagen.');
+          }
+        });
     }
-  </script>
-</body>
+  </script></body>
 </html>
