@@ -3,49 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GrowEmpire Login</title>
+  <title>Passwort vergessen – GrowEmpire</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="form-container">
-    <h2>GrowEmpire Login</h2>
-    <form id="login-form">
+    <h2>🔐 Passwort zurücksetzen</h2>
+    <form id="forgot-form">
       <input type="email" id="email" placeholder="E-Mail" required />
-      <input type="password" id="password" placeholder="Passwort" required />
-      <button type="submit">Einloggen</button>
+      <button type="submit">Zurücksetzen</button>
     </form>
-
-    <p>Noch kein Account? <a href="register.html">Hier registrieren</a></p>
-    <p><a href="forgot.html">Passwort vergessen?</a></p>
-
     <p id="error-msg" class="error"></p>
+    <p><a href="index.html">🔙 Zurück zum Login</a></p>
   </div>
 
-  <!-- SUPABASE LOGIN -->
   <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
     const supabase = createClient(
       'https://ghfzdgaunxblpudkmxmy.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoZnpkZ2F1bnhibHB1ZGttZXhteCIsInJvbGUiOiJhbm9uIiwiaWF0IjoxNzUwNzAyOTU5LCJleHAiOjIwNjYyNzg5NTl9.J8ni4SszaI33ljthdEjqXf8ZKFCs4uWnRZZDyU0IlUU'
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoZnpkZ2F1bnhibHB1ZGtteG15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3MDI5NTksImV4cCI6MjA2NjI3ODk1OX0.J8ni4SszaI33ljthdEjqXf8ZKFCs4uWnRZZDyU0IlUU'
     );
 
-    document.getElementById('login-form').addEventListener('submit', async (e) => {
+    document.getElementById('forgot-form').addEventListener('submit', async (e) => {
       e.preventDefault();
-
       const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
       const errorMsg = document.getElementById('error-msg');
 
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: 'https://ficker.vercel.app/update-password.html'
       });
 
       if (error) {
-        errorMsg.textContent = '❌ Login fehlgeschlagen: ' + error.message;
+        errorMsg.textContent = '❌ Fehler: ' + error.message;
+        errorMsg.style.color = 'red';
       } else {
-        window.location.href = 'dashboard.html';
+        errorMsg.style.color = 'lime';
+        errorMsg.textContent = '📧 E-Mail zum Zurücksetzen wurde verschickt!';
       }
     });
   </script>
