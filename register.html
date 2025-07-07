@@ -53,22 +53,25 @@
       left: 0;
       height: 100vh;
       width: 100vw;
-      background: rgba(0,0,0,0.9);
+      background: rgba(0,0,0,0.95);
       color: white;
       display: none;
       justify-content: center;
       align-items: center;
       padding: 2rem;
+      z-index: 9999;
     }
     .popup-content {
       background: black;
       border: 2px solid #00ff88;
       padding: 2rem;
       border-radius: 8px;
-      max-height: 80vh;
+      max-height: 90vh;
       overflow-y: auto;
-      max-width: 600px;
+      max-width: 90vw;
       text-align: left;
+      font-size: 1rem;
+      line-height: 1.6;
     }
     .popup button {
       background: red;
@@ -94,20 +97,38 @@
       <h2>Allgemeine Geschäftsbedingungen</h2>
       <p>
         Willkommen bei GrowEmpire. Durch das Erstellen eines Accounts erklärst du dich mit folgenden Bedingungen einverstanden:
-        <br /><br />
-        1. Die Nutzung dieser Plattform erfolgt auf eigene Verantwortung.
-        <br />
-        2. Die dargestellten Inhalte sind nicht als Finanzberatung zu verstehen.
-        <br />
-        3. Eine Garantie auf Gewinne besteht nicht.
-        <br />
-        4. Nutzer haften für alle Angaben im System.
-        <br />
-        5. GrowEmpire behält sich das Recht vor, Accounts zu sperren, die gegen die Regeln verstoßen.
-        <br /><br />
-        Unsere Lizenz-Modelle sind virtuelle Produkte, die innerhalb des Systems Vorteile freischalten. Die dargestellten Erträge beruhen auf einem simulierten Anbausystem und stellen keinen realen Anbau oder Vertrieb dar.
-        <br /><br />
-        Bitte prüfe regelmäßig unsere AGB auf Aktualität. Bei Fragen wende dich an den Support.
+        <br><br>
+        1. Die Nutzung dieser Plattform erfolgt auf eigene Verantwortung. Jegliche Nutzung der angebotenen Inhalte liegt im Ermessen des Nutzers.
+        <br>
+        2. Es wird ausdrücklich darauf hingewiesen, dass alle Informationen, Inhalte und Simulationen keinen echten Ertrag, Anbau, Handel oder Produktverkauf darstellen.
+        <br>
+        3. Die dargestellten Erträge beruhen auf einem rein virtuellen System mit simulierten Parametern, die sich jederzeit ändern können.
+        <br>
+        4. Nutzer erkennen an, dass keine Haftung übernommen wird für etwaige Verluste, Missverständnisse oder unterlassene Gewinne.
+        <br>
+        5. Es besteht keinerlei Anspruch auf Auszahlung, Rückerstattung oder Gewinnausschüttung ohne die Erfüllung aller internen Kriterien und manueller Freigaben.
+        <br>
+        6. GrowEmpire bietet keine Lizenz im Sinne der FINMA, BaFin oder sonstiger Finanzmarktaufsichten. Es handelt sich nicht um ein Finanzprodukt.
+        <br>
+        7. Jegliche Nutzung des Dashboards, der Anbauflächen oder Partnerbereiche unterliegt der Zustimmung zu diesen AGB.
+        <br>
+        8. Nutzer haften selbst für die Weitergabe ihrer Zugangsdaten und sind verpflichtet, ihr Konto sicher zu verwalten.
+        <br>
+        9. Bei Verdacht auf Missbrauch, automatisierte Nutzung oder Falschangaben behalten wir uns vor, Accounts ohne Ankündigung zu sperren.
+        <br>
+        10. Jegliche Form von Reinvest, Lizenzkauf oder Teilnahme an Aktionen basiert auf einer rein freiwilligen Simulation und hat keinen realen Warenwert.
+        <br>
+        11. Der Betreiber von GrowEmpire übernimmt keine Verantwortung für Inhalte, die durch Nutzer generiert werden.
+        <br>
+        12. Änderungen an den AGB können jederzeit ohne Vorankündigung vorgenommen werden. Die jeweils aktuelle Version ist bindend.
+        <br>
+        13. Nutzer erklären sich mit der Speicherung ihrer Daten im Rahmen der Systemfunktion einverstanden.
+        <br>
+        14. Der Zugang zu bestimmten Funktionen (z. B. Pflanzenkauf, Ernte, Auszahlung) kann an zusätzliche Bedingungen wie Lizenzkauf oder Downline-Aktivität gebunden sein.
+        <br><br>
+        Mit Nutzung des Systems wird bestätigt, dass alle obigen Punkte verstanden und akzeptiert wurden.
+        <br><br>
+        Bei Fragen oder rechtlichen Anliegen steht der Support über die im Impressum genannte Adresse zur Verfügung.
       </p>
       <button onclick="closeAGB()">Schließen</button>
     </div>
@@ -133,7 +154,6 @@
         return;
       }
 
-      // Supabase Registrierung
       fetch('https://afquciketcteqqynucet.supabase.co/auth/v1/signup', {
         method: 'POST',
         headers: {
