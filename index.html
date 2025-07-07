@@ -7,86 +7,126 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
+      font-family: 'Inter', sans-serif;
       background: url('./assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
-      color: #fff;
+      color: white;
       text-align: center;
     }
-    .login-container {
-      background-color: rgba(0, 0, 0, 0.8);
-      max-width: 400px;
-      margin: 100px auto;
+
+    .container {
       padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 0 12px #00ff88;
+      max-width: 500px;
+      margin: 0 auto;
     }
+
     h1 {
       font-size: 2rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
     }
-    input {
+
+    h2 {
+      font-size: 2.5rem;
+      margin: 0;
+      color: #00ff88;
+    }
+
+    .intro {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    .form {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 2rem;
+      border-radius: 10px;
+      margin-top: 2rem;
+      box-shadow: 0 0 10px #00ff88;
+    }
+
+    input[type="email"],
+    input[type="password"] {
       width: 100%;
       padding: 12px;
-      margin: 0.5rem 0;
-      border-radius: 6px;
+      margin: 10px 0;
+      border-radius: 5px;
       border: none;
       font-size: 1rem;
     }
+
     button {
       width: 100%;
       padding: 12px;
       background-color: #00ff88;
-      color: black;
       border: none;
-      border-radius: 6px;
+      color: black;
       font-weight: bold;
-      font-size: 1rem;
+      border-radius: 5px;
       cursor: pointer;
+      font-size: 1.1rem;
     }
-    a {
+
+    .link {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .link a {
       color: #00ff88;
       text-decoration: underline;
-      display: block;
-      margin-top: 1rem;
     }
   </style>
 </head>
 <body>
-  <div class="login-container">
-    <h1>GrowEmpire Login</h1>
-    <input type="email" id="email" placeholder="E-Mail" />
-    <input type="password" id="password" placeholder="Passwort" />
-    <button onclick="login()">Einloggen</button>
-    <a href="register.html">Noch kein Account? Hier registrieren</a>
+
+  <div class="container">
+    <h1>Willkommen bei</h1>
+    <h2>GrowEmpire</h2>
+    <p class="intro">
+      Baue dein virtuelles Hanf-Imperium auf – starte mit deiner Box,<br />
+      pflanze, ernte und verdiene. Alles vollautomatisch.<br />
+      Alles profitabel.
+    </p>
+
+    <div class="form">
+      <h3>GrowEmpire Login</h3>
+      <input type="email" id="email" placeholder="E-Mail" required />
+      <input type="password" id="password" placeholder="Passwort" required />
+      <button onclick="login()">Einloggen</button>
+      <div class="link">
+        Noch kein Account? <a href="register.html">Hier registrieren</a>
+      </div>
+    </div>
   </div>
 
   <script>
     async function login() {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
 
       if (!email || !password) {
         alert("Bitte E-Mail und Passwort eingeben.");
         return;
       }
 
-      const res = await fetch("https://afquciketcteqqynucet.supabase.co/auth/v1/token?grant_type=password", {
-        method: "POST",
+      const { error, access_token } = await fetch('https://afquciketcteqqynucet.supabase.co/auth/v1/token?grant_type=password', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXVjaWtldGN0ZXFxeW51Y2V0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE4NzQxODYsImV4cCI6MjA2NzQ1MDE4Nn0.Mg247BH4XribwIICKLHu1IUCX50nbSdmK34JniLBPzY"
+          'Content-Type': 'application/json',
+          'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXVjaWtldGN0ZXFxeW51Y2V0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE4NzQxODYsImV4cCI6MjA2NzQ1MDE4Nn0.Mg247BH4XribwIICKLHu1IUCX50nbSdmK34JniLBPzY'
         },
-        body: JSON.stringify({ email, password })
-      });
+        body: JSON.stringify({
+          email,
+          password
+        })
+      }).then(res => res.json());
 
-      const data = await res.json();
-
-      if (data.access_token) {
+      if (access_token) {
         localStorage.setItem("user_email", email);
         window.location.href = "dashboard.html";
       } else {
-        alert("Login fehlgeschlagen. Bitte überprüfe deine Daten.");
+        alert("Login fehlgeschlagen. Bitte überprüfe deine Zugangsdaten.");
       }
     }
   </script>
