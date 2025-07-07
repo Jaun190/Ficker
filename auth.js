@@ -1,67 +1,26 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+// auth.js
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
-// ✅ Deine aktuelle Firebase-Konfiguration (Projekt: Ruedi)
-const firebaseConfig = {
-  apiKey: "AIzaSyC7i9q4MnzBwuu2BtLii5gGt3DO-oGdlRw",
-  authDomain: "ruedi-aebcb.firebaseapp.com",
-  projectId: "ruedi-aebcb",
-  storageBucket: "ruedi-aebcb.appspot.com",
-  messagingSenderId: "784338413167",
-  appId: "1:784338413167:web:13687c8f7825da1e168f9a"
-};
+const supabaseUrl = 'https://ghfzdgaunxblpudkmxmy.supabase.co'
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoZnpkZ2F1bnhibHB1ZGtteG15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3MDI5NTksImV4cCI6MjA2NjI3ODk1OX0.J8ni4SszaI33ljthdEjqXf8ZKFCs4uWnRZZDyU0IlUU'
+const supabase = createClient(supabaseUrl, supabaseKey)
 
-// 🔥 Initialisiere Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+document.getElementById('login-form').addEventListener('submit', async (e) => {
+  e.preventDefault()
 
-// 🔐 Login
-const loginForm = document.getElementById("login-form");
-if (loginForm) {
-  loginForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
+  const email = document.getElementById('email').value
+  const password = document.getElementById('password').value
+  const errorMsg = document.getElementById('error-msg')
 
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      const username = email.split("@")[0];
-      localStorage.setItem("user", username);
-      window.location.href = "dashboard.html";
-    } catch (error) {
-      document.getElementById("error-msg").textContent =
-        "Fehler: " + error.message;
-    }
-  });
-}
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password
+  })
 
-// 🧾 Registrierung
-const registerForm = document.getElementById("register-form");
-if (registerForm) {
-  registerForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirm-password").value;
-
-    if (password !== confirmPassword) {
-      document.getElementById("error-msg").textContent =
-        "Passwörter stimmen nicht überein.";
-      return;
-    }
-
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      const username = email.split("@")[0];
-      localStorage.setItem("user", username);
-      window.location.href = "dashboard.html";
-    } catch (error) {
-      document.getElementById("error-msg").textContent =
-        "Fehler: " + error.message;
-    }
-  });
-}
+  if (error) {
+    errorMsg.textContent = 'Login fehlgeschlagen: ' + error.message
+  } else {
+    // Erfolgreich eingeloggt – weiterleiten
+    window.location.href = 'dashboard.html'
+  }
+})
