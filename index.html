@@ -10,26 +10,25 @@
       font-family: 'Inter', sans-serif;
       background: url('./assets/kiffen.png') no-repeat center center fixed;
       background-size: cover;
-      color: white;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
+      justify-content: flex-end;
       min-height: 100vh;
+      color: white;
     }
 
     .login-box {
-      background-color: rgba(0, 0, 0, 0.85);
+      background-color: black;
       padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 0 16px #00ff88;
-      max-width: 400px;
-      width: 90%;
+      border-radius: 0;
+      width: 100%;
+      max-width: 420px;
       text-align: center;
     }
 
-    .login-box h3 {
+    .login-box h2 {
       margin-bottom: 1rem;
-      font-size: 1.5rem;
     }
 
     input[type="email"],
@@ -67,8 +66,9 @@
   </style>
 </head>
 <body>
+
   <div class="login-box">
-    <h3>GrowEmpire Login</h3>
+    <h2>GrowEmpire Login</h2>
     <input type="email" id="email" placeholder="E-Mail" required />
     <input type="password" id="password" placeholder="Passwort" required />
     <button onclick="login()">Einloggen</button>
@@ -108,5 +108,6 @@
       });
     }
   </script>
+
 </body>
 </html>
