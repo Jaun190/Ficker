@@ -1,184 +1,132 @@
-<!DOCTYPE html>
-<html lang="de">
+<!DOCTYPE html><html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Registrierung – GrowEmpire</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body {
-      font-family: 'Orbitron', sans-serif;
-      background: url('assets/dashboard.png') no-repeat center center fixed;
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: url('./assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
       color: #00ff88;
-      margin: 0;
-      padding: 2rem;
-      overflow-x: hidden;
     }
-
+    .container {
+      max-width: 400px;
+      margin: 80px auto;
+      background: rgba(0,0,0,0.8);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 12px #00ff88;
+    }
     h1 {
       text-align: center;
     }
-
-    form {
-      max-width: 400px;
-      margin: 0 auto;
-      background: rgba(0, 0, 0, 0.8);
-      padding: 2rem;
-      border: 2px solid #00ff88;
-      border-radius: 10px;
-      box-shadow: 0 0 20px #00ff88;
-    }
-
-    label, input {
-      display: block;
+    input, button {
       width: 100%;
-      margin-top: 1rem;
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      border-radius: 8px;
+      border: none;
       font-size: 1rem;
     }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="password"] {
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-    }
-
     button {
-      margin-top: 2rem;
-      padding: 12px;
-      font-size: 1rem;
-      font-weight: bold;
-      border: none;
       background-color: #00ff88;
       color: black;
-      border-radius: 8px;
+      font-weight: bold;
       cursor: pointer;
     }
-
-    .agb-section {
-      margin-top: 1.5rem;
-      font-size: 0.9rem;
+    .checkbox {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 1rem;
     }
-
-    .agb-section a {
+    .checkbox a {
       color: #00ff88;
       text-decoration: underline;
       cursor: pointer;
     }
-
-    /* AGB Modal */
-    #agbModal {
+    #agbPopup {
       display: none;
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.9);
-      z-index: 9999;
-      padding: 50px;
-      box-sizing: border-box;
-      overflow-y: auto;
-    }
-
-    #agbModal .content {
-      background: #000;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.95);
+      padding: 1.5rem;
       border: 2px solid #00ff88;
-      padding: 30px;
       border-radius: 12px;
-      color: #00ff88;
-      max-width: 800px;
-      margin: auto;
-      box-shadow: 0 0 20px #00ff88;
-      position: relative;
+      color: #fff;
+      width: 90%;
+      max-width: 600px;
+      height: 70vh;
+      overflow-y: scroll;
+      z-index: 9999;
     }
-
-    #agbModal .close {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 1.5rem;
+    #agbPopup .text {
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    #agbPopup .close {
+      text-align: right;
+      font-weight: bold;
       cursor: pointer;
       color: #00ff88;
-    }
-
-    #agbModal .text {
-      max-height: 500px;
-      overflow-y: scroll;
-      padding-right: 10px;
+      margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
-
-  <h1>Registrierung</h1>
-
-  <form id="registerForm" onsubmit="return handleRegister()">
-    <label for="username">Benutzername</label>
-    <input type="text" id="username" required>
-
-    <label for="email">E-Mail</label>
-    <input type="email" id="email" required>
-
-    <label for="password">Passwort</label>
-    <input type="password" id="password" required>
-
-    <div class="agb-section">
-      <input type="checkbox" id="agbCheckbox" required>
-      <label for="agbCheckbox">
-        Ich akzeptiere die <a onclick="openAGBPopup()">Allgemeinen Geschäftsbedingungen</a>
-      </label>
+  <div class="container">
+    <h1>Registrieren</h1>
+    <input type="text" placeholder="E-Mail" id="email">
+    <input type="password" placeholder="Passwort" id="password">
+    <div class="checkbox">
+      <input type="checkbox" id="agb">
+      <label for="agb">Ich akzeptiere die <a onclick="showAGB()">Allgemeinen Geschäftsbedingungen</a></label>
     </div>
-
-    <button type="submit">Registrieren</button>
-  </form>
-
-  <!-- AGB POPUP -->
-  <div id="agbModal">
-    <div class="content">
-      <span class="close" onclick="closeAGBPopup()">✖</span>
-      <h2>Allgemeine Geschäftsbedingungen</h2>
-      <div class="text">
-        <p><strong>1. Geltungsbereich:</strong> Diese Bedingungen gelten für alle Nutzer der Plattform GrowEmpire.</p>
-        <p><strong>2. Nutzung & Registrierung:</strong> Jeder Nutzer darf nur ein Konto führen. Die Nutzung erfordert eine gültige E-Mail-Adresse.</p>
-        <p><strong>3. Lizenzmodelle:</strong> Durch Erwerb einer Lizenz erhalten Nutzer erweiterte Rechte, Boni und Reinvest-Vorteile.</p>
-        <p><strong>4. Symbolischer Pflanzenanbau:</strong> Alle Pflanzen in GrowEmpire sind rein virtuell. Der Anbau erfolgt rein digital und symbolisch.</p>
-        <p><strong>5. Erträge & Reinvest:</strong> Alle angegebenen Erträge stellen keinen realen Anspruch dar. Der Reinvest dient der Simulation von Wirtschaftskreisläufen innerhalb des Systems.</p>
-        <p><strong>6. Cashback & Boni:</strong> Premium-Nutzer erhalten bis zu 10 % Rabatt auf Reinvests. Die Verfügbarkeit hängt vom Status ab.</p>
-        <p><strong>7. Änderungen:</strong> GrowEmpire kann diese AGB jederzeit ändern. Nutzer werden rechtzeitig informiert.</p>
-        <p><strong>8. Haftung:</strong> GrowEmpire haftet nicht für technische Ausfälle, Datenverluste oder sonstige Unterbrechungen.</p>
-        <p><strong>9. Datenschutz:</strong> Personenbezogene Daten werden nur im Rahmen der gesetzlichen Vorschriften gespeichert und verarbeitet.</p>
-        <p><strong>10. Kündigung:</strong> Nutzer können ihr Konto jederzeit kündigen. Ein Rückerstattungsanspruch besteht nicht.</p>
-        <!-- Weitere Paragrafen hier einfügen -->
-      </div>
+    <button onclick="register()">Jetzt registrieren</button>
+  </div>  <div id="agbPopup">
+    <div class="close" onclick="closeAGB()">✖ schließen</div>
+    <div class="text">
+      <p><strong>1. Geltungsbereich:</strong> Diese Allgemeinen Geschäftsbedingungen (AGB) gelten für alle registrierten Nutzer der Plattform „GrowEmpire“ und regeln die Nutzung der angebotenen virtuellen Funktionen und Simulationen.</p>
+      <p><strong>2. Virtueller Charakter:</strong> Sämtliche Inhalte, insbesondere Pflanzen, Flächen, Erträge, Reinvests, Lizenzmodelle und Auszahlungen innerhalb dieser Plattform, sind rein virtuell, symbolisch und dienen ausschließlich zur Unterhaltung, Simulation und Visualisierung.</p>
+      <p><strong>3. Kein Finanzprodukt:</strong> GrowEmpire stellt keine echte Geldanlage, Investition, Finanzdienstleistung oder wirtschaftliche Beteiligung dar. Es werden keine Renditen, Gewinne oder Rückflüsse im rechtlichen Sinne garantiert oder versprochen.</p>
+      <p><strong>4. Lizenzen:</strong> Nutzer können freiwillig zwischen verschiedenen Lizenzstufen wählen:
+        <ul>
+          <li><strong>Demo:</strong> Kostenlos, unbegrenzte Anzahl Pflanzen, 0 % Ertrag, kein Auszahlungsanspruch.</li>
+          <li><strong>Lizenz:</strong> Einmalzahlung, 1 Pflanze mit 20 % virtuellem Ertrag.</li>
+          <li><strong>Pro:</strong> 6 Monate gültig, Reinvest-Funktion, 20 % virtueller Ertrag, Partnerstruktur bis 3 Ebenen.</li>
+          <li><strong>Premium:</strong> 12 Monate gültig, bis zu 10 Pflanzen, 30 % virtueller Ertrag, Reinvest-Bonus (10 %), erweitertes Partnernetzwerk (bis 5 Ebenen).</li>
+        </ul>
+      </p>
+      <p><strong>5. Reinvest-Funktion:</strong> Nutzer können virtuelle Reinvests tätigen. Diese Aktionen sind rein systemintern und stellen keinen realen finanziellen Vorteil dar.</p>
+      <p><strong>6. Auszahlungssystem:</strong> Eine virtuelle „Auszahlung“ kann nur dann simuliert werden, wenn systeminterne Bedingungen erfüllt sind (z. B. Reinvest oder Umsatz in der Downline). Es handelt sich hierbei nicht um eine tatsächliche Überweisung oder Geldleistung.</p>
+      <p><strong>7. Referral-System:</strong> Jeder Nutzer erhält einen individuellen Referral-Link. Die daraus resultierenden Aktivitäten und Boni sind rein virtueller Natur.</p>
+      <p><strong>8. Haftungsausschluss:</strong> GrowEmpire übernimmt keine Haftung für technische Fehler, Datenverluste, Systemausfälle oder falsche Erwartungen an virtuelle Erträge oder Auszahlungen.</p>
+      <p><strong>9. Datenschutz:</strong> Personenbezogene Daten werden nur im Rahmen der gesetzlichen Bestimmungen verarbeitet und niemals an Dritte verkauft.</p>
+      <p><strong>10. Änderung der AGB:</strong> GrowEmpire behält sich das Recht vor, diese AGB jederzeit zu ändern. Änderungen werden angemessen angekündigt.</p>
+      <p><strong>11. Akzeptanz:</strong> Mit der Registrierung erklärt sich der Nutzer ausdrücklich mit diesen AGB einverstanden. Ohne Bestätigung der AGB ist eine Nutzung der Plattform nicht möglich.</p>
     </div>
-  </div>
-
-  <script>
-    function openAGBPopup() {
-      document.getElementById("agbModal").style.display = "block";
+  </div>  <script>
+    function showAGB() {
+      document.getElementById('agbPopup').style.display = 'block';
     }
-
-    function closeAGBPopup() {
-      document.getElementById("agbModal").style.display = "none";
+    function closeAGB() {
+      document.getElementById('agbPopup').style.display = 'none';
     }
-
-    function handleRegister() {
-      const user = document.getElementById("username").value;
+    function register() {
       const email = document.getElementById("email").value;
       const pass = document.getElementById("password").value;
-
-      // Beispielhafte Speicherung
-      localStorage.setItem("user_name", user);
-      localStorage.setItem("user_email", email);
-      localStorage.setItem("user_pass", pass);
-      localStorage.setItem("lizenz", "demo");
-
-      alert("Registrierung erfolgreich!");
-      window.location.href = "index.html"; // Weiterleitung zum Login
-      return false; // Verhindert echtes Formular-Submit
+      const agb = document.getElementById("agb").checked;
+      if (!email || !pass || !agb) {
+        alert("Bitte alle Felder ausfüllen und AGB akzeptieren.");
+        return;
+      }
+      alert("Registrierung erfolgreich! Jetzt bitte einloggen.");
+      window.location.href = "index.html";
     }
-  </script>
-
-</body>
+  </script></body>
 </html>
