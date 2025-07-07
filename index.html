@@ -11,42 +11,25 @@
       background: url('./assets/kiffen.png') no-repeat center center fixed;
       background-size: cover;
       color: white;
-    }
-
-    .container {
-      text-align: center;
-      padding: 2rem;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-      color: #ffffff;
-      text-shadow: 0 0 10px #00ff88;
-    }
-
-    h2 {
-      font-size: 2rem;
-      margin-top: 0;
-      color: #00ff88;
-    }
-
-    p {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
     }
 
     .login-box {
       background-color: rgba(0, 0, 0, 0.85);
-      max-width: 400px;
-      margin: 2rem auto;
       padding: 2rem;
       border-radius: 12px;
       box-shadow: 0 0 16px #00ff88;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
     }
 
     .login-box h3 {
       margin-bottom: 1rem;
+      font-size: 1.5rem;
     }
 
     input[type="email"],
@@ -84,22 +67,12 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Willkommen bei</h1>
-    <h2>GrowEmpire</h2>
-    <p>
-      Baue dein virtuelles Hanf-Imperium auf – starte mit deiner Box, pflanze,<br>
-      ernte und verdiene. Alles vollautomatisch.<br>
-      Alles profitabel.
-    </p>
-
-    <div class="login-box">
-      <h3>GrowEmpire Login</h3>
-      <input type="email" id="email" placeholder="E-Mail" required />
-      <input type="password" id="password" placeholder="Passwort" required />
-      <button onclick="login()">Einloggen</button>
-      <a class="register-link" href="register.html">Noch kein Account? Hier registrieren</a>
-    </div>
+  <div class="login-box">
+    <h3>GrowEmpire Login</h3>
+    <input type="email" id="email" placeholder="E-Mail" required />
+    <input type="password" id="password" placeholder="Passwort" required />
+    <button onclick="login()">Einloggen</button>
+    <a class="register-link" href="register.html">Noch kein Account? Hier registrieren</a>
   </div>
 
   <script>
