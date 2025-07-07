@@ -89,6 +89,12 @@
       color: #00ff88;
       text-decoration: underline;
     }
+
+    .error-msg {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
@@ -113,6 +119,7 @@
     <div class="register-link">
       Noch kein Account? <a href="register.html">Hier registrieren</a>
     </div>
+    <p class="error-msg" id="error-msg"></p>
   </div>
 
   <script>
@@ -127,14 +134,14 @@
       const password = document.getElementById('password').value;
 
       const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password
+        email: email,
+        password: password
       });
 
       if (error) {
-        alert('Login fehlgeschlagen: ' + error.message);
+        document.getElementById('error-msg').textContent = "Fehler: " + error.message;
       } else {
-        alert('Login erfolgreich!');
+        localStorage.setItem("user_email", email);
         window.location.href = "dashboard.html";
       }
     });
