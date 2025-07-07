@@ -7,23 +7,21 @@
   <style>
     body {
       font-family: 'Inter', sans-serif;
-      background: url('./assets/dashboard.png') no-repeat center center fixed;
+      background: #000 url('./assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
       color: #00ff88;
-      padding: 2rem;
       text-align: center;
+      padding: 2rem;
     }
-
     .form {
-      background-color: rgba(0,0,0,0.85);
+      background-color: rgba(0, 0, 0, 0.85);
       padding: 2rem;
       border-radius: 12px;
       max-width: 400px;
       margin: 0 auto;
       box-shadow: 0 0 16px #00ff88;
     }
-
-    input[type="email"], input[type="password"], input[type="text"] {
+    input {
       width: 100%;
       padding: 10px;
       margin: 0.5rem 0;
@@ -31,7 +29,6 @@
       border: none;
       font-size: 1rem;
     }
-
     button {
       padding: 12px 24px;
       background-color: #00ff88;
@@ -42,86 +39,68 @@
       cursor: pointer;
       margin-top: 1rem;
     }
-
-    #agb-hinweis {
+    label {
+      display: block;
+      margin-top: 1rem;
       font-size: 0.9rem;
-      margin: 1rem;
     }
-
-    #agb-hinweis a {
+    label a {
       color: #00ff88;
       text-decoration: underline;
       cursor: pointer;
     }
-
     .popup {
       position: fixed;
       top: 0;
       left: 0;
       height: 100vh;
       width: 100vw;
-      background: rgba(0,0,0,0.9);
-      color: white;
+      background: rgba(0, 0, 0, 0.9);
       display: none;
       justify-content: center;
       align-items: center;
       padding: 2rem;
       overflow: auto;
-      box-sizing: border-box;
     }
-
     .popup-content {
       background: black;
+      color: white;
       border: 2px solid #00ff88;
       padding: 2rem;
       border-radius: 8px;
-      max-height: 90vh;
-      overflow: auto;
       max-width: 600px;
       text-align: left;
-      box-sizing: border-box;
     }
-
-    .popup button {
+    .popup-content button {
       background: red;
-      color: white;
       margin-top: 1rem;
+      border: none;
       padding: 10px 20px;
       border-radius: 6px;
-      border: none;
+      color: white;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
+
   <div class="form">
     <h2>Registrieren</h2>
     <input type="text" id="username" placeholder="Benutzername" required />
     <input type="email" id="email" placeholder="E-Mail" required />
     <input type="password" id="password" placeholder="Passwort" required />
-    <label id="agb-hinweis">
+    <label>
       <input type="checkbox" id="agbCheckbox" />
       Ich akzeptiere die <a onclick="openAGB()">Allgemeinen Geschäftsbedingungen</a>
     </label>
-    <br />
     <button onclick="register()">Registrieren</button>
   </div>
 
-  <!-- AGB-Popup -->
+  <!-- AGB -->
   <div class="popup" id="agbPopup">
     <div class="popup-content">
       <h2>Allgemeine Geschäftsbedingungen</h2>
-      <p>
-        Willkommen bei GrowEmpire. Durch das Erstellen eines Accounts erklärst du dich mit folgenden Bedingungen einverstanden:<br /><br />
-        1. Nutzung erfolgt auf eigene Verantwortung.<br />
-        2. Keine Garantie auf Ertrag.<br />
-        3. Alles ist virtuell und symbolisch.<br />
-        4. Lizenzprodukte = rein digitale Nutzung.<br />
-        5. Auszahlung nur bei erfüllten Bedingungen.<br />
-        6. Nur echte E-Mail-Adressen verwenden.<br />
-        7. Verstöße führen zur Sperrung.<br /><br />
-        Änderungen dieser AGB sind jederzeit möglich.
-      </p>
+      <p>Alles ist virtuell. Nutzung erfolgt auf eigene Verantwortung. Es besteht kein Anspruch auf Auszahlung. Lizenz = symbolische Teilnahme.</p>
       <button onclick="closeAGB()">Schließen</button>
     </div>
   </div>
@@ -145,6 +124,7 @@
         alert('Bitte alle Felder ausfüllen.');
         return;
       }
+
       if (!agbChecked) {
         alert('Du musst die AGB akzeptieren.');
         return;
@@ -165,8 +145,7 @@
           localStorage.setItem('username', username);
           window.location.href = 'index.html';
         } else {
-          const errorMsg = data.error?.message || 'Unbekannter Fehler';
-          alert('Registrierung fehlgeschlagen: ' + errorMsg);
+          alert('Registrierung fehlgeschlagen:\n' + JSON.stringify(data, null, 2));
         }
       })
       .catch(err => {
