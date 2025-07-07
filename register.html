@@ -13,14 +13,16 @@
       padding: 2rem;
       text-align: center;
     }
+
     .form {
-      background-color: rgba(0, 0, 0, 0.8);
+      background-color: rgba(0,0,0,0.8);
       padding: 2rem;
       border-radius: 12px;
       max-width: 400px;
       margin: 0 auto;
       box-shadow: 0 0 12px #00ff88;
     }
+
     input[type="email"], input[type="password"], input[type="text"] {
       width: 100%;
       padding: 10px;
@@ -29,6 +31,7 @@
       border: none;
       font-size: 1rem;
     }
+
     button {
       padding: 12px 24px;
       background-color: #00ff88;
@@ -39,53 +42,65 @@
       cursor: pointer;
       margin-top: 1rem;
     }
-    .agb-hinweis {
+
+    label {
       font-size: 0.9rem;
+      display: block;
       margin-top: 1rem;
     }
+
     .agb-hinweis a {
       color: #00ff88;
       text-decoration: underline;
       cursor: pointer;
     }
+
     .popup {
       position: fixed;
       top: 0;
       left: 0;
-      height: 100vh;
-      width: 100vw;
-      background: rgba(0, 0, 0, 0.95);
-      color: white;
-      display: none;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      display: flex;
       justify-content: center;
-      align-items: center;
-      padding: 2rem;
+      align-items: flex-start;
+      padding: 3rem 1rem;
+      overflow: auto;
       z-index: 9999;
+      box-sizing: border-box;
     }
+
     .popup-content {
       background: black;
       border: 2px solid #00ff88;
       padding: 2rem;
-      border-radius: 8px;
-      max-height: 90vh;
-      max-width: 90vw;
-      overflow-y: auto;
-      text-align: left;
-      color: #ccc;
-      box-sizing: border-box;
-      margin: 1rem;
-    }
-    .popup h2 {
+      border-radius: 12px;
+      max-width: 700px;
+      width: 100%;
       color: white;
+      text-align: left;
+      box-sizing: border-box;
     }
-    .popup button {
+
+    .popup-content h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .popup-content p {
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.5;
+    }
+
+    .popup-content button {
       background: red;
       color: white;
-      margin-top: 1rem;
       padding: 10px 20px;
       border: none;
       border-radius: 6px;
-      font-weight: bold;
+      margin-top: 1rem;
       cursor: pointer;
     }
   </style>
@@ -98,29 +113,26 @@
     <input type="password" id="password" placeholder="Passwort" required />
     <label>
       <input type="checkbox" id="agbCheckbox" />
-      Ich akzeptiere die <a onclick="openAGB()">Allgemeinen Geschäftsbedingungen</a>
+      Ich akzeptiere die <span class="agb-hinweis"><a onclick="openAGB()">Allgemeinen Geschäftsbedingungen</a></span>
     </label>
-    <br />
     <button onclick="register()">Registrieren</button>
   </div>
 
-  <div class="popup" id="agbPopup">
+  <div class="popup" id="agbPopup" style="display: none;">
     <div class="popup-content">
       <h2>Allgemeine Geschäftsbedingungen</h2>
-      <p>
-        1. Die Nutzung dieser Plattform erfolgt auf eigene Verantwortung. Nutzer akzeptieren alle Risiken im Zusammenhang mit der Teilnahme.<br><br>
-        2. Die Inhalte und Angebote auf GrowEmpire stellen keine Finanzberatung oder Anlageempfehlung dar.<br><br>
-        3. Es besteht keine rechtliche Garantie auf Gewinne. Unsere Ertragsmodelle sind auf mathematisch simulierten Szenarien aufgebaut. Dennoch werden bei aktiver Nutzung, Anbau und Reinvestitionen reale Auszahlungen ermöglicht – die Erfolgsquote ist abhängig von der Aktivität des Nutzers.<br><br>
-        4. Alle getätigten Einzahlungen gelten als Zugang zu einer Lizenz oder Fläche. Diese sind virtuelle Module und dienen ausschließlich dem Zweck der Teilnahme innerhalb des Systems.<br><br>
-        5. Bei Auszahlung wird eine Identitätsprüfung verlangt. Unvollständige oder falsche Angaben können zur Ablehnung oder Verzögerung führen.<br><br>
-        6. Reinvestitionen sind freiwillig, beeinflussen jedoch die Ertragsmöglichkeiten im System.<br><br>
-        7. Bei Verstößen gegen Regeln oder betrügerischem Verhalten kann der Zugang zum System entzogen werden. Es besteht kein Anspruch auf Rückerstattung.<br><br>
-        8. Datenschutz: Alle Nutzerdaten werden gemäß DSGVO behandelt und nicht an Dritte weitergegeben, außer gesetzlich erforderlich.<br><br>
-        9. Haftung: GrowEmpire haftet nicht für technische Störungen, Datenverlust oder Unterbrechungen. Die Nutzung erfolgt auf eigenes Risiko.<br><br>
-        10. Änderungen: Diese AGB können jederzeit geändert werden. Mit jedem Login erklärt sich der Nutzer mit der neuesten Fassung einverstanden.<br><br>
-        11. Gerichtsstand: Es gilt das Schweizer Recht. Sollte ein Punkt unwirksam sein, bleibt der Rest der AGB gültig.<br><br>
-        Mit der Registrierung erklärst du dich mit diesen Bedingungen einverstanden.
-      </p>
+      <p>1. Die Nutzung dieser Plattform erfolgt auf eigene Verantwortung. Nutzer akzeptieren alle Risiken im Zusammenhang mit der Teilnahme.</p>
+      <p>2. Die Inhalte und Angebote auf GrowEmpire stellen keine Finanzberatung oder Anlageempfehlung dar.</p>
+      <p>3. Es besteht keine rechtliche Garantie auf Gewinne. Unsere Ertragsmodelle sind auf mathematisch simulierten Szenarien aufgebaut. Dennoch werden bei aktiver Nutzung, Anbau und Reinvestitionen reale Auszahlungen ermöglicht – die Erfolgsquote ist abhängig von der Aktivität des Nutzers.</p>
+      <p>4. Alle getätigten Einzahlungen gelten als Zugang zu einer Lizenz oder Fläche. Diese sind virtuelle Module und dienen ausschließlich dem Zweck der Teilnahme innerhalb des Systems.</p>
+      <p>5. Bei Auszahlung wird eine Identitätsprüfung verlangt. Unvollständige oder falsche Angaben können zur Ablehnung oder Verzögerung führen.</p>
+      <p>6. Reinvestitionen sind freiwillig, beeinflussen jedoch die Ertragsmöglichkeiten im System.</p>
+      <p>7. Bei Verstoß gegen die Regeln oder bei missbräuchlicher Nutzung kann der Account gesperrt werden. Rechtsansprüche erlöschen in solchen Fällen.</p>
+      <p>8. Datenschutz: Deine Daten werden vertraulich behandelt. Sie werden nicht an Dritte weitergegeben, es sei denn gesetzlich vorgeschrieben oder für Auszahlung notwendig.</p>
+      <p>9. Haftung: GrowEmpire übernimmt keine Haftung für technische Ausfälle, Unterbrechungen oder Datenverluste.</p>
+      <p>10. Änderungen: Diese AGB können jederzeit geändert werden. Mit jeder Nutzung erklärst du dich mit der jeweils aktuellen Version einverstanden.</p>
+      <p>11. Es gilt das Schweizer Recht. Sollten einzelne Punkte unwirksam sein, bleiben die übrigen Regelungen davon unberührt.</p>
+      <p>Mit der Registrierung erklärst du dich mit diesen Bedingungen einverstanden.</p>
       <button onclick="closeAGB()">Schließen</button>
     </div>
   </div>
@@ -129,6 +141,7 @@
     function openAGB() {
       document.getElementById('agbPopup').style.display = 'flex';
     }
+
     function closeAGB() {
       document.getElementById('agbPopup').style.display = 'none';
     }
@@ -143,6 +156,7 @@
         alert('Bitte alle Felder ausfüllen.');
         return;
       }
+
       if (!agbChecked) {
         alert('Du musst die AGB akzeptieren.');
         return;
@@ -157,16 +171,16 @@
         },
         body: JSON.stringify({ email, password })
       })
-        .then(res => res.json())
-        .then(data => {
-          if (data.user) {
-            localStorage.setItem("user_email", email);
-            localStorage.setItem("username", username);
-            window.location.href = "index.html";
-          } else {
-            alert('Registrierung fehlgeschlagen.');
-          }
-        });
+      .then(res => res.json())
+      .then(data => {
+        if (data.user) {
+          localStorage.setItem("user_email", email);
+          localStorage.setItem("username", username);
+          window.location.href = "index.html";
+        } else {
+          alert('Registrierung fehlgeschlagen.');
+        }
+      });
     }
   </script>
 </body>
