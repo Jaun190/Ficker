@@ -3,193 +3,132 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Registrierung – GrowEmpire</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <title>Registrieren – GrowEmpire</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
   <style>
     body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: url('./assets/dashboard.png') no-repeat center center fixed;
+      font-family: 'Orbitron', sans-serif;
+      background-image: url("assets/dashboard.png");
       background-size: cover;
+      background-position: center;
+      margin: 0;
+      padding: 0;
       color: #00ff88;
-    }
-
-    .topbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      border-bottom: 2px solid #00ff88;
-      box-shadow: 0 0 12px #00ff88;
-      z-index: 998;
-      display: flex;
-      align-items: center;
-      padding-left: 20px;
-      height: 100px;
-    }
-
-    .menu-icon {
-      background: rgba(0, 255, 136, 0.1);
-      color: #00ff88;
-      border: 2px solid #00ff88;
-      padding: 6px 12px;
-      border-radius: 10px;
-      font-size: 22px;
-      cursor: pointer;
-      box-shadow: 0 0 10px #00ff88;
-    }
-
-    .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 100px;
-      left: 20px;
-      background: rgba(0, 0, 0, 0.95);
-      border: 2px solid #00ff88;
-      border-radius: 12px;
-      padding: 0.5rem;
-      min-width: 200px;
-      box-shadow: 0 0 12px #00ff88;
-      z-index: 999;
-    }
-
-    .dropdown-menu a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 10px;
-      color: #00ff88;
-      text-decoration: none;
-      font-size: 1rem;
-      transition: background 0.2s;
-    }
-
-    .dropdown-menu a:hover {
-      background: rgba(0, 255, 136, 0.08);
     }
 
     .container {
-      max-width: 500px;
-      margin: 160px auto 50px;
-      background: rgba(0, 0, 0, 0.8);
-      padding: 2rem;
+      max-width: 400px;
+      margin: 120px auto;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.75);
       border: 2px solid #00ff88;
-      border-radius: 14px;
-      box-shadow: 0 0 15px #00ff88;
+      border-radius: 16px;
+      box-shadow: 0 0 12px #00ff88;
+      text-align: center;
     }
 
     h1 {
-      text-align: center;
-      margin-bottom: 1.5rem;
-      color: #00ff88;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
     }
 
-    input[type="text"],
     input[type="email"],
     input[type="password"] {
       width: 100%;
       padding: 10px;
-      margin-bottom: 1rem;
-      border-radius: 6px;
+      margin-bottom: 16px;
       border: none;
-      font-size: 1rem;
-    }
-
-    .btn {
-      background-color: #00ff88;
-      color: black;
-      font-weight: bold;
-      border: none;
-      padding: 12px 20px;
-      width: 100%;
       border-radius: 8px;
       font-size: 1rem;
-      cursor: pointer;
-    }
-
-    .btn:disabled {
-      background: #444;
-      color: #999;
-      cursor: not-allowed;
+      text-align: center;
     }
 
     .agb-check {
-      margin-top: 10px;
-      color: #00ff88;
-      font-size: 0.95rem;
+      margin-bottom: 16px;
+      font-size: 0.9rem;
     }
 
     .agb-check a {
       color: #00ff88;
       text-decoration: underline;
     }
+
+    button {
+      width: 100%;
+      background-color: #00ff66;
+      border: none;
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      background-color: #444;
+      cursor: not-allowed;
+    }
+
+    .info {
+      margin-top: 12px;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
   </style>
 </head>
 <body>
-  <!-- Menü -->
-  <div class="topbar">
-    <div class="menu-wrapper">
-      <div class="menu-icon" onclick="toggleMenu()">☰</div>
-      <div class="dropdown-menu" id="dropdown">
-        <a href="dashboard.html">📈 Dashboard</a>
-        <a href="plants.html">🌱 Pflanzen</a>
-        <a href="partner.html">🧑‍🤝‍🧑 Partner</a>
-        <a href="lizenz.html">📦 Lizenz</a>
-        <a href="settings.html">⚙️ Einstellungen</a>
-        <a href="payout.html">💸 Auszahlung</a>
-        <a href="index.html">🔴 Logout</a>
-      </div>
-    </div>
-  </div>
 
-  <!-- Formular -->
   <div class="container">
-    <h1>📝 Registrierung</h1>
-    <form id="registerForm">
-      <input type="text" placeholder="Benutzername" required />
-      <input type="email" placeholder="E-Mail" required />
-      <input type="password" placeholder="Passwort" required />
+    <h1>🔐 Registrieren</h1>
+    <input type="email" id="email" placeholder="E-Mail" />
+    <input type="password" id="password" placeholder="Passwort" />
 
-      <div class="agb-check">
-        <input type="checkbox" id="agbCheck" />
-        <label for="agbCheck">
-          Ich akzeptiere die <a href="agb.html" target="_blank">AGB</a>
-        </label>
-      </div>
+    <div class="agb-check">
+      <input type="checkbox" id="agb" />
+      <label for="agb">
+        Ich akzeptiere die <a href="agbpage.html" target="_blank"><u>Allgemeinen Geschäftsbedingungen</u></a>.
+      </label>
+    </div>
 
-      <button type="submit" id="registerBtn" class="btn" disabled>Registrieren</button>
-    </form>
+    <button id="registerBtn" disabled>Jetzt registrieren</button>
+
+    <div class="info">Nach der Registrierung wirst du zum Login weitergeleitet.</div>
   </div>
 
   <script>
-    // Menü
-    function toggleMenu() {
-      const menu = document.getElementById("dropdown");
-      menu.style.display = menu.style.display === "block" ? "none" : "block";
-    }
-
-    window.addEventListener("click", function (e) {
-      const menu = document.getElementById("dropdown");
-      if (!e.target.closest(".menu-wrapper")) {
-        menu.style.display = "none";
-      }
-    });
-
-    // AGB Checkbox steuert Button
-    const agbCheck = document.getElementById("agbCheck");
+    const agbBox = document.getElementById("agb");
     const registerBtn = document.getElementById("registerBtn");
 
-    agbCheck.addEventListener("change", () => {
-      registerBtn.disabled = !agbCheck.checked;
+    agbBox.addEventListener("change", () => {
+      registerBtn.disabled = !agbBox.checked;
     });
 
-    // Registrieren Funktion (lokal)
-    document.getElementById("registerForm").addEventListener("submit", function (e) {
-      e.preventDefault();
+    registerBtn.addEventListener("click", () => {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (!email || !password) {
+        alert("Bitte E-Mail und Passwort eingeben.");
+        return;
+      }
+
+      // Registrierung lokal speichern (Demo)
+      localStorage.setItem("user_email", email);
+      localStorage.setItem("user_password", password);
+
+      // Referral-Tracking (falls vorhanden)
+      const urlParams = new URLSearchParams(window.location.search);
+      const ref = urlParams.get("ref");
+      if (ref) {
+        const partnerData = JSON.parse(localStorage.getItem("partnerData") || "[]");
+        partnerData.push({ email, referrer: ref });
+        localStorage.setItem("partnerData", JSON.stringify(partnerData));
+      }
+
       alert("Registrierung erfolgreich!");
-      window.location.href = "dashboard.html"; // oder login.html
+      window.location.href = "index.html"; // Zur Login-Seite weiterleiten
     });
   </script>
+
 </body>
 </html>
