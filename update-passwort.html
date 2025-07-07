@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neues Passwort setzen</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="form-container">
+    <h2>🔑 Neues Passwort setzen</h2>
+    <form id="new-password-form">
+      <input type="password" id="new-password" placeholder="Neues Passwort" required />
+      <button type="submit">Passwort speichern</button>
+    </form>
+    <p id="message" class="error"></p>
+    <p><a href="index.html">Zurück zum Login</a></p>
+  </div>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+    const supabase = createClient(
+      'https://ghfzdgaunxblpudkmxmy.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoZnpkZ2F1bnhibHB1ZGtteG15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3MDI5NTksImV4cCI6MjA2NjI3ODk1OX0.J8ni4SszaI33ljthdEjqXf8ZKFCs4uWnRZZDyU0IlUU'
+    );
+
+    const form = document.getElementById('new-password-form');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const newPassword = document.getElementById('new-password').value;
+
+      const { error } = await supabase.auth.updateUser({ password: newPassword });
+
+      if (error) {
+        message.textContent = '❌ Fehler: ' + error.message;
+      } else {
+        message.textContent = '✅ Passwort erfolgreich geändert! Jetzt einloggen.';
+      }
+    });
+  </script>
+</body>
+</html>
