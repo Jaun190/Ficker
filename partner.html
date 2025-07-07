@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GrowEmpire Partnerstruktur</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/2f21c3c5d5.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/2f21c5dc5.js" crossorigin="anonymous"></script>
   <style>
     body {
       margin: 0;
@@ -18,13 +18,13 @@
     }
 
     .menu-icon {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       color: #00ff88;
       position: fixed;
       top: 20px;
       left: 20px;
       cursor: pointer;
-      z-index: 1000;
+      z-index: 9999;
     }
 
     nav {
@@ -37,7 +37,7 @@
       padding: 60px 20px;
       box-shadow: 0 0 10px #00ff88;
       transition: left 0.3s ease-in-out;
-      z-index: 999;
+      z-index: 9998;
     }
 
     nav.active {
@@ -116,7 +116,7 @@
   <div class="container">
     <div class="referral-box">
       <h2><i class="fas fa-link"></i> Dein persönlicher Referral-Link</h2>
-      <p id="refLink">https://example.com/register.html?ref=jaun190</p>
+      <p id="refLink">https://example.com/register.html</p>
     </div>
 
     <h2><i class="fas fa-users"></i> Deine Partnerstruktur</h2>
@@ -151,7 +151,6 @@
         const node = document.createElement("div");
         node.className = "node";
         node.textContent = child.email;
-
         const subtree = buildTree(data, child.email, level + 1, max);
         if (subtree) node.appendChild(subtree);
         container.appendChild(node);
@@ -163,10 +162,8 @@
     const root = document.createElement("div");
     root.className = "node";
     root.textContent = email;
-
     const tree = buildTree(demoData, email);
     if (tree) root.appendChild(tree);
-
     document.getElementById("treeContainer").appendChild(root);
   </script>
 </body>
