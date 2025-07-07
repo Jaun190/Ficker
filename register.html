@@ -13,7 +13,6 @@
       padding: 2rem;
       text-align: center;
     }
-
     .form {
       background-color: rgba(0,0,0,0.8);
       padding: 2rem;
@@ -22,7 +21,6 @@
       margin: 0 auto;
       box-shadow: 0 0 12px #00ff88;
     }
-
     input[type="email"], input[type="password"], input[type="text"] {
       width: 100%;
       padding: 10px;
@@ -31,7 +29,6 @@
       border: none;
       font-size: 1rem;
     }
-
     button {
       padding: 12px 24px;
       background-color: #00ff88;
@@ -42,66 +39,42 @@
       cursor: pointer;
       margin-top: 1rem;
     }
-
-    label {
+    .agb-hinweis {
       font-size: 0.9rem;
-      display: block;
       margin-top: 1rem;
     }
-
     .agb-hinweis a {
       color: #00ff88;
       text-decoration: underline;
       cursor: pointer;
     }
-
     .popup {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.95);
-      display: flex;
+      height: 100vh;
+      width: 100vw;
+      background: rgba(0,0,0,0.9);
+      color: white;
+      display: none;
       justify-content: center;
-      align-items: flex-start;
-      padding: 3rem 1rem;
-      overflow: auto;
-      z-index: 9999;
-      box-sizing: border-box;
+      align-items: center;
+      padding: 2rem;
     }
-
     .popup-content {
       background: black;
       border: 2px solid #00ff88;
       padding: 2rem;
-      border-radius: 12px;
-      max-width: 700px;
-      width: 100%;
-      color: white;
+      border-radius: 8px;
+      max-height: 80vh;
+      overflow-y: auto;
+      max-width: 600px;
       text-align: left;
-      box-sizing: border-box;
     }
-
-    .popup-content h2 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .popup-content p {
-      font-size: 0.9rem;
-      margin-bottom: 0.8rem;
-      line-height: 1.5;
-    }
-
-    .popup-content button {
+    .popup button {
       background: red;
       color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 6px;
       margin-top: 1rem;
-      cursor: pointer;
     }
   </style>
 </head>
@@ -113,31 +86,36 @@
     <input type="password" id="password" placeholder="Passwort" required />
     <label>
       <input type="checkbox" id="agbCheckbox" />
-      Ich akzeptiere die <span class="agb-hinweis"><a onclick="openAGB()">Allgemeinen Geschäftsbedingungen</a></span>
+      Ich akzeptiere die <a onclick="openAGB()">Allgemeinen Geschäftsbedingungen</a>
     </label>
+    <br />
     <button onclick="register()">Registrieren</button>
   </div>
 
-  <div class="popup" id="agbPopup" style="display: none;">
+  <div class="popup" id="agbPopup">
     <div class="popup-content">
       <h2>Allgemeine Geschäftsbedingungen</h2>
-      <p>1. Die Nutzung dieser Plattform erfolgt auf eigene Verantwortung. Nutzer akzeptieren alle Risiken im Zusammenhang mit der Teilnahme.</p>
-      <p>2. Die Inhalte und Angebote auf GrowEmpire stellen keine Finanzberatung oder Anlageempfehlung dar.</p>
-      <p>3. Es besteht keine rechtliche Garantie auf Gewinne. Unsere Ertragsmodelle sind auf mathematisch simulierten Szenarien aufgebaut. Dennoch werden bei aktiver Nutzung, Anbau und Reinvestitionen reale Auszahlungen ermöglicht – die Erfolgsquote ist abhängig von der Aktivität des Nutzers.</p>
-      <p>4. Alle getätigten Einzahlungen gelten als Zugang zu einer Lizenz oder Fläche. Diese sind virtuelle Module und dienen ausschließlich dem Zweck der Teilnahme innerhalb des Systems.</p>
-      <p>5. Bei Auszahlung wird eine Identitätsprüfung verlangt. Unvollständige oder falsche Angaben können zur Ablehnung oder Verzögerung führen.</p>
-      <p>6. Reinvestitionen sind freiwillig, beeinflussen jedoch die Ertragsmöglichkeiten im System.</p>
-      <p>7. Bei Verstoß gegen die Regeln oder bei missbräuchlicher Nutzung kann der Account gesperrt werden. Rechtsansprüche erlöschen in solchen Fällen.</p>
-      <p>8. Datenschutz: Deine Daten werden vertraulich behandelt. Sie werden nicht an Dritte weitergegeben, es sei denn gesetzlich vorgeschrieben oder für Auszahlung notwendig.</p>
-      <p>9. Haftung: GrowEmpire übernimmt keine Haftung für technische Ausfälle, Unterbrechungen oder Datenverluste.</p>
-      <p>10. Änderungen: Diese AGB können jederzeit geändert werden. Mit jeder Nutzung erklärst du dich mit der jeweils aktuellen Version einverstanden.</p>
-      <p>11. Es gilt das Schweizer Recht. Sollten einzelne Punkte unwirksam sein, bleiben die übrigen Regelungen davon unberührt.</p>
-      <p>Mit der Registrierung erklärst du dich mit diesen Bedingungen einverstanden.</p>
+      <p>
+        Willkommen bei GrowEmpire. Durch das Erstellen eines Accounts erklärst du dich mit folgenden Bedingungen einverstanden:
+        <br /><br />
+        1. Die Nutzung dieser Plattform erfolgt auf eigene Verantwortung.<br />
+        2. Es besteht keine Garantie auf Gewinne, auch wenn potenzielle Erträge ausgewiesen werden.<br />
+        3. Alle Erträge und Pflanzensimulationen sind rein virtuell und dienen ausschließlich der Teilnahme am System.<br />
+        4. Die Lizenzprodukte sind symbolische digitale Zugänge ohne physische Gegenleistung.<br />
+        5. Auszahlungen erfolgen nur, wenn die im System festgelegten Bedingungen (z. B. Reinvest oder Werbung) erfüllt sind.<br />
+        6. Nutzer verpflichten sich, nur echte, eigene E-Mail-Adressen zu verwenden.<br />
+        7. GrowEmpire behält sich das Recht vor, Accounts zu sperren oder zu prüfen, wenn betrügerisches Verhalten vermutet wird.<br /><br />
+        Diese Plattform ist kein Anlageprodukt im rechtlichen Sinne. Der „Ertrag“ entsteht durch Teilnahme an virtuellen Wachstumszyklen. Durch Kauf und Reinvest erhältst du Zugang zu simulierten Wachstumseinheiten mit möglichen Rückvergütungen, wenn die Bedingungen erfüllt sind.<br /><br />
+        Änderungen dieser AGB sind jederzeit möglich. Bitte lies regelmäßig nach oder kontaktiere unseren Support.
+      </p>
       <button onclick="closeAGB()">Schließen</button>
     </div>
   </div>
 
   <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const ref = urlParams.get('ref');
+
     function openAGB() {
       document.getElementById('agbPopup').style.display = 'flex';
     }
@@ -146,7 +124,7 @@
       document.getElementById('agbPopup').style.display = 'none';
     }
 
-    function register() {
+    async function register() {
       const email = document.getElementById('email').value;
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
@@ -156,31 +134,46 @@
         alert('Bitte alle Felder ausfüllen.');
         return;
       }
-
       if (!agbChecked) {
         alert('Du musst die AGB akzeptieren.');
         return;
       }
 
       // Supabase Registrierung
-      fetch('https://afquciketcteqqynucet.supabase.co/auth/v1/signup', {
+      const res = await fetch('https://afquciketcteqqynucet.supabase.co/auth/v1/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXVjaWtldGN0ZXFxeW51Y2V0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE4NzQxODYsImV4cCI6MjA2NzQ1MDE4Nn0.Mg247BH4XribwIICKLHu1IUCX50nbSdmK34JniLBPzY'
         },
         body: JSON.stringify({ email, password })
-      })
-      .then(res => res.json())
-      .then(data => {
-        if (data.user) {
-          localStorage.setItem("user_email", email);
-          localStorage.setItem("username", username);
-          window.location.href = "index.html";
-        } else {
-          alert('Registrierung fehlgeschlagen.');
-        }
       });
+
+      const data = await res.json();
+
+      if (data.user) {
+        localStorage.setItem("user_email", email);
+        localStorage.setItem("username", username);
+
+        if (ref) {
+          await fetch('https://afquciketcteqqynucet.supabase.co/rest/v1/referrals', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXVjaWtldGN0ZXFxeW51Y2V0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE4NzQxODYsImV4cCI6MjA2NzQ1MDE4Nn0.Mg247BH4XribwIICKLHu1IUCX50nbSdmK34JniLBPzY',
+              'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXVjaWtldGN0ZXFxeW51Y2V0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE4NzQxODYsImV4cCI6MjA2NzQ1MDE4Nn0.Mg247BH4XribwIICKLHu1IUCX50nbSdmK34JniLBPzY'
+            },
+            body: JSON.stringify({
+              referrer_email: ref,
+              referred_email: email
+            })
+          });
+        }
+
+        window.location.href = "index.html";
+      } else {
+        alert("Registrierung fehlgeschlagen.");
+      }
     }
   </script>
 </body>
