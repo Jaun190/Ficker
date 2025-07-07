@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="de">
+<!DOCTYPE html>
+<html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -38,44 +39,42 @@
       cursor: pointer;
       margin-top: 1rem;
     }
-    .agb-hinweis {
-      font-size: 0.9rem;
-      margin-top: 1rem;
-    }
-    .agb-hinweis a {
-      color: #00ff88;
-      text-decoration: underline;
-      cursor: pointer;
-    }
     .popup {
       position: fixed;
       top: 0;
       left: 0;
       height: 100vh;
       width: 100vw;
-      background: rgba(0,0,0,0.95);
+      background: rgba(0,0,0,0.9);
       color: white;
       display: none;
       justify-content: center;
       align-items: center;
       padding: 2rem;
+      z-index: 999;
     }
     .popup-content {
       background: black;
       border: 2px solid #00ff88;
       padding: 2rem;
       border-radius: 8px;
-      max-height: 90vh;
+      max-height: 80vh;
       overflow-y: auto;
-      max-width: 600px;
+      max-width: 700px;
       text-align: left;
-      font-size: 0.9rem;
-      line-height: 1.5rem;
     }
     .popup button {
       background: red;
       color: white;
       margin-top: 1rem;
+    }
+    label {
+      font-size: 0.9rem;
+    }
+    label a {
+      color: #00ff88;
+      text-decoration: underline;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -91,45 +90,54 @@
     </label>
     <br />
     <button onclick="register()">Registrieren</button>
-  </div>  <div class="popup" id="agbPopup">
+  </div>
+
+  <div class="popup" id="agbPopup">
     <div class="popup-content">
       <h2>Allgemeine Geschäftsbedingungen</h2>
       <p>
-        Willkommen bei GrowEmpire. Mit dem Erstellen eines Kontos auf dieser Plattform akzeptierst du die folgenden Bedingungen:
+        Willkommen bei GrowEmpire. Durch die Registrierung auf dieser Plattform erklärst du dich mit den folgenden Bedingungen einverstanden:
         <br /><br />
-        1. Die Nutzung der Plattform erfolgt auf eigene Verantwortung.
-        <br />
-        2. Alle Inhalte dienen ausschließlich der Veranschaulichung und stellen keine Finanz-, Anlage- oder Rechtsberatung dar.
-        <br />
-        3. Es besteht keinerlei Garantie auf Gewinne, Rückzahlungen oder sonstige Erträge.
-        <br />
-        4. Die simulierten Pflanzen, Flächen und Erträge stellen rein digitale Konzepte dar.
-        <br />
-        5. Unsere Lizenz-Modelle sind virtuelle Produkte, die innerhalb der Plattform bestimmte Funktionen und Status freischalten.
-        <br />
-        6. Die im Dashboard dargestellten Erträge beruhen auf einem symbolischen Wachstumssystem. Diese Visualisierung dient rein informativen Zwecken.
-        <br />
-        7. Eine Auszahlung von Guthaben erfolgt ausschließlich auf Basis interner Bonusmechanismen, Reinvests und Nutzerverhalten. Es handelt sich dabei um eine freiwillige Leistung von GrowEmpire ohne Rechtsanspruch.
-        <br />
-        8. Nutzer verpflichten sich, bei der Registrierung wahre Angaben zu machen und keine betrügerischen Absichten zu verfolgen.
-        <br />
-        9. GrowEmpire kann Konten jederzeit sperren oder deaktivieren, wenn ein Verstoß gegen die Regeln oder ein Missbrauch des Systems festgestellt wird.
-        <br />
-        10. Änderungen an diesen AGB sind jederzeit möglich und werden über die Plattform veröffentlicht.
+
+        <strong>1. Nutzung & Haftung</strong><br />
+        Die Nutzung erfolgt auf eigene Verantwortung. GrowEmpire übernimmt keine Haftung für Verluste, Fehler oder unerwünschte Ergebnisse innerhalb des Systems. Nutzer sind verpflichtet, korrekte Angaben zu machen.
+
         <br /><br />
-        Durch Setzen des Häkchens erklärst du, diese Bedingungen zur Kenntnis genommen zu haben. Ein Anspruch auf Auszahlung, Rückerstattung oder Rendite besteht zu keiner Zeit.
+        <strong>2. Virtuelles System</strong><br />
+        GrowEmpire ist ein symbolisches, rein virtuelles Plattformkonzept. Alle dargestellten Inhalte (Pflanzen, Flächen, Erträge) dienen der Simulation und haben keinen realen Gegenwert. Es findet kein echter Anbau oder Vertrieb statt.
+
         <br /><br />
-        Bei Fragen wende dich bitte an den Support. Bitte prüfe regelmäßig die AGB auf Aktualisierungen.
+        <strong>3. Ertragsmodell</strong><br />
+        Die im System dargestellten Erträge (z. B. 20 % oder 30 %) beruhen auf internen Mechanismen und stellen keinen garantierten Gewinn dar. Der angezeigte Ertrag ist ein symbolischer Wert, abhängig vom Verhalten im System (z. B. Reinvest, Lizenzmodell, Downline-Aktivität).
+
+        <br /><br />
+        <strong>4. Auszahlung</strong><br />
+        Auszahlungen sind freiwillige Leistungen von GrowEmpire und erfolgen ausschließlich, wenn definierte Bedingungen erfüllt sind – etwa durch Deckung via Reinvestments oder Downline-Umsätze. Es besteht kein rechtlicher Anspruch auf Auszahlung, solange diese Bedingungen nicht erfüllt sind.
+
+        <br /><br />
+        <strong>5. Kontosperrung</strong><br />
+        GrowEmpire behält sich vor, Nutzerkonten zu deaktivieren oder zu sperren, die gegen diese AGB, geltende Gesetze oder Systemregeln verstoßen.
+
+        <br /><br />
+        <strong>6. Änderungen</strong><br />
+        Diese AGB können jederzeit angepasst werden. Nutzer werden gebeten, sich regelmäßig über Änderungen zu informieren.
+
+        <br /><br />
+        Mit der Registrierung bestätigst du, dass du diese Bedingungen verstanden hast und akzeptierst.
       </p>
       <button onclick="closeAGB()">Schließen</button>
     </div>
-  </div>  <script>
+  </div>
+
+  <script>
     function openAGB() {
       document.getElementById('agbPopup').style.display = 'flex';
     }
+
     function closeAGB() {
       document.getElementById('agbPopup').style.display = 'none';
     }
+
     function register() {
       const email = document.getElementById('email').value;
       const username = document.getElementById('username').value;
@@ -145,6 +153,7 @@
         return;
       }
 
+      // Supabase Registrierung
       fetch('https://afquciketcteqqynucet.supabase.co/auth/v1/signup', {
         method: 'POST',
         headers: {
@@ -153,16 +162,17 @@
         },
         body: JSON.stringify({ email, password })
       })
-        .then(res => res.json())
-        .then(data => {
-          if (data.user) {
-            localStorage.setItem("user_email", email);
-            localStorage.setItem("username", username);
-            window.location.href = "index.html";
-          } else {
-            alert('Registrierung fehlgeschlagen.');
-          }
-        });
+      .then(res => res.json())
+      .then(data => {
+        if (data.user) {
+          localStorage.setItem("user_email", email);
+          localStorage.setItem("username", username);
+          window.location.href = "index.html";
+        } else {
+          alert('Registrierung fehlgeschlagen.');
+        }
+      });
     }
-  </script></body>
+  </script>
+</body>
 </html>
