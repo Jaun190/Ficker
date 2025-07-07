@@ -7,105 +7,74 @@
   <style>
     body {
       margin: 0;
-      padding: 0;
       font-family: 'Inter', sans-serif;
       background: url('./assets/kiffen.png') no-repeat center center fixed;
       background-size: cover;
       display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: center;
-      min-height: 100vh;
-      color: white;
+      justify-content: center;
+      align-items: flex-end;
+      height: 100vh;
     }
 
     .login-box {
-      background-color: #000;
+      background-color: rgba(0, 0, 0, 0.9);
       padding: 2rem;
-      width: 100%;
-      max-width: 420px;
-      box-sizing: border-box;
-      text-align: center;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #00ff88;
+      width: 90%;
+      max-width: 400px;
+      margin-bottom: 2rem;
     }
 
     h2 {
-      margin-bottom: 1rem;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 1.5rem;
     }
 
-    input[type="email"],
-    input[type="password"] {
+    input {
       width: 100%;
-      padding: 12px;
-      margin: 0.5rem 0;
+      padding: 1rem;
+      margin-bottom: 1rem;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       font-size: 1rem;
     }
 
-    button {
+    .button {
       width: 100%;
-      padding: 12px;
-      margin-top: 1rem;
+      padding: 1rem;
       background-color: #00ff88;
-      color: black;
-      font-weight: bold;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
       cursor: pointer;
     }
 
-    a {
-      color: #00ff88;
-      text-decoration: none;
-      display: block;
+    .register-link {
+      text-align: center;
       margin-top: 1rem;
+      color: #00ff88;
     }
 
-    a:hover {
+    .register-link a {
+      color: #00ff88;
       text-decoration: underline;
     }
   </style>
 </head>
 <body>
-
   <div class="login-box">
     <h2>GrowEmpire Login</h2>
-    <input type="email" id="email" placeholder="E-Mail" required />
-    <input type="password" id="password" placeholder="Passwort" required />
-    <button onclick="login()">Einloggen</button>
-    <a href="register.html">Noch kein Account? Hier registrieren</a>
+    <form>
+      <input type="email" placeholder="E-Mail" required />
+      <input type="password" placeholder="Passwort" required />
+      <button type="submit" class="button">Einloggen</button>
+    </form>
+    <div class="register-link">
+      Noch kein Account? <a href="register.html">Hier registrieren</a>
+    </div>
   </div>
-
-  <script>
-    function login() {
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-
-      if (!email || !password) {
-        alert("Bitte E-Mail und Passwort eingeben.");
-        return;
-      }
-
-      fetch("https://afquciketcteqqynucet.supabase.co/auth/v1/token?grant_type=password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-        },
-        body: JSON.stringify({ email, password })
-      })
-      .then(res => res.json())
-      .then(data => {
-        if (data.access_token) {
-          localStorage.setItem("access_token", data.access_token);
-          localStorage.setItem("user_email", email);
-          window.location.href = "dashboard.html";
-        } else {
-          alert("Login fehlgeschlagen. Bitte überprüfe deine Daten.");
-        }
-      });
-    }
-  </script>
-
 </body>
 </html>
