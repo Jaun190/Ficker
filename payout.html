@@ -1,0 +1,114 @@
+<!DOCTYPE html><html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auszahlung – GrowEmpire</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: url('./assets/dashboard.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #00ff88;
+      text-align: center;
+      padding: 2rem;
+    }
+    .box {
+      background: rgba(0, 0, 0, 0.85);
+      border: 2px solid #00ff88;
+      border-radius: 16px;
+      box-shadow: 0 0 16px #00ff88;
+      padding: 2rem;
+      max-width: 600px;
+      margin: 100px auto;
+    }
+    h1 {
+      font-size: 2rem;
+      color: #00ff88;
+    }
+    p {
+      font-size: 1.1rem;
+      color: #ccc;
+      margin: 1rem 0;
+    }
+    .btn {
+      background-color: #00ff88;
+      border: none;
+      color: black;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      margin: 1rem;
+      box-shadow: 0 0 10px #00ff88;
+      transition: transform 0.2s;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+    }
+    .status {
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #ffffff;
+    }
+    .highlight {
+      color: #00ff88;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>💸 Deine Ernteübersicht</h1>
+    <p id="summary">Daten werden geladen...</p><div class="status" id="status"></div>
+
+<button class="btn" onclick="reinvest()">🔁 Reinvest</button>
+<button class="btn" id="btnPayout" disabled onclick="window.location.href='bank.html'">💸 Auszahlung</button>
+
+  </div>  <script>
+    const demoHarvests = JSON.parse(localStorage.getItem("purchases") || "[]")
+      .filter(p => {
+        const date = new Date(p.date);
+        const today = new Date();
+        const tage = p.tage || 75;
+        const diff = Math.ceil((today - date) / (1000 * 60 * 60 * 24));
+        return diff >= tage;
+      });
+
+    const pflanzenAnzahl = demoHarvests.length;
+    const ertragProPflanze = (localStorage.getItem("lizenz") === "premium") ? 45 : 30;
+    const gesamtErtrag = pflanzenAnzahl * ertragProPflanze;
+
+    // Beispielhafte Deckung: 90 von 150 gedeckt
+    let gedeckt = parseInt(localStorage.getItem("deckung") || "0");
+    const fehlt = Math.max(0, gesamtErtrag - gedeckt);
+
+    document.getElementById("summary").innerHTML = `
+      Du hast <span class="highlight">${pflanzenAnzahl}</span> Pflanze(n) geerntet.<br>
+      Gesamt-Ertrag: <span class="highlight">CHF ${gesamtErtrag}.–</span><br>
+      Gedeckt: <span class="highlight">CHF ${gedeckt}.–</span><br>
+      Fehlbetrag: <span class="highlight">CHF ${fehlt}.–</span>
+    `;
+
+    const payoutBtn = document.getElementById("btnPayout");
+    const status = document.getElementById("status");
+
+    if (fehlt === 0 && pflanzenAnzahl > 0) {
+      payoutBtn.disabled = false;
+      status.innerHTML = "✅ Deine Auszahlung ist jetzt möglich.";
+    } else if (pflanzenAnzahl > 0) {
+      status.innerHTML = "🔒 Auszahlung noch gesperrt – bitte Reinvestieren oder Partnerumsatz erhöhen.";
+    } else {
+      status.innerHTML = "🌱 Du hast aktuell keine erntebereiten Pflanzen.";
+    }
+
+    function reinvest() {
+      gedeckt += 30;
+      localStorage.setItem("deckung", gedeckt);
+      alert("🔁 CHF 30.– wurden reinvestiert und als gedeckt markiert.");
+      location.reload();
+    }
+  </script></body>
+</html>

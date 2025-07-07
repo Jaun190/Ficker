@@ -1,0 +1,172 @@
+<!-- Refresh Trigger 17:42 -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GrowEmpire Partnerstruktur</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/2f21c3c5d5.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background-image: url('assets/dashboard.png');
+      background-size: cover;
+      background-position: center;
+      color: #00ff88;
+      overflow-x: hidden;
+    }
+
+    .menu-icon {
+      font-size: 1.5rem;
+      color: #00ff88;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 250px;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      padding: 60px 20px;
+      box-shadow: 2px 0 10px #00ff88;
+      transition: left 0.3s ease-in-out;
+      z-index: 999;
+    }
+
+    nav.active {
+      left: 0;
+    }
+
+    nav a {
+      display: block;
+      color: #00ff88;
+      text-decoration: none;
+      margin: 15px 0;
+      font-size: 1.1rem;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 100px auto 50px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .referral-box {
+      border: 2px solid #00ff88;
+      padding: 20px;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.85);
+      box-shadow: 0 0 15px #00ff88;
+      margin-bottom: 40px;
+    }
+
+    .referral-box p {
+      font-size: 1.1rem;
+      word-break: break-word;
+    }
+
+    .tree-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .node {
+      background: black;
+      border: 2px solid #00ff88;
+      border-radius: 10px;
+      padding: 10px 20px;
+      margin: 10px;
+      color: #00ff88;
+      font-weight: bold;
+      box-shadow: 0 0 10px #00ff88;
+    }
+
+    .children {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="menu-icon" onclick="toggleMenu()">
+    <i class="fas fa-bars"></i>
+  </div>
+
+  <nav id="mainMenu">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="partner.html">Partner</a>
+    <a href="agb.html">AGB</a>
+    <a href="impressum.html">Impressum</a>
+    <a href="logout.html">Logout</a>
+  </nav>
+
+  <div class="container">
+    <div class="referral-box">
+      <h2><i class="fas fa-link"></i> Dein persönlicher<br>Referral-Link</h2>
+      <p id="refLink">https://example.com/register.html?ref=jaun190</p>
+    </div>
+
+    <h2><i class="fas fa-users"></i> Deine Partnerstruktur</h2>
+    <div class="tree-container" id="treeContainer"></div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('mainMenu').classList.toggle('active');
+    }
+
+    const demoData = [
+      { email: "jaun190@gmail.com", referrer: null },
+      { email: "bob@example.com", referrer: "jaun190@gmail.com" },
+      { email: "carla@example.com", referrer: "bob@example.com" },
+      { email: "dave@example.com", referrer: "bob@example.com" }
+    ];
+
+    const email = localStorage.getItem("user_email") || "jaun190@gmail.com";
+    document.getElementById("refLink").textContent =
+      `https://jaun190.github.io/register.html?ref=${email.split('@')[0]}`;
+
+    function buildTree(data, parent, level = 1, max = 3) {
+      if (level > max) return null;
+      const children = data.filter(p => p.referrer === parent);
+      if (!children.length) return null;
+
+      const container = document.createElement("div");
+      container.className = "children";
+
+      for (const child of children) {
+        const node = document.createElement("div");
+        node.className = "node";
+        node.textContent = child.email;
+        const subtree = buildTree(data, child.email, level + 1, max);
+        if (subtree) node.appendChild(subtree);
+        container.appendChild(node);
+      }
+
+      return container;
+    }
+
+    const root = document.createElement("div");
+    root.className = "node";
+    root.textContent = email;
+    const tree = buildTree(demoData, email);
+    if (tree) root.appendChild(tree);
+    document.getElementById("treeContainer").appendChild(root);
+  </script>
+
+</body>
+</html>
