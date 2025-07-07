@@ -12,11 +12,34 @@
       background: url('./assets/kiffen.png') no-repeat top center;
       background-size: cover;
       background-color: #000;
-      height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
       align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+    }
+
+    .intro {
+      color: #f4f4f4;
+      text-align: center;
+      padding: 3rem 1rem 1rem;
+      max-width: 600px;
+    }
+
+    .intro h1 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .intro h2 {
+      font-size: 3rem;
+      color: #dcdcdc;
+      margin: 0 0 1.5rem;
+    }
+
+    .intro p {
+      font-size: 1.1rem;
+      line-height: 1.6;
     }
 
     .login-box {
@@ -26,10 +49,10 @@
       box-shadow: 0 0 20px #00ff88;
       width: 90%;
       max-width: 400px;
-      margin-bottom: 6vh;
+      margin: 2rem auto;
     }
 
-    h2 {
+    .login-box h2 {
       color: #fff;
       text-align: center;
       margin-bottom: 1.5rem;
@@ -39,8 +62,8 @@
       width: 100%;
       padding: 1rem;
       margin-bottom: 1rem;
-      border: none;
       border-radius: 8px;
+      border: none;
       font-size: 1rem;
     }
 
@@ -48,11 +71,11 @@
       width: 100%;
       padding: 1rem;
       background-color: #00ff88;
-      color: #000;
       border: none;
       border-radius: 8px;
       font-weight: bold;
       font-size: 1rem;
+      color: #000;
       cursor: pointer;
     }
 
@@ -69,6 +92,17 @@
   </style>
 </head>
 <body>
+
+  <div class="intro">
+    <h1>Willkommen bei</h1>
+    <h2>GrowEmpire</h2>
+    <p>
+      Baue dein virtuelles Hanf-Imperium auf – starte mit deiner Box, pflanze, <br>
+      ernte und verdiene. Alles vollautomatisch.<br>
+      Alles profitabel.
+    </p>
+  </div>
+
   <div class="login-box">
     <h2>GrowEmpire Login</h2>
     <form id="login-form">
@@ -95,11 +129,13 @@
       const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
       if (error) {
-        alert('Fehler: ' + error.message);
+        alert('Login fehlgeschlagen: ' + error.message);
       } else {
-        window.location.href = 'dashboard.html';
+        alert('Login erfolgreich!');
+        window.location.href = "dashboard.html";
       }
     });
   </script>
+
 </body>
 </html>
