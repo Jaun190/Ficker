@@ -9,12 +9,14 @@
       margin: 0;
       font-family: 'Inter', sans-serif;
       background: url('./assets/kiffen.png') no-repeat top center;
-      background-size: contain;
+      background-size: cover;
       background-color: #000;
+      min-height: 100vh;
       display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      height: 100vh;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 2rem 1rem;
     }
 
     .login-box {
@@ -22,7 +24,7 @@
       padding: 2rem;
       border-radius: 12px;
       box-shadow: 0 0 20px #00ff88;
-      width: 90%;
+      width: 100%;
       max-width: 400px;
       margin-bottom: 2rem;
     }
@@ -64,18 +66,43 @@
       text-decoration: underline;
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </head>
 <body>
   <div class="login-box">
     <h2>GrowEmpire Login</h2>
-    <form>
-      <input type="email" placeholder="E-Mail" required />
-      <input type="password" placeholder="Passwort" required />
+    <form id="login-form">
+      <input type="email" id="email" placeholder="E-Mail" required />
+      <input type="password" id="password" placeholder="Passwort" required />
       <button type="submit" class="button">Einloggen</button>
     </form>
     <div class="register-link">
       Noch kein Account? <a href="register.html">Hier registrieren</a>
     </div>
   </div>
+
+  <script>
+    const supabase = supabase.createClient(
+      'https://ghfzdgaunxblpudkmxmy.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoZnpkZ2F1bnhibHB1ZGtteG15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3MDI5NTksImV4cCI6MjA2NjI3ODk1OX0.J8ni4SszaI33ljthdEjqXf8ZKFCs4uWnRZZDyU0IlUU'
+    );
+
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      const { error, user, session } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
+
+      if (error) {
+        alert('Login fehlgeschlagen: ' + error.message);
+      } else {
+        window.location.href = 'dashboard.html';
+      }
+    });
+  </script>
 </body>
 </html>
