@@ -7,27 +7,28 @@
   <style>
     body {
       margin: 0;
+      padding: 0;
       font-family: 'Inter', sans-serif;
       background: url('./assets/kiffen.png') no-repeat center center fixed;
       background-size: cover;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: flex-end;
+      align-items: center;
       min-height: 100vh;
       color: white;
     }
 
     .login-box {
-      background-color: black;
+      background-color: #000;
       padding: 2rem;
-      border-radius: 0;
       width: 100%;
       max-width: 420px;
+      box-sizing: border-box;
       text-align: center;
     }
 
-    .login-box h2 {
+    h2 {
       margin-bottom: 1rem;
     }
 
@@ -36,8 +37,8 @@
       width: 100%;
       padding: 12px;
       margin: 0.5rem 0;
-      border-radius: 6px;
       border: none;
+      border-radius: 6px;
       font-size: 1rem;
     }
 
@@ -53,14 +54,14 @@
       cursor: pointer;
     }
 
-    .register-link {
-      margin-top: 1rem;
-      display: block;
+    a {
       color: #00ff88;
       text-decoration: none;
+      display: block;
+      margin-top: 1rem;
     }
 
-    .register-link:hover {
+    a:hover {
       text-decoration: underline;
     }
   </style>
@@ -72,7 +73,7 @@
     <input type="email" id="email" placeholder="E-Mail" required />
     <input type="password" id="password" placeholder="Passwort" required />
     <button onclick="login()">Einloggen</button>
-    <a class="register-link" href="register.html">Noch kein Account? Hier registrieren</a>
+    <a href="register.html">Noch kein Account? Hier registrieren</a>
   </div>
 
   <script>
@@ -81,7 +82,7 @@
       const password = document.getElementById('password').value;
 
       if (!email || !password) {
-        alert("Bitte fülle alle Felder aus.");
+        alert("Bitte E-Mail und Passwort eingeben.");
         return;
       }
 
@@ -89,14 +90,11 @@
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXVjaWtldGN0ZXFxeW51Y2V0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE4NzQxODYsImV4cCI6MjA2NzQ1MDE4Nn0.Mg247BH4XribwIICKLHu1IUCX50nbSdmK34JniLBPzY"
+          "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
         },
-        body: JSON.stringify({
-          email: email,
-          password: password
-        })
+        body: JSON.stringify({ email, password })
       })
-      .then(response => response.json())
+      .then(res => res.json())
       .then(data => {
         if (data.access_token) {
           localStorage.setItem("access_token", data.access_token);
