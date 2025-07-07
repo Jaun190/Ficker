@@ -4,19 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GrowEmpire Login</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <style>
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
       background: url('./assets/kiffen.png') no-repeat top center;
-      background-size: cover;
+      background-size: contain;
       background-color: #000;
-      min-height: 100vh;
       display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: center;
-      padding: 2rem 1rem;
+      justify-content: center;
+      align-items: flex-end;
+      height: 100vh;
     }
 
     .login-box {
@@ -24,9 +23,9 @@
       padding: 2rem;
       border-radius: 12px;
       box-shadow: 0 0 20px #00ff88;
-      width: 100%;
+      width: 90%;
       max-width: 400px;
-      margin-bottom: 2rem;
+      margin-bottom: 3vh;
     }
 
     h2 {
@@ -48,6 +47,7 @@
       width: 100%;
       padding: 1rem;
       background-color: #00ff88;
+      color: #000;
       border: none;
       border-radius: 8px;
       font-weight: bold;
@@ -66,12 +66,11 @@
       text-decoration: underline;
     }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </head>
 <body>
   <div class="login-box">
     <h2>GrowEmpire Login</h2>
-    <form id="login-form">
+    <form onsubmit="login(event)">
       <input type="email" id="email" placeholder="E-Mail" required />
       <input type="password" id="password" placeholder="Passwort" required />
       <button type="submit" class="button">Einloggen</button>
@@ -87,12 +86,12 @@
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoZnpkZ2F1bnhibHB1ZGtteG15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3MDI5NTksImV4cCI6MjA2NjI3ODk1OX0.J8ni4SszaI33ljthdEjqXf8ZKFCs4uWnRZZDyU0IlUU'
     );
 
-    document.getElementById('login-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
+    async function login(event) {
+      event.preventDefault();
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
 
-      const { error, user, session } = await supabase.auth.signInWithPassword({
+      const { error } = await supabase.auth.signInWithPassword({
         email,
         password
       });
@@ -102,7 +101,7 @@
       } else {
         window.location.href = 'dashboard.html';
       }
-    });
+    }
   </script>
 </body>
 </html>
