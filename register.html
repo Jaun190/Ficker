@@ -14,7 +14,7 @@
       text-align: center;
     }
     .form {
-      background-color: rgba(0,0,0,0.8);
+      background-color: rgba(0, 0, 0, 0.8);
       padding: 2rem;
       border-radius: 12px;
       max-width: 400px;
@@ -39,13 +39,22 @@
       cursor: pointer;
       margin-top: 1rem;
     }
+    .agb-hinweis {
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
+    .agb-hinweis a {
+      color: #00ff88;
+      text-decoration: underline;
+      cursor: pointer;
+    }
     .popup {
       position: fixed;
       top: 0;
       left: 0;
       height: 100vh;
       width: 100vw;
-      background: rgba(0,0,0,0.95);
+      background: rgba(0, 0, 0, 0.95);
       color: white;
       display: none;
       justify-content: center;
@@ -64,25 +73,20 @@
       text-align: left;
       color: #ccc;
       box-sizing: border-box;
+      margin: 1rem;
     }
-    .popup-content h2 {
-      color: #fff;
-      margin-bottom: 1rem;
-    }
-    .popup-content p {
-      margin-bottom: 1rem;
-      font-size: 0.9rem;
-      line-height: 1.6;
+    .popup h2 {
+      color: white;
     }
     .popup button {
       background: red;
       color: white;
+      margin-top: 1rem;
       padding: 10px 20px;
       border: none;
       border-radius: 6px;
       font-weight: bold;
       cursor: pointer;
-      margin-top: 1rem;
     }
   </style>
 </head>
@@ -103,18 +107,20 @@
   <div class="popup" id="agbPopup">
     <div class="popup-content">
       <h2>Allgemeine Geschäftsbedingungen</h2>
-      <p>1. Die Nutzung dieser Plattform erfolgt auf eigene Verantwortung. Nutzer akzeptieren alle Risiken im Zusammenhang mit der Teilnahme.</p>
-      <p>2. Die Inhalte und Angebote auf GrowEmpire stellen keine Finanzberatung oder Anlageempfehlung dar.</p>
-      <p>3. Es besteht keine rechtliche Garantie auf Gewinne. Unsere Ertragsmodelle sind auf mathematisch simulierten Szenarien aufgebaut. Dennoch werden bei aktiver Nutzung, Anbau und Reinvestition reale Auszahlungen ermöglicht – die Erfolgsquote ist abhängig von der Aktivität des Nutzers.</p>
-      <p>4. Alle getätigten Einzahlungen gelten als Zugang zu einer Lizenz oder Fläche. Diese sind virtuelle Module und dienen ausschließlich dem Zweck der Teilnahme innerhalb des Systems.</p>
-      <p>5. Bei Auszahlung wird eine Identitätsprüfung verlangt. Unvollständige oder falsche Angaben können zur Ablehnung oder Verzögerung führen.</p>
-      <p>6. Reinvestitionen sind freiwillig, beeinflussen aber den potenziellen Ertrag. Wer nicht reinvestiert, profitiert nicht von möglichen Boni.</p>
-      <p>7. GrowEmpire behält sich vor, Nutzerkonten jederzeit zu prüfen und ggf. zu deaktivieren, wenn Missbrauch oder schädliches Verhalten festgestellt wird.</p>
-      <p>8. Datenschutz: Alle personenbezogenen Daten werden DSGVO-konform gespeichert. Eine Weitergabe an Dritte erfolgt nicht, außer gesetzlich vorgeschrieben oder zur Auszahlung notwendig.</p>
-      <p>9. GrowEmpire übernimmt keine Haftung für technische Ausfälle, Datenverluste oder Systemausfälle. Die Nutzung erfolgt auf eigenes Risiko.</p>
-      <p>10. Änderungen der AGB können jederzeit vorgenommen werden. Die aktuellste Fassung ist für alle Nutzer verbindlich.</p>
-      <p>11. Diese AGB unterliegen dem schweizerischen Recht. Unwirksame Klauseln berühren nicht die Wirksamkeit der übrigen Regelungen.</p>
-      <p>Mit dem Setzen des Häkchens erklärst du dich mit diesen Bedingungen einverstanden.</p>
+      <p>
+        1. Die Nutzung dieser Plattform erfolgt auf eigene Verantwortung. Nutzer akzeptieren alle Risiken im Zusammenhang mit der Teilnahme.<br><br>
+        2. Die Inhalte und Angebote auf GrowEmpire stellen keine Finanzberatung oder Anlageempfehlung dar.<br><br>
+        3. Es besteht keine rechtliche Garantie auf Gewinne. Unsere Ertragsmodelle sind auf mathematisch simulierten Szenarien aufgebaut. Dennoch werden bei aktiver Nutzung, Anbau und Reinvestitionen reale Auszahlungen ermöglicht – die Erfolgsquote ist abhängig von der Aktivität des Nutzers.<br><br>
+        4. Alle getätigten Einzahlungen gelten als Zugang zu einer Lizenz oder Fläche. Diese sind virtuelle Module und dienen ausschließlich dem Zweck der Teilnahme innerhalb des Systems.<br><br>
+        5. Bei Auszahlung wird eine Identitätsprüfung verlangt. Unvollständige oder falsche Angaben können zur Ablehnung oder Verzögerung führen.<br><br>
+        6. Reinvestitionen sind freiwillig, beeinflussen jedoch die Ertragsmöglichkeiten im System.<br><br>
+        7. Bei Verstößen gegen Regeln oder betrügerischem Verhalten kann der Zugang zum System entzogen werden. Es besteht kein Anspruch auf Rückerstattung.<br><br>
+        8. Datenschutz: Alle Nutzerdaten werden gemäß DSGVO behandelt und nicht an Dritte weitergegeben, außer gesetzlich erforderlich.<br><br>
+        9. Haftung: GrowEmpire haftet nicht für technische Störungen, Datenverlust oder Unterbrechungen. Die Nutzung erfolgt auf eigenes Risiko.<br><br>
+        10. Änderungen: Diese AGB können jederzeit geändert werden. Mit jedem Login erklärt sich der Nutzer mit der neuesten Fassung einverstanden.<br><br>
+        11. Gerichtsstand: Es gilt das Schweizer Recht. Sollte ein Punkt unwirksam sein, bleibt der Rest der AGB gültig.<br><br>
+        Mit der Registrierung erklärst du dich mit diesen Bedingungen einverstanden.
+      </p>
       <button onclick="closeAGB()">Schließen</button>
     </div>
   </div>
@@ -126,6 +132,7 @@
     function closeAGB() {
       document.getElementById('agbPopup').style.display = 'none';
     }
+
     function register() {
       const email = document.getElementById('email').value;
       const username = document.getElementById('username').value;
@@ -141,6 +148,7 @@
         return;
       }
 
+      // Supabase Registrierung
       fetch('https://afquciketcteqqynucet.supabase.co/auth/v1/signup', {
         method: 'POST',
         headers: {
