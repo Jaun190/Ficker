@@ -4,19 +4,97 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GrowEmpire Login</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('./assets/dashboard.png') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    h1 {
+      font-size: 3rem;
+      color: #c1ffc1;
+    }
+    .login-container {
+      background-color: rgba(0, 0, 0, 0.85);
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 0 15px #00ff88;
+    }
+    input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 1rem 0;
+      border-radius: 6px;
+      border: none;
+      font-size: 1rem;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      background-color: #00ff88;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      color: black;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .link {
+      color: #00ff88;
+      margin-top: 1rem;
+    }
+  </style>
 </head>
 <body>
-  <div class="form-container">
+  <h1>Willkommen bei<br>GrowEmpire</h1>
+  <p>Baue dein virtuelles Hanf-Imperium auf – starte mit deiner Box, pflanze, ernte und verdiene. Alles vollautomatisch. Alles profitabel.</p>
+
+  <div class="login-container">
     <h2>GrowEmpire Login</h2>
-    <form id="login-form">
-      <input type="email" id="email" placeholder="E-Mail" required />
-      <input type="password" id="password" placeholder="Passwort" required />
-      <button type="submit">Einloggen</button>
-    </form>
-    <p>Noch kein Account? <a href="register.html">Hier registrieren</a></p>
-    <p id="error-msg" class="error"></p>
+    <input type="email" id="email" placeholder="E-Mail" />
+    <input type="password" id="password" placeholder="Passwort" />
+    <button onclick="login()">Einloggen</button>
+    <p class="link">Noch kein Account? <a href="register.html">Hier registrieren</a></p>
   </div>
-  <script type="module" src="auth.js"></script>
+
+  <script>
+    async function login() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      if (!email || !password) {
+        alert("Bitte E-Mail und Passwort eingeben.");
+        return;
+      }
+
+      const res = await fetch("https://afquciketcteqqynucet.supabase.co/auth/v1/token?grant_type=password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXVjaWtldGN0ZXFxeW51Y2V0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE4NzQxODYsImV4cCI6MjA2NzQ1MDE4Nn0.Mg247BH4XribwIICKLHu1IUCX50nbSdmK34JniLBPzY"
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await res.json();
+
+      if (data.access_token) {
+        localStorage.setItem("user_email", email);
+        window.location.href = "partner.html"; // oder dashboard.html
+      } else {
+        alert("Login fehlgeschlagen. Bitte überprüfe deine Daten.");
+      }
+    }
+  </script>
 </body>
 </html>
