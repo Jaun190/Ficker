@@ -12,6 +12,7 @@
     <form id="login-form">
       <input type="email" id="email" placeholder="E-Mail" required />
       <input type="password" id="password" placeholder="Passwort" required />
+      <p><a href="forgot.html">🔑 Passwort vergessen?</a></p>
       <button type="submit">Einloggen</button>
     </form>
     <p>Noch kein Account? <a href="register.html">Hier registrieren</a></p>
@@ -24,26 +25,27 @@
 
     const supabase = createClient(
       'https://ghfzdgaunxblpudkmxmy.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoZnpkZ2F1bnhibHB1ZGtteG15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3MDI5NTksImV4cCI6MjA2NjI3ODk1OX0.J8ni4SszaI33ljthdEjqXf8ZKFCs4uWnRZZDyU0IlUU'
-    )
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoZnpkZ2F1bnhibHB1ZGtteG15IiwiaWF0IjoxNzUwNzAyOTU5LCJleHAiOjIwNjYyNzg5NTl9.J8ni4SszaI33ljthdEjqXf8ZKFCs4uWnRZZDyU0IlUU'
+    );
 
     document.getElementById('login-form').addEventListener('submit', async (e) => {
-      e.preventDefault()
-      const email = document.getElementById('email').value
-      const password = document.getElementById('password').value
-      const errorMsg = document.getElementById('error-msg')
+      e.preventDefault();
+
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const errorMsg = document.getElementById('error-msg');
 
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password
-      })
+      });
 
       if (error) {
-        errorMsg.textContent = '❌ Login fehlgeschlagen: ' + error.message
+        errorMsg.textContent = '❌ Login fehlgeschlagen: ' + error.message;
       } else {
-        window.location.href = 'dashboard.html'
+        window.location.href = 'dashboard.html';
       }
-    })
+    });
   </script>
 </body>
 </html>
