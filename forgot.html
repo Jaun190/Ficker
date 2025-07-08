@@ -2,76 +2,88 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Passwort vergessen</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Passwort vergessen – GrowEmpire</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
     body {
-      background: #f7f7f7;
+      background: url('assets/kiffen.png') no-repeat center center fixed;
+      background-size: cover;
       font-family: Arial, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
+      color: white;
     }
 
     .container {
-      background: white;
-      padding: 30px 40px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      text-align: center;
-      width: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
       max-width: 400px;
+      margin: 100px auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
     }
 
     h2 {
+      text-align: center;
       margin-bottom: 20px;
     }
 
     input[type="email"] {
       width: 100%;
-      padding: 12px;
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 16px;
+      padding: 10px;
+      margin: 15px 0;
+      border: none;
+      border-radius: 5px;
     }
 
     button {
+      width: 100%;
+      padding: 10px;
       background-color: #4CAF50;
-      color: white;
-      padding: 12px 20px;
       border: none;
-      border-radius: 6px;
-      font-size: 16px;
+      color: white;
+      font-weight: bold;
+      border-radius: 5px;
       cursor: pointer;
     }
 
-    button:hover {
-      background-color: #45a049;
-    }
-
-    .back-link {
-      display: block;
-      margin-top: 20px;
-      color: #555;
-      text-decoration: none;
-    }
-
-    .back-link:hover {
-      text-decoration: underline;
+    .message {
+      margin-top: 15px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h2>Passwort vergessen</h2>
-    <form action="forgot_password.php" method="POST">
-      <input type="email" name="email" placeholder="Deine E-Mail-Adresse" required />
-      <button type="submit">Zurücksetzen</button>
+    <form id="forgotForm">
+      <input type="email" id="email" placeholder="Deine E-Mail-Adresse" required />
+      <button type="submit">Link zum Zurücksetzen senden</button>
+      <div class="message" id="responseMsg"></div>
     </form>
-    <a class="back-link" href="index.html">Zurück zum Login</a>
   </div>
+
+  <script>
+    const form = document.getElementById("forgotForm");
+    const responseMsg = document.getElementById("responseMsg");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+
+      const res = await fetch("/api/forgot-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        responseMsg.innerText = "E-Mail wurde gesendet – bitte Posteingang prüfen.";
+      } else {
+        responseMsg.innerText = data.error || "Fehler beim Senden der E-Mail.";
+      }
+    });
+  </script>
 </body>
 </html>
