@@ -8,86 +8,109 @@
     body {
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
-      background-image: url('/kiffen.png'); /* Stelle sicher, dass die Datei im public-Ordner liegt */
+      background: url('assets/kiffen.png') no-repeat center center fixed;
       background-size: 95%;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      font-family: Arial, sans-serif;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
       height: 100vh;
+      width: 100vw;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 0;
     }
 
     .container {
-      background-color: rgba(255, 255, 255, 0.95);
-      padding: 40px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: white;
       text-align: center;
-      width: 90%;
-      max-width: 400px;
     }
 
-    h1 {
-      margin-bottom: 20px;
-      font-size: 24px;
-      color: #222;
+    .forgot-box {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
     }
 
     input[type="email"] {
       width: 100%;
       padding: 12px;
-      margin: 15px 0;
-      border: 1px solid #ccc;
+      margin-top: 10px;
+      border: none;
       border-radius: 5px;
-      font-size: 16px;
     }
 
     button {
+      margin-top: 20px;
+      padding: 12px;
       width: 100%;
-      background-color: #00e676;
+      background-color: #28a745;
       color: white;
       border: none;
-      padding: 14px;
-      font-size: 16px;
       border-radius: 5px;
+      font-weight: bold;
       cursor: pointer;
     }
 
     button:hover {
-      background-color: #00c853;
+      background-color: #218838;
     }
 
     a {
       display: block;
-      margin-top: 15px;
-      color: #00c853;
+      margin-top: 20px;
+      color: #ccc;
       text-decoration: none;
-      font-size: 14px;
     }
 
     a:hover {
       text-decoration: underline;
     }
-
-    img {
-      width: 60px;
-      height: auto;
-      margin-bottom: 15px;
-    }
   </style>
 </head>
 <body>
+  <div class="overlay"></div>
   <div class="container">
-    <img src="/kiffen.png" alt="Logo" />
-    <h1>Passwort vergessen</h1>
-    <form action="/send-reset-link" method="POST">
-      <input type="email" name="email" placeholder="E-Mail-Adresse" required />
-      <button type="submit">E-Mail senden</button>
-    </form>
-    <a href="/index.html">Zurück zur Anmeldung</a>
+    <div class="forgot-box">
+      <h2>Passwort vergessen?</h2>
+      <p>Gib deine E-Mail-Adresse ein, um einen Link zum Zurücksetzen des Passworts zu erhalten.</p>
+      <input type="email" id="email" placeholder="E-Mail-Adresse" />
+      <button onclick="sendResetEmail()">Link senden</button>
+      <a href="index.html">Zurück zum Login</a>
+    </div>
   </div>
+
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+    const supabase = createClient(
+      'https://ghfzdgaunxblpudkmxmy.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoZnpkZ2F1bnhibHB1ZGtteG15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3MDI5NTksImV4cCI6MjA2NjI3ODk1OX0.J8ni4SszaI33ljthdEjqXf8ZKFCs4uWnRZZDyU0IlUU'
+    );
+
+    async function sendResetEmail() {
+      const email = document.getElementById('email').value;
+      const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: 'https://growempire.vercel.app/update-password.html',
+      });
+
+      if (error) {
+        alert('Fehler beim Senden der E-Mail: ' + error.message);
+      } else {
+        alert('E-Mail zum Zurücksetzen gesendet!');
+      }
+    }
+  </script>
 </body>
 </html>
