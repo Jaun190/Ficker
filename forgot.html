@@ -1,48 +1,50 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GrowEmpire Passwort zurücksetzen</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body class="form-container" style="background-image: url('assets/kiffen.png'); background-size: 95%; background-position: top; background-repeat: no-repeat;">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GrowEmpire Passwort zurücksetzen</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body style="background-image: url('assets/kiffen.png'); background-size: 95%; background-position: top; background-repeat: no-repeat;">
+    <div class="form-container">
+      <h2>GrowEmpire Passwort zurücksetzen</h2>
+      <form id="reset-form">
+        <input type="email" id="email" placeholder="E-Mail" required />
+        <button type="submit">🔒 Link senden</button>
+      </form>
+      <p><a href="index.html">Zurück zum Login</a></p>
+      <p id="error-msg" class="error"></p>
+      <p id="success-msg" style="color: #00ff88;"></p>
+    </div>
 
-  <h2>Passwort zurücksetzen</h2>
-  <form id="reset-form">
-    <input type="email" id="reset-email" placeholder="E-Mail" required />
-    <button type="submit">Link senden</button>
-  </form>
+    <!-- SUPABASE RESET -->
+    <script type="module">
+      import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-  <p><a href="index.html">Zurück zum Login</a></p>
-  <p id="reset-msg" class="error"></p>
+      const supabase = createClient(
+        'https://ghfzdgaunxblpudkmxmy.supabase.co',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoZnpkZ2F1bnhibHB1ZGtteG15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3MDI5NTksImV4cCI6MjA2NjI3ODk1OX0.J8ni4SszaI33ljthdEjqXf8ZKFCs4uWnRZZDyU0IlUU'
+      );
 
-  <!-- SUPABASE PASSWORD RESET -->
-  <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+      document.getElementById('reset-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const errorMsg = document.getElementById('error-msg');
+        const successMsg = document.getElementById('success-msg');
+        errorMsg.textContent = '';
+        successMsg.textContent = '';
 
-    const supabase = createClient(
-      'https://ghfaznbupkudnxmy.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdX...'
-    )
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+          redirectTo: 'https://ficker.vercel.app/reset.html'
+        });
 
-    document.getElementById('reset-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const email = document.getElementById('reset-email').value;
-      const msg = document.getElementById('reset-msg');
-
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: 'https://ficker.vercel.app/reset.html' // Hier kannst du später deine echte Reset-Seite verlinken
+        if (error) {
+          errorMsg.textContent = '❌ Fehler: ' + error.message;
+        } else {
+          successMsg.textContent = '✅ Link wurde gesendet. Bitte prüfe deine E-Mail.';
+        }
       });
-
-      if (error) {
-        msg.textContent = '❌ Fehler: ' + error.message;
-      } else {
-        alert('Wenn die Mail korrekt ist, wurde der Link versendet.');
-      }
-    });
-  </script>
-
-</body>
+    </script>
+  </body>
 </html>
