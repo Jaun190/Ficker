@@ -2,53 +2,57 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Passwort vergessen</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Passwort vergessen – GrowEmpire</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: sans-serif;
-      background: url("img/bg.jpg") no-repeat top center;
+      font-family: Arial, sans-serif;
+      background-image: url('/kiffen.png'); /* Stelle sicher, dass die Datei im public-Ordner liegt */
       background-size: 95%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
-    .login-container {
-      width: 100%;
-      max-width: 400px;
-      margin: 120px auto;
-      background: rgba(255, 255, 255, 0.9);
-      padding: 30px;
+    .container {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 40px;
       border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
       text-align: center;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 400px;
     }
 
-    .logo {
-      width: 120px;
-      height: auto;
+    h1 {
       margin-bottom: 20px;
+      font-size: 24px;
+      color: #222;
     }
 
     input[type="email"] {
       width: 100%;
       padding: 12px;
-      margin-bottom: 15px;
+      margin: 15px 0;
       border: 1px solid #ccc;
-      border-radius: 8px;
+      border-radius: 5px;
       font-size: 16px;
     }
 
     button {
       width: 100%;
       background-color: #00e676;
-      color: black;
-      padding: 12px;
-      font-size: 16px;
+      color: white;
       border: none;
-      border-radius: 8px;
+      padding: 14px;
+      font-size: 16px;
+      border-radius: 5px;
       cursor: pointer;
     }
 
@@ -57,56 +61,33 @@
     }
 
     a {
-      display: inline-block;
-      margin-top: 20px;
+      display: block;
+      margin-top: 15px;
       color: #00c853;
       text-decoration: none;
+      font-size: 14px;
     }
 
     a:hover {
       text-decoration: underline;
     }
 
-    #status {
-      margin-top: 15px;
-      font-weight: bold;
+    img {
+      width: 60px;
+      height: auto;
+      margin-bottom: 15px;
     }
   </style>
 </head>
 <body>
-  <div class="login-container">
-    <img src="img/kiffen.png" alt="Logo" class="logo" />
-    <h2>Passwort vergessen</h2>
-    <form id="reset-form">
-      <input type="email" id="email" placeholder="E-Mail-Adresse" required />
+  <div class="container">
+    <img src="/kiffen.png" alt="Logo" />
+    <h1>Passwort vergessen</h1>
+    <form action="/send-reset-link" method="POST">
+      <input type="email" name="email" placeholder="E-Mail-Adresse" required />
       <button type="submit">E-Mail senden</button>
     </form>
-    <a href="index.html">Zurück zur Anmeldung</a>
-    <div id="status"></div>
+    <a href="/index.html">Zurück zur Anmeldung</a>
   </div>
-
-  <script>
-    const supabase = createClient(
-      'https://ghfzdgaunxblpudkmxmy.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoZnpkZ2F1bnhibHB1ZGtteG15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3MDI5NTksImV4cCI6MjA2NjI3ODk1OX0.J8ni4SszaI33ljthdEjqXf8ZKFCs4uWnRZZDyU0IlUU'
-    );
-
-    document.getElementById('reset-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const email = document.getElementById('email').value;
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: 'https://ficker.vercel.app/update-password.html'
-      });
-
-      const status = document.getElementById('status');
-      if (error) {
-        status.innerText = 'Fehler: ' + error.message;
-        status.style.color = 'red';
-      } else {
-        status.innerText = 'E-Mail wurde gesendet!';
-        status.style.color = 'green';
-      }
-    });
-  </script>
 </body>
 </html>
