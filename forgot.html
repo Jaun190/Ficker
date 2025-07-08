@@ -2,123 +2,47 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GrowEmpire – Passwort zurücksetzen</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"/>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: url('assets/kiffen.png') no-repeat center top;
-      background-size: cover;
-      color: white;
-    }
-
-    .overlay {
-      background-color: rgba(0, 0, 0, 0.85);
-      min-height: 100vh;
-      padding: 40px 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-    }
-
-    h1 {
-      font-size: 2.2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    h2 {
-      font-size: 1.4rem;
-      font-weight: normal;
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    .form-container {
-      background-color: #000;
-      padding: 30px 25px;
-      border-radius: 12px;
-      width: 100%;
-      max-width: 400px;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
-    }
-
-    .form-container h3 {
-      text-align: center;
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-    }
-
-    input[type="email"] {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 6px;
-      margin-bottom: 20px;
-      font-size: 1rem;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      background-color: #00ff88;
-      color: #000;
-      font-size: 1rem;
-      font-weight: bold;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .link {
-      text-align: center;
-      margin-top: 15px;
-    }
-
-    .link a {
-      color: #00ff88;
-      text-decoration: none;
-    }
-  </style>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GrowEmpire Passwort zurücksetzen</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <div class="overlay">
-    <h1>Willkommen bei <strong>GrowEmpire</strong></h1>
-    <h2>Starte mit deiner Box, pflanze und verdiene. Alles vollautomatisch. Alles profitabel.</h2>
+<body class="form-container" style="background-image: url('assets/kiffen.png'); background-size: cover; background-position: top; background-repeat: no-repeat;">
 
-    <div class="form-container">
-      <h3>🔐 Passwort zurücksetzen</h3>
-      <input type="email" id="email" placeholder="E-Mail-Adresse" required />
-      <button onclick="resetPassword()">Link senden</button>
-      <div class="link">
-        <a href="index.html">Zurück zum Login</a>
-      </div>
-    </div>
-  </div>
+  <h2>Passwort zurücksetzen</h2>
+  <form id="reset-form">
+    <input type="email" id="reset-email" placeholder="E-Mail" required />
+    <button type="submit">Link senden</button>
+  </form>
 
-  <script>
-    const supabase = supabase.createClient(
-      'https://ghfzdgaunxblpudkmxmy.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoZnpkZ2F1bnhibHB1ZGtteG15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3MDI5NTksImV4cCI6MjA2NjI3ODk1OX0.J8ni4SszaI33ljthdEjqXf8ZKFCs4uWnRZZDyU0IlUU'
-    );
+  <p><a href="index.html">Zurück zum Login</a></p>
+  <p id="reset-msg" class="error"></p>
 
-    async function resetPassword() {
-      const email = document.getElementById('email').value;
-      if (!email) return alert('Bitte E-Mail eingeben');
+  <!-- SUPABASE PASSWORD RESET -->
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+    const supabase = createClient(
+      'https://ghfaznbupkudnxmy.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdX...'
+    )
+
+    document.getElementById('reset-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById('reset-email').value;
+      const msg = document.getElementById('reset-msg');
 
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: 'https://ficker.vercel.app/reset.html'
+        redirectTo: 'https://ficker.vercel.app/reset.html' // Hier kannst du später deine echte Reset-Seite verlinken
       });
 
       if (error) {
-        alert('Fehler: ' + error.message);
+        msg.textContent = '❌ Fehler: ' + error.message;
       } else {
-        alert('E-Mail zum Zurücksetzen wurde gesendet.');
+        alert('Wenn die Mail korrekt ist, wurde der Link versendet.');
       }
-    }
+    });
   </script>
+
 </body>
 </html>
