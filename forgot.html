@@ -3,22 +3,85 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Passwort zurücksetzen – GrowEmpire</title>
+  <title>Passwort vergessen</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-</head>
-<body style="background: url('img/bg.jpg') no-repeat top center; background-size: 95%;">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background: url("img/bg.jpg") no-repeat top center;
+      background-size: 95%;
+    }
 
+    .login-container {
+      width: 100%;
+      max-width: 400px;
+      margin: 120px auto;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .logo {
+      width: 120px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    input[type="email"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      background-color: #00e676;
+      color: black;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #00c853;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      color: #00c853;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    #status {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
   <div class="login-container">
     <img src="img/kiffen.png" alt="Logo" class="logo" />
     <h2>Passwort vergessen</h2>
-
     <form id="reset-form">
       <input type="email" id="email" placeholder="E-Mail-Adresse" required />
       <button type="submit">E-Mail senden</button>
     </form>
-
-    <p><a href="index.html">Zurück zur Anmeldung</a></p>
+    <a href="index.html">Zurück zur Anmeldung</a>
     <div id="status"></div>
   </div>
 
