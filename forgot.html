@@ -1,50 +1,49 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GrowEmpire Passwort zurücksetzen</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body style="background-image: url('assets/kiffen.png'); background-size: 95%; background-position: top; background-repeat: no-repeat;">
-    <div class="form-container">
-      <h2>GrowEmpire Passwort zurücksetzen</h2>
-      <form id="reset-form">
-        <input type="email" id="email" placeholder="E-Mail" required />
-        <button type="submit">🔒 Link senden</button>
-      </form>
-      <p><a href="index.html">Zurück zum Login</a></p>
-      <p id="error-msg" class="error"></p>
-      <p id="success-msg" style="color: #00ff88;"></p>
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Passwort zurücksetzen – GrowEmpire</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body style="background: url('img/bg.jpg') no-repeat center top; background-size: 95%;">
 
-    <!-- SUPABASE RESET -->
-    <script type="module">
-      import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+  <div class="login-container">
+    <img src="img/kiffen.png" alt="Logo" class="logo" />
+    <h2>Passwort zurücksetzen</h2>
 
-      const supabase = createClient(
-        'https://ghfzdgaunxblpudkmxmy.supabase.co',
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoZnpkZ2F1bnhibHB1ZGtteG15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3MDI5NTksImV4cCI6MjA2NjI3ODk1OX0.J8ni4SszaI33ljthdEjqXf8ZKFCs4uWnRZZDyU0IlUU'
-      );
+    <form id="reset-form">
+      <input type="email" id="email" placeholder="E-Mail-Adresse" required />
+      <button type="submit">E-Mail senden</button>
+    </form>
 
-      document.getElementById('reset-form').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const email = document.getElementById('email').value;
-        const errorMsg = document.getElementById('error-msg');
-        const successMsg = document.getElementById('success-msg');
-        errorMsg.textContent = '';
-        successMsg.textContent = '';
+    <p><a href="index.html">Zurück zur Anmeldung</a></p>
+    <div id="status"></div>
+  </div>
 
-        const { error } = await supabase.auth.resetPasswordForEmail(email, {
-          redirectTo: 'https://ficker.vercel.app/reset.html'
-        });
+  <script>
+    const supabase = createClient(
+      'https://ghfzdgaunxblpudkmxmy.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoZnpkZ2F1bnhibHB1ZGtteG15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3MDI5NTksImV4cCI6MjA2NjI3ODk1OX0.J8ni4SszaI33ljthdEjqXf8ZKFCs4uWnRZZDyU0IlUU'
+    );
 
-        if (error) {
-          errorMsg.textContent = '❌ Fehler: ' + error.message;
-        } else {
-          successMsg.textContent = '✅ Link wurde gesendet. Bitte prüfe deine E-Mail.';
-        }
+    document.getElementById('reset-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: 'https://growempire.vercel.app/update-password.html'
       });
-    </script>
-  </body>
+
+      const status = document.getElementById('status');
+      if (error) {
+        status.innerText = 'Fehler: ' + error.message;
+        status.style.color = 'red';
+      } else {
+        status.innerText = 'E-Mail wurde gesendet!';
+        status.style.color = 'green';
+      }
+    });
+  </script>
+</body>
 </html>
