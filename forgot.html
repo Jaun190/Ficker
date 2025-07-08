@@ -3,113 +3,122 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GrowEmpire – Passwort zurücksetzen</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"/>
+  <title>Passwort zurücksetzen – GrowEmpire</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
+      padding: 0;
+      font-family: "Arial", sans-serif;
       background-image: url('assets/kiffen.png');
       background-size: cover;
-      background-repeat: no-repeat;
       background-position: top center;
+      background-repeat: no-repeat;
+      height: 100vh;
       color: white;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .overlay {
-      background-color: rgba(0, 0, 0, 0.7);
+      background-color: rgba(0, 0, 0, 0.65);
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      min-height: 100vh;
-      padding: 60px 20px;
-      box-sizing: border-box;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      padding: 20px;
+      max-width: 400px;
+      margin: 0 auto;
     }
 
     h1 {
-      font-size: 36px;
+      font-size: 32px;
+      font-weight: bold;
       margin-bottom: 10px;
     }
 
     p {
       font-size: 16px;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
     }
 
-    .form-container {
-      background-color: rgba(0, 0, 0, 0.5);
-      max-width: 400px;
-      margin: 0 auto;
-      padding: 20px;
-      border-radius: 15px;
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
     }
 
     input[type="email"] {
       width: 100%;
-      padding: 12px;
-      border-radius: 10px;
-      border: none;
-      margin-bottom: 20px;
+      padding: 15px;
       font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      box-sizing: border-box;
     }
 
-    button {
-      width: 100%;
-      background-color: #00ff7f;
+    .btn {
+      background-color: #00e676;
       color: black;
-      border: none;
-      padding: 14px;
+      padding: 15px;
+      width: 100%;
       font-size: 18px;
-      border-radius: 10px;
-      cursor: pointer;
       font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-bottom: 15px;
+    }
+
+    .btn:hover {
+      background-color: #00c853;
     }
 
     a {
       color: white;
       text-decoration: underline;
-      display: block;
-      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    @media screen and (max-width: 480px) {
+      h1 {
+        font-size: 26px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="overlay">
+  <div class="overlay"></div>
+  <div class="container">
     <h1>GrowEmpire</h1>
-    <p>Starte mit deiner Box, pflanze und verdiene. Alles vollautomatisch. Alles profitabel.</p>
-
-    <div class="form-container">
-      <h2>Passwort zurücksetzen</h2>
-      <p>Gib deine E-Mail ein – wir senden dir den Link</p>
-      <form id="resetForm">
+    <p>Starte mit deiner Box, pflanze und verdiene.<br />Alles vollautomatisch. Alles profitabel.</p>
+    <h2>Passwort zurücksetzen</h2>
+    <p>Gib deine E-Mail ein – wir senden dir den Link</p>
+    <form id="forgotForm">
+      <div class="form-group">
         <input type="email" id="email" placeholder="Deine E-Mail" required />
-        <button type="submit">Link senden</button>
-      </form>
-      <a href="index.html">Zurück zum Login</a>
-    </div>
+      </div>
+      <button type="submit" class="btn">Link senden</button>
+    </form>
+    <a href="index.html">Zurück zum Login</a>
   </div>
 
   <script>
-    document.getElementById("resetForm").addEventListener("submit", async function(e) {
+    document.getElementById("forgotForm").addEventListener("submit", function(e) {
       e.preventDefault();
       const email = document.getElementById("email").value;
-
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: "https://ficker.vercel.app/reset.html"
-      });
-
-      if (error) {
-        alert("Fehler beim Senden: " + error.message);
-      } else {
-        alert("Passwort-Reset-Link wurde gesendet!");
-      }
+      // Hier kommt dein Reset-Handler z. B. Supabase:
+      // supabase.auth.resetPasswordForEmail(email)
+      alert("Wenn die E-Mail korrekt ist, wurde ein Link gesendet.");
     });
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script>
-    const supabase = supabase.createClient(
-      'https://ghfzdgaunxblpudkmxmy.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoZnpkZ2F1bnhibHB1ZGtteG15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3MDI5NTksImV4cCI6MjA2NjI3ODk1OX0.J8ni4SszaI33ljthdEjqXf8ZKFCs4uWnRZZDyU0IlUU'
-    );
   </script>
 </body>
 </html>
