@@ -3,93 +3,88 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Passwort zurücksetzen – GrowEmpire</title>
+  <title>Passwort vergessen – GrowEmpire</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: "Arial", sans-serif;
-      background-image: url('assets/kiffen.png');
+      background: url("assets/kiffen.png") no-repeat center top;
       background-size: cover;
-      background-position: top center;
-      background-repeat: no-repeat;
       height: 100vh;
-      color: white;
-      text-align: center;
+      overflow: hidden;
       display: flex;
-      flex-direction: column;
+      align-items: center;
       justify-content: center;
     }
 
     .overlay {
-      background-color: rgba(0, 0, 0, 0.65);
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       width: 100%;
       height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
       z-index: 0;
     }
 
-    .container {
+    .content {
       position: relative;
       z-index: 1;
-      padding: 20px;
       max-width: 400px;
-      margin: 0 auto;
+      width: 90%;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 16px;
+      padding: 30px;
+      text-align: center;
+      color: #fff;
     }
 
-    h1 {
+    .content h1 {
       font-size: 32px;
-      font-weight: bold;
       margin-bottom: 10px;
     }
 
-    p {
+    .content p {
       font-size: 16px;
-      margin-bottom: 30px;
-    }
-
-    .form-group {
       margin-bottom: 20px;
-      text-align: left;
     }
 
-    input[type="email"] {
+    .content input {
       width: 100%;
-      padding: 15px;
+      padding: 14px;
+      border-radius: 10px;
+      border: none;
       font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .content button {
+      width: 100%;
+      padding: 14px;
       border: none;
       border-radius: 10px;
-      box-sizing: border-box;
-    }
-
-    .btn {
       background-color: #00e676;
       color: black;
-      padding: 15px;
-      width: 100%;
       font-size: 18px;
       font-weight: bold;
-      border: none;
-      border-radius: 12px;
       cursor: pointer;
-      margin-bottom: 15px;
     }
 
-    .btn:hover {
+    .content button:hover {
       background-color: #00c853;
     }
 
-    a {
+    .content a {
+      display: block;
+      margin-top: 15px;
       color: white;
       text-decoration: underline;
       font-size: 14px;
     }
 
-    @media screen and (max-width: 480px) {
-      h1 {
+    @media (max-width: 480px) {
+      .content h1 {
         font-size: 26px;
       }
     }
@@ -97,17 +92,18 @@
 </head>
 <body>
   <div class="overlay"></div>
-  <div class="container">
+  <div class="content">
     <h1>GrowEmpire</h1>
-    <p>Starte mit deiner Box, pflanze und verdiene.<br />Alles vollautomatisch. Alles profitabel.</p>
+    <p>Starte mit deiner Box, pflanze und verdiene. Alles vollautomatisch. Alles profitabel.</p>
+
     <h2>Passwort zurücksetzen</h2>
     <p>Gib deine E-Mail ein – wir senden dir den Link</p>
+
     <form id="forgotForm">
-      <div class="form-group">
-        <input type="email" id="email" placeholder="Deine E-Mail" required />
-      </div>
-      <button type="submit" class="btn">Link senden</button>
+      <input type="email" id="email" placeholder="Deine E-Mail-Adresse" required />
+      <button type="submit">Link senden</button>
     </form>
+
     <a href="index.html">Zurück zum Login</a>
   </div>
 
@@ -115,9 +111,8 @@
     document.getElementById("forgotForm").addEventListener("submit", function(e) {
       e.preventDefault();
       const email = document.getElementById("email").value;
-      // Hier kommt dein Reset-Handler z. B. Supabase:
-      // supabase.auth.resetPasswordForEmail(email)
-      alert("Wenn die E-Mail korrekt ist, wurde ein Link gesendet.");
+      // TODO: Anbindung an Supabase oder Backend für Mailversand
+      alert("Wenn die Mail korrekt ist, wurde der Link versendet.");
     });
   </script>
 </body>
