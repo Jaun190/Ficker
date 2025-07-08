@@ -15,44 +15,24 @@
       min-height: 100vh;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: white;
-      text-align: center;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
     }
 
     .content {
-      margin-top: 8vh;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.7);
       padding: 2em;
       border-radius: 1em;
       max-width: 90%;
       width: 400px;
-    }
-
-    h1 {
-      font-size: 2em;
-      margin-bottom: 0.2em;
-      color: #ffffff;
-      text-shadow: 1px 1px 4px black;
-    }
-
-    .brand {
-      font-size: 2.2em;
-      color: #00cc33;
-      font-weight: bold;
-    }
-
-    p {
-      font-size: 1em;
-      margin-top: 0.5em;
-      margin-bottom: 1.5em;
-      text-shadow: 1px 1px 4px black;
+      text-align: center;
     }
 
     h2 {
-      font-size: 1.3em;
+      font-size: 1.5em;
       margin-bottom: 1em;
+      color: #00cc33;
     }
 
     input[type="email"] {
@@ -65,7 +45,7 @@
     }
 
     button {
-      padding: 1em 2em;
+      padding: 1em;
       background-color: #00cc33;
       color: white;
       border: none;
@@ -77,26 +57,23 @@
     }
 
     button:hover {
-      background-color: #00aa2a;
+      background-color: #009928;
     }
   </style>
 </head>
 <body>
   <div class="content">
-    <h1>Willkommen bei <span class="brand">GrowEmpire</span></h1>
-    <p>Baue dein virtuelles Hanf-Imperium auf – starte mit deiner Box, pflanze, ernte und verdiene. Alles profitabel.</p>
-    <h2>Passwort vergessen</h2>
+    <h2>Passwort zurücksetzen</h2>
     <form id="resetForm">
       <input type="email" placeholder="Deine E-Mail" required />
-      <button type="submit">Link zum Zurücksetzen senden</button>
+      <button type="submit">Link senden</button>
     </form>
   </div>
 
   <script>
-    // Hier kommt ggf. dein Supabase-Reset-Code rein
     document.getElementById("resetForm").addEventListener("submit", function (e) {
       e.preventDefault();
-      alert("Falls deine E-Mail registriert ist, erhältst du einen Link.");
+      alert("Wenn die E-Mail registriert ist, erhältst du einen Link.");
     });
   </script>
 </body>
