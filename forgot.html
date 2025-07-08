@@ -10,38 +10,52 @@
       padding: 0;
       font-family: sans-serif;
       background: url('assets/kiffen.png') top center no-repeat;
-      background-size: contain;
+      background-size: cover;
       background-color: black;
-      height: 100vh;
-      overflow: hidden;
+      min-height: 100vh;
     }
 
-    .form-box {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0, 0, 0, 0.5);
-      padding: 30px;
-      border-radius: 12px;
-      text-align: center;
+    .wrapper {
+      padding: 60px 20px 40px;
+      max-width: 480px;
+      margin: 0 auto;
       color: white;
-      width: 90%;
-      max-width: 400px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    form {
+      margin-top: 30px;
     }
 
     input {
       width: 100%;
-      padding: 12px;
+      padding: 14px;
       border-radius: 8px;
       border: none;
-      margin-top: 10px;
       margin-bottom: 20px;
       font-size: 16px;
     }
 
     button {
-      padding: 12px 20px;
+      width: 100%;
+      padding: 14px;
       font-size: 16px;
       background: limegreen;
       border: none;
@@ -52,10 +66,21 @@
     button:hover {
       background: #00cc44;
     }
+
+    #status {
+      margin-top: 20px;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
-  <div class="form-box">
+  <div class="wrapper">
+    <h1>Willkommen bei<br><span style="font-size: 40px; color: #99ff99;">GrowEmpire</span></h1>
+    <p>
+      Baue dein virtuelles Hanf-Imperium auf – starte mit deiner Box, pflanze<br />
+      ernte und verdiene. Alles profitabel.
+    </p>
+
     <h2>Passwort vergessen</h2>
     <form id="forgotForm">
       <input type="email" id="email" placeholder="Deine E-Mail" required />
