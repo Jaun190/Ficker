@@ -2,79 +2,32 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Passwort vergessen – GrowEmpire</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-image: url('assets/kiffen.png');
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: top center;
-      min-height: 100vh;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .content {
-      background: rgba(0, 0, 0, 0.7);
-      padding: 2em;
-      border-radius: 1em;
-      max-width: 90%;
-      width: 400px;
-      text-align: center;
-    }
-
-    h2 {
-      font-size: 1.5em;
-      margin-bottom: 1em;
-      color: #00cc33;
-    }
-
-    input[type="email"] {
-      padding: 1em;
-      width: 100%;
-      border-radius: 10px;
-      border: none;
-      margin-bottom: 1em;
-      font-size: 1em;
-    }
-
-    button {
-      padding: 1em;
-      background-color: #00cc33;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 1em;
-      font-weight: bold;
-      width: 100%;
-    }
-
-    button:hover {
-      background-color: #009928;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Passwort zurücksetzen – GrowEmpire</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
-<body>
-  <div class="content">
-    <h2>Passwort zurücksetzen</h2>
-    <form id="resetForm">
-      <input type="email" placeholder="Deine E-Mail" required />
-      <button type="submit">Link senden</button>
+<body style="margin: 0; padding: 0; background: url('assets/kiffen.png') no-repeat top center; background-size: cover; font-family: sans-serif; color: white;">
+
+  <div style="width: 100%; height: 100vh; backdrop-filter: brightness(0.8); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem;">
+    
+    <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Passwort zurücksetzen</h1>
+    <p style="margin-bottom: 2rem;">Gib deine E-Mail ein – wir senden dir den Link</p>
+    
+    <form style="width: 100%; max-width: 400px;">
+      <input 
+        type="email" 
+        placeholder="Deine E-Mail" 
+        required 
+        style="width: 100%; padding: 1rem; font-size: 1rem; border-radius: 0.5rem; border: none; margin-bottom: 1rem;"
+      />
+      <button 
+        type="submit" 
+        style="width: 100%; padding: 1rem; font-size: 1rem; background-color: #00cc44; color: white; border: none; border-radius: 0.5rem; cursor: pointer;">
+        Link senden
+      </button>
     </form>
+
   </div>
 
-  <script>
-    document.getElementById("resetForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-      alert("Wenn die E-Mail registriert ist, erhältst du einen Link.");
-    });
-  </script>
 </body>
 </html>
