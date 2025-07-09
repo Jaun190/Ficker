@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Neues Passwort – GrowEmpire</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body style="background-image: url('assets/dashboard.png'); background-size: cover; background-position: center;">
+
+  <div class="form-container">
+    <h2>🔐 Neues Passwort setzen</h2>
+    <p>Gib hier dein neues Passwort ein.</p>
+    <form id="new-password-form">
+      <input type="password" id="new-password" placeholder="Neues Passwort" required />
+      <button type="submit" class="green-btn">✅ Speichern</button>
+    </form>
+    <p id="msg" style="margin-top: 10px;"></p>
+  </div>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+    const supabase = createClient('https://ghfzdgaunxblpudkmxmy.supabase.co', 'PASTE_YOUR_SUPABASE_KEY_HERE');
+
+    document.getElementById('new-password-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const password = document.getElementById('new-password').value;
+      const msg = document.getElementById('msg');
+
+      const { error } = await supabase.auth.updateUser({ password });
+      if (error) {
+        msg.textContent = '❌ Fehler: ' + error.message;
+        msg.style.color = 'red';
+      } else {
+        msg.textContent = '✅ Passwort gespeichert!';
+        msg.style.color = 'lightgreen';
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 2000);
+      }
+    });
+  </script>
+</body>
+</html>
