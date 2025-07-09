@@ -1,40 +1,49 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Passwort vergessen</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-  <div class="w-full max-w-sm bg-white shadow-md rounded px-8 pt-6 pb-8">
-    
-    <!-- Logo-Bild -->
-    <div class="flex justify-center mb-4">
-      <img src="kiffen.png" alt="Logo" class="h-16 w-16">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Passwort vergessen</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <style>
+      body {
+        background-color: #000;
+        background-image: url('hanf-bg.jpg'); /* gleiche Hanf-Grafik wie auf der Login-Seite */
+        background-size: cover;
+        background-position: center;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex items-center justify-center">
+    <div class="bg-black bg-opacity-80 rounded px-8 pt-6 pb-8 w-full max-w-sm">
+
+      <!-- Logo -->
+      <div class="flex justify-center mb-6">
+        <img src="kiffen.png" alt="Logo" class="w-20 h-20" />
+      </div>
+
+      <!-- Titel -->
+      <h2 class="text-center text-2xl font-bold text-white mb-6">🔐 Passwort vergessen</h2>
+
+      <!-- Text -->
+      <p class="text-gray-300 text-center mb-6">
+        Du hast dein Passwort vergessen?<br />
+        Kein Problem – schreib uns einfach.
+      </p>
+
+      <!-- Mail-Button -->
+      <div class="flex justify-center">
+        <a href="mailto:jaun190@gmail.com"
+           class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+          📧 Support kontaktieren
+        </a>
+      </div>
+
+      <!-- Footer -->
+      <p class="mt-6 text-center text-sm text-gray-400">
+        Antwort innerhalb 24h garantiert.
+      </p>
+
     </div>
-
-    <!-- Überschrift -->
-    <h2 class="text-center text-2xl font-bold mb-6">🔐 Passwort vergessen</h2>
-
-    <!-- Text -->
-    <p class="text-gray-700 text-center mb-6">
-      Du hast dein Passwort vergessen?<br>
-      Kein Problem – kontaktiere uns direkt:
-    </p>
-
-    <!-- Button -->
-    <div class="flex items-center justify-center">
-      <a href="mailto:jaun190@gmail.com" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-        📧 Support kontaktieren
-      </a>
-    </div>
-
-    <!-- Fußtext -->
-    <p class="mt-6 text-center text-sm text-gray-500">
-      Wir helfen dir schnell weiter.
-    </p>
-
-  </div>
-</body>
+  </body>
 </html>
