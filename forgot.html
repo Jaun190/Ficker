@@ -1,48 +1,30 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GrowEmpire Passwort Reset</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="form-container">
-    <h2>🔐 Passwort zurücksetzen</h2>
-    <form id="reset-form">
-      <input type="email" id="reset-email" placeholder="E-Mail-Adresse" required />
-      <button type="submit">E-Mail senden</button>
-    </form>
-    <p><a href="index.html">Zurück zur Anmeldung</a></p>
-    <p id="reset-msg" class="error"></p>
-  </div>
+<!-- forgot.html -->
+<script type="module">
+  import { createClient } from 'https://esm.sh/@supabase/supabase-js'
 
-  <!-- SUPABASE PASSWORD RESET -->
-  <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+  const supabase = createClient(
+    'https://afquciketcteqqynucet.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXVjaWtldGN0ZXFxeW51Y2V0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE4NzQxODYsImV4cCI6MjA2NzQ1MDE4Nn0.Mg247BH4XribwIICKLHu1IUCX50nbSdmK34JniLBPzY'
+  )
 
-    const supabase = createClient(
-      'https://ghfzdgaunxblpudkmxmy.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoZnpkZ2F1bnhibHB1ZGtteG15eCIsInJvbGUiOiJwdWJsaWMiLCJpYXQiOjE3NTA3MDI5NTksImV4cCI6MjA2NjI3ODk1OX0.J8ni4SszaI33ljthdEjqXf8ZKFCs4uWnRZZDyU0IlUU'
-    );
+  const form = document.querySelector('form')
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault()
+    const email = document.getElementById('email').value
 
-    document.getElementById('reset-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const email = document.getElementById('reset-email').value;
-      const msg = document.getElementById('reset-msg');
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: 'https://growempire.vercel.app/update.html'
+    })
 
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: 'https://ficker.vercel.app/update-passwort.html',
-      });
+    if (error) {
+      alert('Fehler: ' + error.message)
+    } else {
+      alert('E-Mail zum Zurücksetzen wurde gesendet.')
+    }
+  })
+</script>
 
-      if (error) {
-        msg.textContent = '❌ Fehler: ' + error.message;
-        msg.style.color = 'red';
-      } else {
-        msg.textContent = '✅ E-Mail zum Zurücksetzen wurde gesendet.';
-        msg.style.color = 'green';
-      }
-    });
-  </script>
-</body>
-</html>
+<form>
+  <input id="email" type="email" placeholder="Deine E-Mail" required />
+  <button type="submit">E-Mail senden</button>
+</form>
