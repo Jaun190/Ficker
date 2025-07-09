@@ -1,30 +1,59 @@
-<!-- forgot.html -->
-<script type="module">
-  import { createClient } from 'https://esm.sh/@supabase/supabase-js'
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Passwort vergessen – Hashline</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Passwort vergessen</h1>
+    <p>Gib deine E-Mail-Adresse ein. Wir senden dir einen Link zum Zurücksetzen des Passworts.</p>
 
-  const supabase = createClient(
-    'https://afquciketcteqqynucet.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXVjaWtldGN0ZXFxeW51Y2V0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE4NzQxODYsImV4cCI6MjA2NzQ1MDE4Nn0.Mg247BH4XribwIICKLHu1IUCX50nbSdmK34JniLBPzY'
-  )
+    <div class="form-group">
+      <input type="email" id="email" placeholder="Deine E-Mail-Adresse" />
+    </div>
 
-  const form = document.querySelector('form')
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault()
-    const email = document.getElementById('email').value
+    <button onclick="sendReset()">E-Mail senden</button>
 
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: 'https://growempire.vercel.app/update.html'
-    })
+    <p id="status" style="margin-top: 1rem;"></p>
 
-    if (error) {
-      alert('Fehler: ' + error.message)
-    } else {
-      alert('E-Mail zum Zurücksetzen wurde gesendet.')
+    <div style="margin-top: 2rem;">
+      <a href="index.html">Zurück zum Login</a>
+    </div>
+  </div>
+
+  <script>
+    async function sendReset() {
+      const email = document.getElementById('email').value;
+      const statusEl = document.getElementById('status');
+
+      if (!email) {
+        statusEl.innerText = "Bitte gib deine E-Mail-Adresse ein.";
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/send-password-reset', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ email })
+        });
+
+        const result = await res.json();
+
+        if (result.success) {
+          statusEl.innerText = "E-Mail wurde erfolgreich gesendet!";
+        } else {
+          statusEl.innerText = "Fehler beim Senden. Versuche es erneut.";
+          console.error(result.error);
+        }
+      } catch (error) {
+        statusEl.innerText = "Netzwerkfehler. Bitte später erneut versuchen.";
+        console.error(error);
+      }
     }
-  })
-</script>
-
-<form>
-  <input id="email" type="email" placeholder="Deine E-Mail" required />
-  <button type="submit">E-Mail senden</button>
-</form>
+  </script>
+</body>
+</html>
