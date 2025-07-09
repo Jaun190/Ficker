@@ -13,9 +13,14 @@ const transporter = nodemailer.createTransport({
 async function sendResetMail(to, resetLink) {
   const mailOptions = {
     from: '"GrowEmpire" <no-reply@growempire.ch>',
-    to: to,
+    to,
     subject: "🔐 Passwort zurücksetzen",
-    html: `<p>Klicke auf den folgenden Link, um dein Passwort zurückzusetzen:</p><p><a href="${resetLink}">${resetLink}</a></p>`
+    html: `
+      <p>Hallo,</p>
+      <p>Klicke auf folgenden Link, um dein Passwort zurückzusetzen:</p>
+      <p><a href="${resetLink}">${resetLink}</a></p>
+      <p>Dieser Link ist nur für kurze Zeit gültig.</p>
+    `
   };
 
   await transporter.sendMail(mailOptions);
