@@ -1,57 +1,83 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Passwort vergessen – Hashline</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Passwort zurücksetzen – GrowChain</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .box {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: #28a745;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #218838;
+    }
+    .message {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Passwort vergessen</h1>
-    <p>Gib deine E-Mail-Adresse ein. Wir senden dir einen Link zum Zurücksetzen des Passworts.</p>
-
-    <div class="form-group">
-      <input type="email" id="email" placeholder="Deine E-Mail-Adresse" />
-    </div>
-
-    <button onclick="sendReset()">E-Mail senden</button>
-
-    <p id="status" style="margin-top: 1rem;"></p>
-
-    <div style="margin-top: 2rem;">
-      <a href="index.html">Zurück zum Login</a>
-    </div>
+  <div class="box">
+    <h2>Passwort zurücksetzen</h2>
+    <input type="email" id="email" placeholder="Deine E-Mail-Adresse" required />
+    <button onclick="resetPassword()">Link senden</button>
+    <div class="message" id="message"></div>
   </div>
 
   <script>
-    async function sendReset() {
+    const SUPABASE_URL = 'https://afquciketcteqqynucet.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXVjaWtldGN0ZXFxeW51Y2V0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE4NzQxODYsImV4cCI6MjA2NzQ1MDE4Nn0.Mg247BH4XribwIICKLHu1IUCX50nbSdmK34JniLBPzY';
+
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    async function resetPassword() {
       const email = document.getElementById('email').value;
-      const statusEl = document.getElementById('status');
+      const message = document.getElementById('message');
+      message.textContent = '';
 
-      if (!email) {
-        statusEl.innerText = "Bitte gib deine E-Mail-Adresse ein.";
-        return;
-      }
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: 'https://growchain.vercel.app/update.html'
+      });
 
-      try {
-        const res = await fetch('/api/send-password-reset', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({ email })
-        });
-
-        const result = await res.json();
-
-        if (result.success) {
-          statusEl.innerText = "E-Mail wurde erfolgreich gesendet!";
-        } else {
-          statusEl.innerText = "Fehler beim Senden. Versuche es erneut.";
-          console.error(result.error);
-        }
-      } catch (error) {
-        statusEl.innerText = "Netzwerkfehler. Bitte später erneut versuchen.";
-        console.error(error);
+      if (error) {
+        message.textContent = 'Fehler: ' + error.message;
+        message.style.color = 'red';
+      } else {
+        message.textContent = 'E-Mail zum Zurücksetzen wurde gesendet!';
+        message.style.color = 'green';
       }
     }
   </script>
