@@ -2,75 +2,65 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Passwort zurücksetzen</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     body {
-      font-family: sans-serif;
-      background: #f8f8f8;
-      padding: 40px;
-      max-width: 400px;
-      margin: auto;
+      font-family: Arial, sans-serif;
       text-align: center;
+      margin: 50px;
     }
-    input, button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 12px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
+    input {
+      padding: 10px;
       font-size: 16px;
+      width: 80%;
+      max-width: 300px;
+      margin-bottom: 10px;
     }
     button {
-      background-color: #4CAF50;
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #4CAF50;
       color: white;
       border: none;
       cursor: pointer;
     }
-    button:hover {
-      background-color: #45a049;
-    }
-    #status {
-      margin-top: 20px;
-      font-weight: bold;
+    #message {
+      margin-top: 15px;
     }
   </style>
 </head>
 <body>
+
   <h2>🔐 Passwort zurücksetzen</h2>
-
-  <input type="email" id="email" placeholder="Deine E-Mail-Adresse" required />
+  <input type="email" id="email" placeholder="Deine E-Mail" required />
+  <br />
   <button onclick="resetPassword()">E-Mail senden</button>
+  <div id="message"></div>
 
-  <p id="status"></p>
-
-  <script type="module">
-    import { createClient } from "https://esm.sh/@supabase/supabase-js@2"
-
-    const supabase = createClient(
-      'https://bopvgxzmmlpewbanfmdg.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJvcHZneHptbWxwZXdiYW5mbWRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA1NzQzMDQsImV4cCI6MjA2NjE1MDMwNH0.AM7buv9L-MBG1BGqj0T-pI1x_t2jRZdgeyfxo3g15qQ'
+  <script>
+    const supabase = supabase.createClient(
+      "https://hjldtaluigjzvrqlkujb.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
     );
 
     async function resetPassword() {
       const email = document.getElementById("email").value;
-      const status = document.getElementById("status");
-
-      if (!email) {
-        status.textContent = '❗ Bitte E-Mail-Adresse eingeben.';
-        return;
-      }
-
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: 'https://ficker.vercel.app/update-password.html',
+        redirectTo: "https://ficker.vercel.app/update-password.html"
       });
 
+      const msg = document.getElementById("message");
       if (error) {
-        status.textContent = '❌ Fehler: ' + error.message;
+        msg.innerText = "Fehler: " + error.message;
+        msg.style.color = "red";
       } else {
-        status.textContent = '✅ E-Mail wurde gesendet (falls registriert).';
+        msg.innerText = "E-Mail zum Zurücksetzen wurde gesendet!";
+        msg.style.color = "green";
       }
     }
   </script>
+
 </body>
 </html>
