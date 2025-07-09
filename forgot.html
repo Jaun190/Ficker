@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="form-container">
-    <h2>🔒 Passwort zurücksetzen</h2>
+    <h2>🔐 Passwort zurücksetzen</h2>
     <form id="reset-form">
       <input type="email" id="reset-email" placeholder="E-Mail-Adresse" required />
       <button type="submit">E-Mail senden</button>
@@ -23,16 +23,21 @@
 
     const supabase = createClient(
       'https://ghfzdgaunxblpudkmxmy.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoZnpkZ2F1bnhibHB1ZGtteG15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3MDI5NTksImV4cCI6MjA2NjI3ODk1OX0.J8ni4SszaI33ljthdEjqXf8ZKFCs4uWnRZZDyU0IlUU'
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoZnpkZ2F1bnhibHB1ZGtteG15eCIsInJvbGUiOiJwdWJsaWMiLCJpYXQiOjE3NTA3MDI5NTksImV4cCI6MjA2NjI3ODk1OX0.J8ni4SszaI33ljthdEjqXf8ZKFCs4uWnRZZDyU0IlUU'
     );
 
     document.getElementById('reset-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       const email = document.getElementById('reset-email').value;
       const msg = document.getElementById('reset-msg');
-      const { error } = await supabase.auth.resetPasswordForEmail(email);
+
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: 'https://ficker.vercel.app/update-passwort.html',
+      });
+
       if (error) {
         msg.textContent = '❌ Fehler: ' + error.message;
+        msg.style.color = 'red';
       } else {
         msg.textContent = '✅ E-Mail zum Zurücksetzen wurde gesendet.';
         msg.style.color = 'green';
