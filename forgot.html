@@ -1,9 +1,34 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Passwort zurücksetzen</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+    const SUPABASE_URL = 'https://afquciketcteqqynucet.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXVjaWtldGN0ZXFxeW51Y2V0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE4NzQxODYsImV4cCI6MjA2NzQ1MDE4Nn0.Mg247BH4XribwIICKLHu1IUCX50nbSdmK34JniLBPzY';
+
+    const client = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    window.resetPassword = async () => {
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message');
+      message.textContent = '';
+
+      const { error } = await client.auth.resetPasswordForEmail(email, {
+        redirectTo: 'https://growchain.vercel.app/update.html',
+      });
+
+      if (error) {
+        message.textContent = 'Fehler: ' + error.message;
+        message.style.color = 'red';
+      } else {
+        message.textContent = 'E-Mail zum Zurücksetzen wurde gesendet!';
+        message.style.color = 'lime';
+      }
+    };
+  </script>
   <style>
     body {
       margin: 0;
@@ -68,30 +93,5 @@
     <button onclick="resetPassword()">Zurücksetzen-Link senden</button>
     <div class="message" id="message"></div>
   </div>
-
-  <script>
-    const SUPABASE_URL = 'https://afquciketcteqqynucet.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXVjaWtldGN0ZXFxeW51Y2V0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE4NzQxODYsImV4cCI6MjA2NzQ1MDE4Nn0.Mg247BH4XribwIICKLHu1IUCX50nbSdmK34JniLBPzY';
-
-    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-    async function resetPassword() {
-      const email = document.getElementById("email").value;
-      const message = document.getElementById("message");
-      message.textContent = "";
-
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: 'https://growchain.vercel.app/update.html'
-      });
-
-      if (error) {
-        message.textContent = "Fehler: " + error.message;
-        message.style.color = "red";
-      } else {
-        message.textContent = "E-Mail zum Zurücksetzen wurde gesendet!";
-        message.style.color = "lime";
-      }
-    }
-  </script>
 </body>
 </html>
