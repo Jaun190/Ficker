@@ -1,52 +1,99 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GrowEmpire Login</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="form-container">
-    <h2>GrowEmpire Login</h2>
-    <form id="login-form">
-      <form id="login-form">
-  <input type="email" id="email" placeholder="E-Mail" required />
-  <input type="password" id="password" placeholder="Passwort" required />
-  <button type="submit">Einloggen</button>
-</form>
-<p><a href="forgot.html">🔐 Passwort vergessen?</a></p>
-    <p>Noch kein Account? <a href="register.html">Hier registrieren</a></p>
-    <p id="error-msg" class="error"></p>
-  </div>
-
-  <!-- SUPABASE LOGIN -->
-  <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
-
-    const supabase = createClient(
-      'https://ghfzdgaunxblpudkmxmy.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoZnpkZ2F1bnhibHB1ZGtteG15IiwiaWF0IjoxNzUwNzAyOTU5LCJleHAiOjIwNjYyNzg5NTl9.J8ni4SszaI33ljthdEjqXf8ZKFCs4uWnRZZDyU0IlUU'
-    );
-
-    document.getElementById('login-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const errorMsg = document.getElementById('error-msg');
-
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password
-      });
-
-      if (error) {
-        errorMsg.textContent = '❌ Login fehlgeschlagen: ' + error.message;
-      } else {
-        window.location.href = 'dashboard.html';
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GrowEmpire Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background-color: #000;
+        color: #fff;
+        text-align: center;
+        padding: 2rem;
       }
-    });
-  </script>
-</body>
+      h1 {
+        font-size: 2rem;
+      }
+      form {
+        margin-top: 2rem;
+      }
+      input {
+        padding: 1rem;
+        margin: 0.5rem 0;
+        width: 90%;
+        max-width: 400px;
+        border: none;
+        border-radius: 10px;
+        font-size: 1rem;
+      }
+      button {
+        padding: 1rem 2rem;
+        margin-top: 1rem;
+        font-size: 1rem;
+        background-color: #00ff99;
+        border: none;
+        border-radius: 10px;
+        color: black;
+        cursor: pointer;
+      }
+      .error {
+        color: red;
+        margin-top: 1rem;
+      }
+      .link {
+        margin-top: 1rem;
+        display: block;
+        color: #0f0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Willkommen bei <br><strong>GrowEmpire</strong></h1>
+    <p>Baue dein virtuelles Hanf-Imperium auf – starte mit deiner Box, pflanze, ernte und verdiene. Alles vollautomatisch.<br>Alles profitabel.</p>
+
+    <form id="login-form">
+      <h2>GrowEmpire Login</h2>
+      <input type="email" placeholder="Email" required /><br />
+      <input type="password" placeholder="Passwort" required /><br />
+      <button type="submit">Einloggen</button>
+      <div class="link">
+        🔐 <a href="#" style="color: #0f0;">Passwort vergessen?</a>
+      </div>
+      <div class="link">
+        Noch kein Account? <a href="#" style="color: #0f0;">Hier registrieren</a>
+      </div>
+      <div id="error" class="error"></div>
+    </form>
+
+    <!-- Supabase Script + Login Integration -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+      const supabase = window.supabase.createClient(
+        'https://hjldtaluigjzvrqlkujb.supabase.co',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqbGR0YWx1aWdqenZycWxrdWpiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIwNTY3NjcsImV4cCI6MjA2NzYzMjc2N30.LRgNsD7ZsJzPM4QPlv0p9HuBtl4YEYLPgrj7ShKih08'
+      );
+
+      document.getElementById("login-form").addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const email = document.querySelector('input[type="email"]').value;
+        const password = document.querySelector('input[type="password"]').value;
+        const errorDiv = document.getElementById("error");
+
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: email,
+          password: password
+        });
+
+        if (error) {
+          errorDiv.textContent = "❌ Login fehlgeschlagen: " + error.message;
+        } else {
+          errorDiv.textContent = "";
+          window.location.href = "/dashboard.html";
+        }
+      });
+    </script>
+  </body>
 </html>
