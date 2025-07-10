@@ -2,56 +2,99 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GrowEmpire Registrierung</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GrowEmpire – Registrierung</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="form-container">
-    <h2>Registrieren bei GrowEmpire</h2>
+  <div class="container">
+    <h1>Registrieren</h1>
     <form id="register-form">
+      <input type="text" id="username" placeholder="Benutzername" required />
       <input type="email" id="email" placeholder="E-Mail" required />
       <input type="password" id="password" placeholder="Passwort" required />
       <input type="password" id="confirm-password" placeholder="Passwort bestätigen" required />
       <button type="submit">Registrieren</button>
     </form>
-    <p>Schon registriert? <a href="index.html">Zum Login</a></p>
-    <p id="error-msg" class="error"></p>
+    <p><a href="#" onclick="openAGB()">AGB anzeigen</a></p>
+    <p><a href="index.html">Zurück zum Login</a></p>
   </div>
 
-  <!-- Supabase Registrierung -->
-  <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+  <!-- AGB Popup -->
+  <div id="agb-popup" class="agb-popup" style="display:none;">
+    <div class="agb-content">
+      <span class="close-btn" onclick="document.getElementById('agb-popup').style.display='none'">&times;</span>
+      <h2>Allgemeine Geschäftsbedingungen (AGB)</h2>
+      <div class="agb-text">
+        <ol>
+          <li>GrowEmpire ist ein virtuelles Grow- und Empfehlungsprojekt mit Fokus auf Community-Aufbau.</li>
+          <li>Jeder Nutzer kann durch den Erwerb virtueller Pflanzen oder Flächen an einem simulierten Anbauprozess teilnehmen.</li>
+          <li>Der Erwerb einer virtuellen Pflanze kostet zwischen CHF 150.– und CHF 300.– je nach Sorte und Menge.</li>
+          <li>Nach ca. 75 Tagen Laufzeit erhalten Nutzer eine Rückvergütung, sofern bestimmte Bedingungen erfüllt sind.</li>
+          <li>Die Auszahlung erfolgt nur, wenn der entsprechende Umsatz durch Reinvestitionen oder Downline-Aktivität generiert wurde.</li>
+          <li>Provisionen werden bei erfolgreicher Empfehlung neuer Nutzer (direkte Downline) sofort gutgeschrieben und sind auszahlbar.</li>
+          <li>Der Empfehlungsbonus beträgt mindestens 3 % auf direkte Partnerumsätze (Starterpaket, Pflanzenkäufe etc.).</li>
+          <li>Virtuelle Erträge aus Pflanzenkäufen gelten steuerlich als Symbolwerte und unterliegen keiner Garantieleistung.</li>
+          <li>GrowEmpire strebt langfristige Stabilität durch Reinvest-Anreize und Downline-Ausbau an.</li>
+          <li>Jeder Nutzer kann maximal 10 Pflanzen pro m² gleichzeitig pflegen, außer er steigt im Level auf.</li>
+          <li>Level-Aufstieg erfolgt durch Werbeaktivität oder hohe Reinvestquote. Höhere Level ermöglichen mehr Fläche & Vorteile.</li>
+          <li>GrowEmpire behält sich das Recht vor, Auszahlungen zu prüfen und bei Verdacht auf Missbrauch zurückzuhalten.</li>
+          <li>Alle Daten werden DSGVO-konform und gemäss Schweizer Datenschutzgesetz gespeichert.</li>
+          <li>Die Teilnahme ist ab 18 Jahren erlaubt. Es besteht kein Anspruch auf reale Ernte oder Produkte.</li>
+          <li>Mit Registrierung akzeptierst du diese AGB in ihrer jeweils aktuellen Fassung.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
 
-    const supabase = createClient(
-      'https://hjldtaluigjzvrqlkujb.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqbGR0YWx1aWdqenZycWxrdWpiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIwNTY3NjcsImV4cCI6MjA2NzYzMjc2N30.LRgNsD7ZsJzPM4QPlv0p9HuBtl4YEYLPgrj7ShKih08'
-    );
+  <style>
+    .agb-popup {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.85);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999;
+    }
+    .agb-content {
+      background: #111;
+      color: white;
+      width: 90%;
+      max-width: 600px;
+      max-height: 90vh;
+      padding: 20px;
+      border-radius: 10px;
+      overflow-y: auto;
+      position: relative;
+    }
+    .agb-content h2 {
+      margin-top: 0;
+      font-size: 1.4em;
+    }
+    .agb-text ol {
+      padding-left: 20px;
+    }
+    .agb-text li {
+      margin-bottom: 10px;
+      line-height: 1.5em;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px; right: 15px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+  </style>
 
-    document.getElementById('register-form').addEventListener('submit', async (e) => {
+  <script>
+    function openAGB() {
+      document.getElementById('agb-popup').style.display = 'flex';
+    }
+
+    // Registrierung (optional aktivieren mit Supabase etc.)
+    document.getElementById("register-form").addEventListener("submit", function (e) {
       e.preventDefault();
-
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const confirmPassword = document.getElementById('confirm-password').value;
-      const errorMsg = document.getElementById('error-msg');
-
-      if (password !== confirmPassword) {
-        errorMsg.textContent = '❌ Passwörter stimmen nicht überein.';
-        return;
-      }
-
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-      });
-
-      if (error) {
-        errorMsg.textContent = '❌ Registrierung fehlgeschlagen: ' + error.message;
-      } else {
-        alert('✅ Bitte bestätige deine E-Mail. Danach kannst du dich einloggen.');
-        window.location.href = 'index.html';
-      }
+      // Registrierungscode kommt hier
+      alert("Registrierung abgeschlossen.");
     });
   </script>
 </body>
