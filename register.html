@@ -2,185 +2,110 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GrowEmpire Registrierung</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: black;
-      background-image: url('assets/kiffen.png');
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-attachment: fixed;
+      background: black url('assets/kiffen.png') no-repeat center center fixed;
       background-size: 95%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       color: white;
+      font-family: Arial, sans-serif;
     }
-
-    .container {
-      background: rgba(0, 0, 0, 0.75);
-      padding: 40px;
-      border-radius: 16px;
-      box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+    .form-container {
       max-width: 400px;
-      width: 100%;
+      margin: 100px auto;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #00ff00;
     }
-
-    h1 {
-      text-align: center;
-      font-size: 28px;
-      margin-bottom: 24px;
-      color: #00ff88;
-    }
-
-    input {
+    input, button {
+      display: block;
       width: 100%;
-      padding: 12px;
-      margin: 8px 0;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
       border: none;
-      border-radius: 8px;
-      background: #222;
-      color: white;
     }
-
     button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 16px;
-      border: none;
-      border-radius: 8px;
-      background: #00ff88;
-      color: black;
+      background-color: #00cc00;
+      color: white;
       font-weight: bold;
-      cursor: pointer;
     }
-
-    .agb {
-      text-align: center;
-      font-size: 14px;
-      margin-top: 16px;
+    a {
+      color: #00ffcc;
     }
-
-    .agb a {
-      color: #00ff88;
-      text-decoration: underline;
-      cursor: pointer;
-    }
-
-    .error {
-      color: red;
-      font-size: 14px;
-      text-align: center;
-      display: none;
-      margin-top: 10px;
-    }
-
-    /* Modal */
-    .modal {
+    #agb-popup {
       display: none;
       position: fixed;
-      z-index: 999;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.85);
-    }
-
-    .modal-content {
-      background-color: #111;
-      margin: 10% auto;
-      padding: 20px;
-      border-radius: 12px;
-      width: 80%;
-      max-height: 70vh;
-      overflow-y: auto;
+      top: 5%;
+      left: 5%;
+      width: 90%;
+      height: 90%;
+      background: #111;
       color: white;
+      overflow-y: scroll;
+      padding: 20px;
+      border: 2px solid #0f0;
+      border-radius: 10px;
+      z-index: 9999;
     }
-
-    .close {
-      color: #00ff88;
-      float: right;
-      font-size: 24px;
-      font-weight: bold;
-      cursor: pointer;
+    #agb-popup h3 {
+      margin-top: 0;
     }
-
-    .modal-content h2 {
-      color: #00ff88;
+    #agb-popup button {
+      margin-top: 20px;
+      background: #444;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>GrowEmpire Registrierung</h1>
-    <input type="text" id="username" placeholder="Benutzername" />
-    <input type="email" id="email" placeholder="E-Mail-Adresse" />
-    <input type="password" id="password" placeholder="Passwort" />
-    <input type="password" id="confirmPassword" placeholder="Passwort bestätigen" />
-    <button onclick="register()">Registrieren</button>
-    <div class="error" id="errorMsg">Die Passwörter stimmen nicht überein!</div>
-    <div class="agb">
-      Durch die Registrierung akzeptierst du unsere <a id="agbLink">AGB</a>.
-    </div>
+  <div class="form-container">
+    <h2>GrowEmpire Registrierung</h2>
+    <form id="register-form">
+      <input type="email" id="email" placeholder="E-Mail" required />
+      <input type="password" id="password" placeholder="Passwort" required />
+      <input type="password" id="confirm-password" placeholder="Passwort bestätigen" required />
+      <label><input type="checkbox" id="agb-checkbox" required /> Ich akzeptiere die <a href="#" onclick="showAGB()">AGB</a></label>
+      <button type="submit">Registrieren</button>
+    </form>
+    <p>Du hast schon ein Konto? <a href="index.html">Zum Login</a></p>
+    <p id="error-msg" class="error"></p>
   </div>
 
-  <div id="agbModal" class="modal">
-    <div class="modal-content">
-      <span class="close" id="closeModal">&times;</span>
-      <h2>Allgemeine Geschäftsbedingungen</h2>
-      <p>
-        1. Mit der Registrierung erklärst du dich mit unseren Bedingungen einverstanden.<br><br>
-        2. Du erhältst Provisionen für erfolgreich geworbene Mitglieder oder Käufe.<br><br>
-        3. Gekaufte virtuelle Pflanzen erzeugen einen simulierten Ertrag im System.<br><br>
-        4. Der Ertrag wird als Bonuswert im Dashboard angezeigt, Auszahlung gemäß Reinvest- oder Werbeaktivität.<br><br>
-        5. Alle Angaben im System basieren auf einer fiktiven Darstellung.<br><br>
-        6. Es besteht kein Anspruch auf reale Produktlieferung – es handelt sich um ein virtuelles Erlebnis.<br><br>
-        7. Provisionen können ab einem bestimmten Betrag oder Level ausbezahlt werden.<br><br>
-        8. Manipulation oder Mehrfach-Accounts führen zur Sperrung.<br><br>
-        9. Das Support-Team kann bei Missbrauch die Auszahlung verweigern.<br><br>
-        10. Alle Nutzer sind für die Richtigkeit ihrer Angaben verantwortlich.<br><br>
-        11. Rückerstattungen sind ausgeschlossen.<br><br>
-        12. Es besteht kein Anrecht auf Ernte oder Ertrag ohne aktive Teilnahme.<br><br>
-        13. Änderungen der AGB sind jederzeit möglich.<br><br>
-        14. Für Fragen steht das Support-Team zur Verfügung: jaun190@gmail.com<br><br>
-        15. Mit der Registrierung akzeptierst du alle obigen Punkte verbindlich.
-      </p>
-    </div>
+  <div id="agb-popup">
+    <h3>Allgemeine Geschäftsbedingungen (AGB)</h3>
+    <ol>
+      <li>Mit der Registrierung akzeptieren Sie die Geschäftsbedingungen von GrowEmpire.</li>
+      <li>Provisionen werden nur bei aktiver Teilnahme und erfolgreicher Weiterempfehlung generiert.</li>
+      <li>Virtuelle Produkte wie Pflanzen sind symbolische Elemente im System, die als Bonus Erträge anzeigen.</li>
+      <li>Alle angegebenen Erträge verstehen sich als Richtwerte ohne Garantie.</li>
+      <li>GrowEmpire zahlt Provisionen automatisiert oder manuell, abhängig vom Nutzerstatus.</li>
+      <li>Eine Auszahlung erfolgt nur bei erfolgreicher Identitätsprüfung durch Upload eines Ausweisdokuments.</li>
+      <li>Reinvests werden im System als Treuebonus erfasst und fördern den Systemfortschritt.</li>
+      <li>Level-Upgrades basieren auf Teamleistung, Kaufverhalten und Aktivität im System.</li>
+      <li>GrowEmpire ist ein hybrides Belohnungssystem, kein Finanzprodukt oder Investment-Angebot.</li>
+      <li>Alle Nutzer verpflichten sich zur Einhaltung der geltenden Gesetze in ihrem Land.</li>
+      <li>Manipulation, Mehrfachkonten oder Missbrauch führen zur sofortigen Sperrung.</li>
+      <li>Provisionen können bei Verstoß gegen die AGB nachträglich aberkannt werden.</li>
+      <li>Jeder Nutzer ist für die korrekte Angabe seiner Zahlungsinformationen verantwortlich.</li>
+      <li>Die Nutzung von GrowEmpire erfolgt auf eigenes Risiko. Es besteht keine Garantie auf Erfolg.</li>
+      <li>Durch das Akzeptieren dieser AGB bestätigen Sie, dass alle Angaben wahrheitsgemäß gemacht wurden.</li>
+    </ol>
+    <button onclick="hideAGB()">AGB schließen</button>
   </div>
 
   <script>
-    const agbLink = document.getElementById("agbLink");
-    const agbModal = document.getElementById("agbModal");
-    const closeModal = document.getElementById("closeModal");
-    const errorMsg = document.getElementById("errorMsg");
-
-    agbLink.onclick = () => agbModal.style.display = "block";
-    closeModal.onclick = () => agbModal.style.display = "none";
-    window.onclick = (event) => {
-      if (event.target == agbModal) {
-        agbModal.style.display = "none";
-      }
-    };
-
-    function register() {
-      const pw = document.getElementById("password").value;
-      const confirm = document.getElementById("confirmPassword").value;
-
-      if (pw !== confirm) {
-        errorMsg.style.display = "block";
-      } else {
-        errorMsg.style.display = "none";
-        alert("Registrierung erfolgreich!");
-        // Weiterleitung oder Datenverarbeitung hier
-      }
+    function showAGB() {
+      document.getElementById('agb-popup').style.display = 'block';
     }
+    function hideAGB() {
+      document.getElementById('agb-popup').style.display = 'none';
+    }
+
+    // Supabase Registrierung (optional):
+    // document.getElementById('register-form').addEventListener('submit', async (e) => { ... })
   </script>
 </body>
 </html>
