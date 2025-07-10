@@ -1,34 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <title>Test Registrierung</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <title>GrowEmpire – Registrierung</title>
 </head>
-<body>
-  <h1>Test Registrierung</h1>
-  <input type="email" id="email" placeholder="E-Mail" />
-  <input type="password" id="password" placeholder="Passwort" />
-  <button onclick="register()">Registrieren</button>
+<body style="font-family:sans-serif;text-align:center;padding:40px;">
+  <h1>Registrieren</h1>
+  <input id="email" type="email" placeholder="E-Mail" /><br><br>
+  <input id="password" type="password" placeholder="Passwort" /><br><br>
+  <button id="registerButton">Jetzt registrieren</button>
 
-  <script>
-    const supabase = supabase.createClient(
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+
+    const supabase = createClient(
       "https://hjldtaluigjzvrqlkujb.supabase.co",
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqbGR0YWx1aWdqenZycWxrdWpiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIwNTY3NjcsImV4cCI6MjA2NzYzMjc2N30.LRgNsD7ZsJzPM4QPlv0p9HuBtl4YEYLPgrj7ShKih08"
     );
 
-    async function register() {
+    document.getElementById("registerButton").addEventListener("click", async () => {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
 
-      const { error, user } = await supabase.auth.signUp({ email, password });
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password
+      });
 
       if (error) {
         alert("Fehler: " + error.message);
       } else {
-        alert("Erfolg! E-Mail bestätigen.");
+        alert("Erfolg! Bitte bestätige die E-Mail.");
       }
-    }
+    });
   </script>
 </body>
 </html>
