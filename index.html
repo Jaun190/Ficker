@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
   <div class="form-container">
     <h2>GrowEmpire Login</h2>
     <form id="login-form">
@@ -15,15 +14,14 @@
       <input type="password" id="password" placeholder="Passwort" required />
       <button type="submit">Einloggen</button>
     </form>
-
-    <p>🔐 <a href="forgot.html">Passwort vergessen?</a></p>
+    <p><a href="forgot.html">🔐 Passwort vergessen?</a></p>
     <p>Noch kein Account? <a href="register.html">Hier registrieren</a></p>
-    <p id="error-msg" class="error-msg"></p>
+    <p id="error-msg" class="error"></p>
   </div>
 
-  <!-- SUPABASE LOGIN -->
+  <!-- Supabase Login -->
   <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
     const supabase = createClient(
       'https://hjldtaluigjzvrqlkujb.supabase.co',
@@ -37,10 +35,7 @@
       const password = document.getElementById('password').value;
       const errorMsg = document.getElementById('error-msg');
 
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password
-      });
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
 
       if (error) {
         errorMsg.textContent = '❌ Login fehlgeschlagen: ' + error.message;
@@ -49,6 +44,5 @@
       }
     });
   </script>
-
 </body>
 </html>
