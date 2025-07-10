@@ -8,185 +8,151 @@
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Arial', sans-serif;
-      background-color: #000;
-      color: #0f0;
-      overflow-x: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('assets/kiffen.png') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: white;
     }
 
     .container {
-      max-width: 500px;
-      margin: 100px auto;
-      padding: 30px;
-      border: 2px solid #0f0;
-      box-shadow: 0 0 20px #0f0;
-      border-radius: 15px;
-      background-color: #111;
+      background: rgba(0, 0, 0, 0.75);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+      max-width: 400px;
+      width: 100%;
     }
 
     h1 {
       text-align: center;
-      font-size: 2em;
-      color: #0f0;
-      margin-bottom: 20px;
+      font-size: 28px;
+      margin-bottom: 24px;
+      color: #00ff88;
     }
 
-    label {
-      display: block;
-      margin-top: 15px;
-      font-size: 1em;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="password"] {
+    input {
       width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      background-color: #000;
-      border: 1px solid #0f0;
-      color: #0f0;
-      border-radius: 5px;
-    }
-
-    .checkbox {
-      margin-top: 20px;
-      font-size: 0.95em;
-    }
-
-    .checkbox a {
-      color: #0f0;
-      text-decoration: underline;
-      cursor: pointer;
+      padding: 12px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 8px;
+      background: #222;
+      color: white;
     }
 
     button {
       width: 100%;
       padding: 12px;
-      margin-top: 25px;
-      background-color: #0f0;
-      color: #000;
-      font-weight: bold;
-      font-size: 1.1em;
+      margin-top: 16px;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
+      background: #00ff88;
+      color: black;
+      font-weight: bold;
       cursor: pointer;
     }
 
-    /* Modal AGB */
+    .agb {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 16px;
+    }
+
+    .agb a {
+      color: #00ff88;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* Modal */
     .modal {
       display: none;
       position: fixed;
-      z-index: 9999;
+      z-index: 999;
       left: 0;
       top: 0;
       width: 100%;
       height: 100%;
       overflow: auto;
-      background-color: rgba(0,0,0,0.95);
+      background-color: rgba(0, 0, 0, 0.85);
     }
 
     .modal-content {
       background-color: #111;
-      margin: 60px auto;
-      padding: 30px;
-      border: 2px solid #0f0;
-      border-radius: 15px;
-      width: 90%;
-      max-width: 800px;
-      color: #0f0;
-      box-shadow: 0 0 20px #0f0;
-      max-height: 80vh;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 12px;
+      width: 80%;
+      max-height: 70vh;
       overflow-y: auto;
-    }
-
-    .modal-content h2 {
-      margin-top: 0;
-      color: #0f0;
-      font-size: 1.5em;
+      color: white;
     }
 
     .close {
-      color: #0f0;
+      color: #00ff88;
       float: right;
-      font-size: 28px;
+      font-size: 24px;
       font-weight: bold;
       cursor: pointer;
     }
 
-    .close:hover {
-      color: red;
-    }
-
-    ol {
-      padding-left: 20px;
-    }
-
-    ol li {
-      margin-bottom: 12px;
-      line-height: 1.5;
+    .modal-content h2 {
+      color: #00ff88;
     }
   </style>
 </head>
 <body>
-
   <div class="container">
-    <h1>Registrieren</h1>
-    <form>
-      <label>Benutzername</label>
-      <input type="text" required />
-
-      <label>E-Mail</label>
-      <input type="email" required />
-
-      <label>Passwort</label>
-      <input type="password" required />
-
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" required />
-          Ich akzeptiere die <a id="openModal">AGB</a>
-        </label>
-      </div>
-
-      <button type="submit">Konto erstellen</button>
-    </form>
+    <h1>GrowEmpire Registrierung</h1>
+    <input type="text" placeholder="Benutzername" />
+    <input type="email" placeholder="E-Mail-Adresse" />
+    <input type="password" placeholder="Passwort" />
+    <button>Registrieren</button>
+    <div class="agb">
+      Durch die Registrierung akzeptierst du unsere <a id="agbLink">AGB</a>.
+    </div>
   </div>
 
-  <!-- AGB Modal -->
   <div id="agbModal" class="modal">
     <div class="modal-content">
       <span class="close" id="closeModal">&times;</span>
       <h2>Allgemeine Geschäftsbedingungen</h2>
-      <ol>
-        <li>GrowEmpire.store ist ein rein virtuelles System zur symbolischen Darstellung von Wachstum, Ertrag und Gemeinschaft.</li>
-        <li>Alle Käufe und Investitionen sind rein virtuell. Es handelt sich nicht um echte Pflanzen oder physische Produkte.</li>
-        <li>Virtuelle Pflanzen simulieren Wachstum und Ertrag. Der angezeigte Ertrag ist symbolisch, kann aber zur Auszahlung berechtigen.</li>
-        <li>Provisionen für Weiterempfehlungen sind real und können bei aktivem Einsatz zur Auszahlung kommen.</li>
-        <li>Die Auszahlung erfolgt gemäß den aktuellen Partner- und Provisionsbedingungen.</li>
-        <li>Für den Zugang zur Plattform ist eine gültige Lizenz erforderlich. Es besteht kein automatischer Anspruch auf Gewinn.</li>
-        <li>Reinvestitionen, Levelaufstiege und Zusatzboni sind möglich, aber nicht garantiert.</li>
-        <li>Die Plattform kann Funktionen oder Regeln jederzeit ändern oder erweitern.</li>
-        <li>GrowEmpire haftet nicht für persönliche Verluste durch Fehlentscheidungen, mangelnde Aktivität oder Fehlinterpretationen.</li>
-        <li>Alle Angaben dienen nur zu Informationszwecken. Kein Finanz-, Steuer- oder Anlageversprechen.</li>
-        <li>Ein Anspruch auf Auszahlung besteht nur, wenn alle Bedingungen (z. B. Lizenz, Reinvest-Deckung, Downline-Aktivität) erfüllt sind.</li>
-        <li>GrowEmpire ist kein Finanzinstitut, sondern eine Community-Plattform mit virtuellen Elementen.</li>
-        <li>Mit der Registrierung akzeptierst du alle Punkte dieser Bedingungen in vollem Umfang.</li>
-        <li>Verstöße gegen die Regeln können zur Sperrung des Accounts und Verlust aller virtuellen Inhalte führen.</li>
-        <li>Gerichtsstand ist Schweiz. Änderungen dieser AGB behalten wir uns jederzeit vor.</li>
-      </ol>
+      <p>
+        1. Mit der Registrierung erklärst du dich mit unseren Bedingungen einverstanden.<br><br>
+        2. Du erhältst Provisionen für erfolgreich geworbene Mitglieder oder Käufe.<br><br>
+        3. Gekaufte virtuelle Pflanzen erzeugen einen simulierten Ertrag im System.<br><br>
+        4. Der Ertrag wird als Bonuswert im Dashboard angezeigt, Auszahlung gemäß Reinvest- oder Werbeaktivität.<br><br>
+        5. Alle Angaben im System basieren auf einer fiktiven Darstellung.<br><br>
+        6. Es besteht kein Anspruch auf reale Produktlieferung – es handelt sich um ein virtuelles Erlebnis.<br><br>
+        7. Provisionen können ab einem bestimmten Betrag oder Level ausbezahlt werden.<br><br>
+        8. Manipulation oder Mehrfach-Accounts führen zur Sperrung.<br><br>
+        9. Das Support-Team kann bei Missbrauch die Auszahlung verweigern.<br><br>
+        10. Alle Nutzer sind für die Richtigkeit ihrer Angaben verantwortlich.<br><br>
+        11. Rückerstattungen sind ausgeschlossen.<br><br>
+        12. Es besteht kein Anrecht auf Ernte oder Ertrag ohne aktive Teilnahme.<br><br>
+        13. Änderungen der AGB sind jederzeit möglich.<br><br>
+        14. Für Fragen steht das Support-Team zur Verfügung: jaun190@gmail.com<br><br>
+        15. Mit der Registrierung akzeptierst du alle obigen Punkte verbindlich.
+      </p>
     </div>
   </div>
 
   <script>
-    const modal = document.getElementById("agbModal");
-    const openModal = document.getElementById("openModal");
+    const agbLink = document.getElementById("agbLink");
+    const agbModal = document.getElementById("agbModal");
     const closeModal = document.getElementById("closeModal");
 
-    openModal.onclick = () => modal.style.display = "block";
-    closeModal.onclick = () => modal.style.display = "none";
-    window.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
+    agbLink.onclick = () => agbModal.style.display = "block";
+    closeModal.onclick = () => agbModal.style.display = "none";
+    window.onclick = (event) => {
+      if (event.target == agbModal) {
+        agbModal.style.display = "none";
+      }
+    };
   </script>
-
 </body>
 </html>
