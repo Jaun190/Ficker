@@ -218,3 +218,85 @@
     }
   </script></body>
 </html>
+<!-- Supabase-Bibliothek -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<script>
+  // Supabase-Zugangsdaten
+  const SUPABASE_URL = 'https://ghfzdgaunxblpudkmxmy.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdoZnpkZ2F1bnhibHB1ZGtteG15Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3MDI5NTksImV4cCI6MjA2NjI3ODk1OX0.J8ni4SszaI33ljthdEjqXf8ZKFCs4uWnRZZDyU0IlUU';
+  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  // Dashboard bei Seitenaufruf initialisieren
+  document.addEventListener('DOMContentLoaded', async () => {
+    const user = await getCurrentUser();
+    if (!user) {
+      window.location.href = '/login.html';
+      return;
+    }
+
+    const pflanzen = await ladePflanzen(user.id);
+    zeigePflanzen(pflanzen);
+    zeigeLizenzStatus(user.id);
+  });
+
+  // Aktuellen Nutzer holen
+  async function getCurrentUser() {
+    const { data, error } = await supabase.auth.getUser();
+    if (error || !data.user) {
+      return null;
+    }
+    return data.user;
+  }
+
+  // Lizenz anzeigen
+  async function zeigeLizenzStatus(userId) {
+    const { data, error } = await supabase
+      .from('user_licenses')
+      .select('license_type')
+      .eq('user_id', userId)
+      .single();
+
+    const lizenz = data?.license_type || 'DEMO';
+    document.getElementById('lizenzStatus')?.innerText = `Aktive Lizenz: ${lizenz}`;
+  }
+
+  // Pflanzen aus Supabase laden
+  async function ladePflanzen(userId) {
+    const { data, error } = await supabase
+      .from('user_plants')
+      .select('id, sort, kaufdatum, erntedatum')
+      .eq('user_id', userId);
+
+    return data || [];
+  }
+
+  // Pflanzen auf dem Dashboard anzeigen
+  function zeigePflanzen(pflanzen) {
+    const container = document.getElementById('pflanzenContainer');
+    if (!container) return;
+
+    container.innerHTML = ''; // Leeren
+
+    pflanzen.forEach(pflanze => {
+      const jetzt = new Date();
+      const ernte = new Date(pflanze.erntedatum);
+      const kauf = new Date(pflanze.kaufdatum);
+      const tageGesamt = Math.round((ernte - kauf) / (1000 * 60 * 60 * 24));
+      const tageÜbrig = Math.max(0, Math.round((ernte - jetzt) / (1000 * 60 * 60 * 24)));
+      const fortschritt = Math.round(100 - (tageÜbrig / tageGesamt) * 100);
+
+      const card = document.createElement('div');
+      card.className = 'pflanzen-card';
+      card.innerHTML = `
+        <h3>🌱 ${pflanze.sort}</h3>
+        <p>📅 Gekauft am: ${kauf.toLocaleDateString()}</p>
+        <p>⏳ Noch ${tageÜbrig} Tage bis zur Ernte</p>
+        <div style="background: #222; border-radius: 10px; overflow: hidden; margin-top: 8px;">
+          <div style="width: ${fortschritt}%; height: 10px; background: lime;"></div>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+</script>
