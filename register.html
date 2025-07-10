@@ -2,110 +2,166 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GrowEmpire Registrierung</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registrieren – GrowEmpire</title>
   <style>
     body {
-      background: black url('assets/kiffen.png') no-repeat center center fixed;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: black url("assets/kiffen.png") no-repeat center center fixed;
       background-size: 95%;
       color: white;
-      font-family: Arial, sans-serif;
     }
-    .form-container {
+    .container {
       max-width: 400px;
       margin: 100px auto;
-      background: rgba(0, 0, 0, 0.8);
       padding: 30px;
+      background: rgba(0, 0, 0, 0.85);
       border-radius: 12px;
-      box-shadow: 0 0 10px #00ff00;
+      box-shadow: 0 0 10px #0f0;
     }
-    input, button {
-      display: block;
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #0f0;
+    }
+    input {
       width: 100%;
-      margin: 10px 0;
-      padding: 10px;
-      border-radius: 5px;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 6px;
       border: none;
     }
     button {
-      background-color: #00cc00;
+      width: 100%;
+      padding: 12px;
+      background: limegreen;
+      border: none;
       color: white;
       font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
     }
-    a {
-      color: #00ffcc;
+    .agb-text {
+      font-size: 13px;
+      text-align: center;
+      margin-top: 10px;
     }
-    #agb-popup {
-      display: none;
+    .agb-text a {
+      color: #0f0;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .popup {
       position: fixed;
-      top: 5%;
-      left: 5%;
-      width: 90%;
-      height: 90%;
-      background: #111;
-      color: white;
-      overflow-y: scroll;
-      padding: 20px;
-      border: 2px solid #0f0;
-      border-radius: 10px;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      display: none;
+      justify-content: center;
+      align-items: center;
       z-index: 9999;
     }
-    #agb-popup h3 {
-      margin-top: 0;
+    .popup-content {
+      background: #111;
+      padding: 20px;
+      max-height: 80vh;
+      overflow-y: auto;
+      max-width: 600px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px #0f0;
+      color: white;
     }
-    #agb-popup button {
+    .popup-content h2 {
+      margin-top: 0;
+      color: #0f0;
+    }
+    .popup-content ol {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .popup-close {
       margin-top: 20px;
-      background: #444;
+      padding: 10px 20px;
+      background: limegreen;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
     }
   </style>
 </head>
 <body>
-  <div class="form-container">
-    <h2>GrowEmpire Registrierung</h2>
-    <form id="register-form">
-      <input type="email" id="email" placeholder="E-Mail" required />
-      <input type="password" id="password" placeholder="Passwort" required />
-      <input type="password" id="confirm-password" placeholder="Passwort bestätigen" required />
-      <label><input type="checkbox" id="agb-checkbox" required /> Ich akzeptiere die <a href="#" onclick="showAGB()">AGB</a></label>
-      <button type="submit">Registrieren</button>
-    </form>
-    <p>Du hast schon ein Konto? <a href="index.html">Zum Login</a></p>
-    <p id="error-msg" class="error"></p>
+
+  <div class="container">
+    <h1>GrowEmpire</h1>
+    <input type="email" id="email" placeholder="E-Mail" required />
+    <input type="password" id="password" placeholder="Passwort" required />
+    <input type="password" id="confirm" placeholder="Passwort bestätigen" required />
+    <button onclick="register()">Registrieren</button>
+
+    <div class="agb-text">
+      Durch deine Anmeldung akzeptierst du unsere <a onclick="showAGB()">AGB</a>.
+    </div>
   </div>
 
-  <div id="agb-popup">
-    <h3>Allgemeine Geschäftsbedingungen (AGB)</h3>
-    <ol>
-      <li>Mit der Registrierung akzeptieren Sie die Geschäftsbedingungen von GrowEmpire.</li>
-      <li>Provisionen werden nur bei aktiver Teilnahme und erfolgreicher Weiterempfehlung generiert.</li>
-      <li>Virtuelle Produkte wie Pflanzen sind symbolische Elemente im System, die als Bonus Erträge anzeigen.</li>
-      <li>Alle angegebenen Erträge verstehen sich als Richtwerte ohne Garantie.</li>
-      <li>GrowEmpire zahlt Provisionen automatisiert oder manuell, abhängig vom Nutzerstatus.</li>
-      <li>Eine Auszahlung erfolgt nur bei erfolgreicher Identitätsprüfung durch Upload eines Ausweisdokuments.</li>
-      <li>Reinvests werden im System als Treuebonus erfasst und fördern den Systemfortschritt.</li>
-      <li>Level-Upgrades basieren auf Teamleistung, Kaufverhalten und Aktivität im System.</li>
-      <li>GrowEmpire ist ein hybrides Belohnungssystem, kein Finanzprodukt oder Investment-Angebot.</li>
-      <li>Alle Nutzer verpflichten sich zur Einhaltung der geltenden Gesetze in ihrem Land.</li>
-      <li>Manipulation, Mehrfachkonten oder Missbrauch führen zur sofortigen Sperrung.</li>
-      <li>Provisionen können bei Verstoß gegen die AGB nachträglich aberkannt werden.</li>
-      <li>Jeder Nutzer ist für die korrekte Angabe seiner Zahlungsinformationen verantwortlich.</li>
-      <li>Die Nutzung von GrowEmpire erfolgt auf eigenes Risiko. Es besteht keine Garantie auf Erfolg.</li>
-      <li>Durch das Akzeptieren dieser AGB bestätigen Sie, dass alle Angaben wahrheitsgemäß gemacht wurden.</li>
-    </ol>
-    <button onclick="hideAGB()">AGB schließen</button>
+  <div class="popup" id="agbPopup">
+    <div class="popup-content">
+      <h2>Allgemeine Geschäftsbedingungen (AGB)</h2>
+      <ol>
+        <li>GrowEmpire ist ein virtuelles System mit simuliertem Pflanzenanbau.</li>
+        <li>Erträge entstehen durch Reinvests und Partnerumsatz.</li>
+        <li>Provisionen werden bei aktivem Werben ausbezahlt.</li>
+        <li>Eine Auszahlung ist nur möglich, wenn der Umsatz dafür gedeckt ist.</li>
+        <li>Das System bietet keinen garantierten Ertrag.</li>
+        <li>Jede Pflanze kostet einmalig CHF 150.– mit virtueller Rückvergütung von CHF 180.– nach 75 Tagen.</li>
+        <li>Der Nutzer erhält ein Dashboard zur Verwaltung seiner Aktivitäten.</li>
+        <li>Levelaufstiege sind durch Werbeerfolg und Reinvests möglich.</li>
+        <li>Mit steigender Aktivität wächst die virtuelle Anbaufläche.</li>
+        <li>GrowEmpire behält sich das Recht vor, Änderungen jederzeit vorzunehmen.</li>
+        <li>Alle Inhalte dienen der Unterhaltung und sind nicht als Investition zu verstehen.</li>
+        <li>Ein Missbrauch des Systems führt zur Sperrung.</li>
+        <li>Bei Problemen steht unser Support zur Verfügung.</li>
+        <li>Mit der Registrierung erklärst du dich mit allen Punkten einverstanden.</li>
+        <li>Die Auszahlung virtueller Erträge erfolgt unter Einhaltung der internen Regeln.</li>
+      </ol>
+      <button class="popup-close" onclick="hideAGB()">Schließen</button>
+    </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script>
-    function showAGB() {
-      document.getElementById('agb-popup').style.display = 'block';
-    }
-    function hideAGB() {
-      document.getElementById('agb-popup').style.display = 'none';
+    const SUPABASE_URL = 'https://hjldtaluigjzvrqlkujb.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqbGR0YWx1aWdqenZycWxrdWpiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIwNTY3NjcsImV4cCI6MjA2NzYzMjc2N30.LRgNsD7ZsJzPM4QPlv0p9HuBtl4YEYLPgrj7ShKih08';
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    async function register() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const confirm = document.getElementById("confirm").value;
+
+      if (password !== confirm) {
+        alert("Passwörter stimmen nicht überein!");
+        return;
+      }
+
+      const { error } = await supabase.auth.signUp({ email, password });
+      if (error) {
+        alert("Fehler: " + error.message);
+      } else {
+        alert("Registrierung erfolgreich! Bitte E-Mail bestätigen.");
+        window.location.href = "index.html";
+      }
     }
 
-    // Supabase Registrierung (optional):
-    // document.getElementById('register-form').addEventListener('submit', async (e) => { ... })
+    function showAGB() {
+      document.getElementById("agbPopup").style.display = "flex";
+    }
+
+    function hideAGB() {
+      document.getElementById("agbPopup").style.display = "none";
+    }
   </script>
+
 </body>
 </html>
