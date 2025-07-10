@@ -2,171 +2,48 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Registrieren – GrowEmpire</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AGB – GrowEmpire.store</title>
   <style>
     body {
-      font-family: 'Inter', sans-serif;
-      background: #000 url('./assets/dashboard.png') no-repeat center center fixed;
-      background-size: cover;
-      color: #00ff88;
-      text-align: center;
+      font-family: Arial, sans-serif;
       padding: 2rem;
+      background: #111;
+      color: #fff;
+      line-height: 1.6;
     }
-
-    form {
-      background-color: rgba(0, 0, 0, 0.85);
-      padding: 2rem;
-      border-radius: 12px;
-      max-width: 400px;
-      margin: 0 auto;
-      box-shadow: 0 0 16px #00ff88;
+    h1 {
+      color: #6fff57;
     }
-
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 0.5rem 0;
-      border-radius: 6px;
-      border: none;
-      font-size: 1rem;
+    ol {
+      padding-left: 1.2rem;
     }
-
-    button {
-      padding: 12px 24px;
-      background-color: #00ff88;
-      color: black;
-      font-weight: bold;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-top: 1rem;
+    li {
+      margin-bottom: 1rem;
     }
-
-    label {
-      display: block;
-      margin-top: 1rem;
-      font-size: 0.9rem;
-    }
-
-    label a {
-      color: #00ff88;
-      text-decoration: underline;
-      cursor: pointer;
-    }
-
-    .popup {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.9);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      padding: 2rem;
-      overflow: auto;
-    }
-
-    .popup-content {
-      background: black;
-      color: white;
-      border: 2px solid #00ff88;
-      padding: 2rem;
-      border-radius: 8px;
-      max-width: 600px;
-      text-align: left;
-    }
-
-    .popup-content button {
-      background: red;
-      margin-top: 1rem;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      color: white;
-      cursor: pointer;
+    strong {
+      color: #6fff57;
     }
   </style>
 </head>
 <body>
-  <div class="form">
-    <h2>Registrieren</h2>
-    <input type="text" id="username" placeholder="Benutzername" required />
-    <input type="email" id="email" placeholder="E-Mail" required />
-    <input type="password" id="password" placeholder="Passwort" required />
-    <label>
-      <input type="checkbox" id="agbCheckbox" />
-      Ich akzeptiere die <a onclick="openAGB()">Allgemeinen Geschäftsbedingungen</a>
-    </label>
-    <button onclick="register()">Registrieren</button>
-  </div>
-
-  <!-- AGB -->
-  <div class="popup" id="agbPopup">
-    <div class="popup-content">
-      <h2>Allgemeine Geschäftsbedingungen</h2>
-      <p>
-        Die Teilnahme an GrowEmpire.store ist freiwillig. Alle angebotenen Leistungen, Pflanzen, Erträge und Inhalte sind rein virtuell. Eine reale Auszahlung von „virtuellen Erträgen“ ist nur dann möglich, wenn die Teilnahmebedingungen erfüllt und die rechtlichen Voraussetzungen gegeben sind.
-      </p>
-      <p>
-        Provisionen für vermittelte Nutzer werden gemäß den aktuellen Regeln im Partnerbereich angezeigt. Diese basieren auf Aktivität, Reinvests und erfüllen nicht automatisch Anspruch auf Auszahlung. Die Plattform behält sich vor, bei Missbrauch oder unrechtmäßiger Nutzung Konten zu sperren oder auszuschließen.
-      </p>
-      <p>
-        Mit der Registrierung erkennst du diese Bedingungen an. Die Nutzung erfolgt auf eigene Verantwortung.
-      </p>
-      <button onclick="closeAGB()">Schließen</button>
-    </div>
-  </div>
-
-  <script>
-    function openAGB() {
-      document.getElementById('agbPopup').style.display = 'flex';
-    }
-
-    function closeAGB() {
-      document.getElementById('agbPopup').style.display = 'none';
-    }
-
-    function register() {
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const username = document.getElementById('username').value;
-      const agbChecked = document.getElementById('agbCheckbox').checked;
-
-      if (!email || !password || !username) {
-        alert('Bitte alle Felder ausfüllen.');
-        return;
-      }
-
-      if (!agbChecked) {
-        alert('Du musst die AGB akzeptieren.');
-        return;
-      }
-
-      fetch('https://afqukicketteqqynucet.supabase.co/auth/v1/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXVraWNrdGV0ZXFxeW51Y2V0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3MjY0ODUsImV4cCI6MjA2NjMwMjA4NX0.OWHKcJS2xFCDRm9UzyPOQb6-lXGdMM2cRTiBd9_2E4k'
-        },
-        body: JSON.stringify({ email, password })
-      })
-        .then(res => res.json())
-        .then(data => {
-          if (data.user) {
-            localStorage.setItem('user_email', email);
-            localStorage.setItem('username', username);
-            window.location.href = 'index.html';
-          } else {
-            alert('Registrierung fehlgeschlagen:\n' + JSON.stringify(data, null, 2));
-          }
-        })
-        .catch(err => {
-          alert('Verbindung fehlgeschlagen: ' + err.message);
-        });
-    }
-  </script>
+  <h1>Allgemeine Geschäftsbedingungen (AGB) – GrowEmpire.store</h1>
+  <ol>
+    <li><strong>Geltungsbereich:</strong> Diese AGB regeln das Vertragsverhältnis zwischen der Plattform GrowEmpire.store (nachfolgend „Plattform“) und registrierten Nutzern aus der Schweiz.</li>
+    <li><strong>Registrierung:</strong> Die Nutzung erfordert eine kostenlose Registrierung. Die Teilnahme ist nur volljährigen, handlungsfähigen Personen erlaubt.</li>
+    <li><strong>Virtuelles Modell:</strong> Alle Inhalte und Leistungen, insbesondere Pflanzen, Flächen und Wachstumsmodelle, sind rein symbolisch und dienen der Simulation. Ein echter Anbau findet nicht statt.</li>
+    <li><strong>Erträge:</strong> Die dargestellten Erträge basieren auf einem symbolischen Modell. Sie dienen der Motivation und Veranschaulichung. Dennoch werden Provisionen und Umsatzbeteiligungen für aktive Nutzer real ausbezahlt.</li>
+    <li><strong>MLM-Struktur:</strong> GrowEmpire.store arbeitet mit einem transparenten Empfehlungsmodell. Nutzer können andere Personen werben und dafür strukturierte Provisionen erhalten.</li>
+    <li><strong>Provisionen:</strong> Provisionen werden automatisch berechnet und nach interner Prüfung auf Wunsch an den Nutzer ausbezahlt. Die Höhe der Provision hängt vom Umsatz, der Aktivität und dem Level des Nutzers ab.</li>
+    <li><strong>Levelsystem:</strong> Nutzer können durch Aktivität (z. B. Werben neuer Partner oder Reinvests) im Level aufsteigen. Höhere Level bieten Vorteile wie mehr virtuelle Fläche, exklusive Sorten und höhere Provisionen.</li>
+    <li><strong>Lizenzmodell:</strong> Der Zugang zum Pflanzenkauf erfordert eine gültige virtuelle Grow-Lizenz (monatlich oder lifetime). Diese ist kostenpflichtig.</li>
+    <li><strong>Reinvest-Funktion:</strong> Nutzer können virtuelle Erträge reinvestieren und dadurch neue Pflanzen symbolisch erwerben. Diese Funktion erhöht den möglichen symbolischen Ertrag.</li>
+    <li><strong>Keine Finanzdienstleistung:</strong> GrowEmpire.store bietet keine Kapitalanlage, kein echtes Investment und keine Garantie auf Gewinne. Es handelt sich um ein rein gamifiziertes Belohnungssystem mit echtem MLM-Anteil.</li>
+    <li><strong>Haftungsausschluss:</strong> Die Plattform übernimmt keine Haftung für falsche Angaben von Nutzern, Systemausfälle oder wirtschaftliche Fehleinschätzungen.</li>
+    <li><strong>Zahlungsabwicklung:</strong> Die Zahlungen erfolgen über Drittanbieter (z. B. Stripe). Rückerstattungen sind grundsätzlich ausgeschlossen, außer bei nachweislichem Systemfehler.</li>
+    <li><strong>Datenschutz:</strong> Die persönlichen Daten der Nutzer werden gemäß schweizerischem Datenschutzgesetz vertraulich behandelt und nicht an Dritte weitergegeben.</li>
+    <li><strong>Kündigung:</strong> Nutzer können ihr Konto jederzeit kündigen. Bei Löschung des Kontos verfallen alle virtuellen Inhalte ohne Anspruch auf Auszahlung.</li>
+    <li><strong>Gerichtsstand:</strong> Gerichtsstand ist Bern, Schweiz. Es gilt ausschliesslich schweizerisches Recht.</li>
+  </ol>
 </body>
 </html>
