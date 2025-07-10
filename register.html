@@ -13,7 +13,8 @@
       text-align: center;
       padding: 2rem;
     }
-    .form {
+
+    form {
       background-color: rgba(0, 0, 0, 0.85);
       padding: 2rem;
       border-radius: 12px;
@@ -21,6 +22,7 @@
       margin: 0 auto;
       box-shadow: 0 0 16px #00ff88;
     }
+
     input {
       width: 100%;
       padding: 10px;
@@ -29,6 +31,7 @@
       border: none;
       font-size: 1rem;
     }
+
     button {
       padding: 12px 24px;
       background-color: #00ff88;
@@ -39,22 +42,25 @@
       cursor: pointer;
       margin-top: 1rem;
     }
+
     label {
       display: block;
       margin-top: 1rem;
       font-size: 0.9rem;
     }
+
     label a {
       color: #00ff88;
       text-decoration: underline;
       cursor: pointer;
     }
+
     .popup {
       position: fixed;
       top: 0;
       left: 0;
-      height: 100vh;
       width: 100vw;
+      height: 100vh;
       background: rgba(0, 0, 0, 0.9);
       display: none;
       justify-content: center;
@@ -62,6 +68,7 @@
       padding: 2rem;
       overflow: auto;
     }
+
     .popup-content {
       background: black;
       color: white;
@@ -71,6 +78,7 @@
       max-width: 600px;
       text-align: left;
     }
+
     .popup-content button {
       background: red;
       margin-top: 1rem;
@@ -83,7 +91,6 @@
   </style>
 </head>
 <body>
-
   <div class="form">
     <h2>Registrieren</h2>
     <input type="text" id="username" placeholder="Benutzername" required />
@@ -100,7 +107,15 @@
   <div class="popup" id="agbPopup">
     <div class="popup-content">
       <h2>Allgemeine Geschäftsbedingungen</h2>
-      <p>Alles ist virtuell. Nutzung erfolgt auf eigene Verantwortung. Es besteht kein Anspruch auf Auszahlung. Lizenz = symbolische Teilnahme.</p>
+      <p>
+        Die Teilnahme an GrowEmpire.store ist freiwillig. Alle angebotenen Leistungen, Pflanzen, Erträge und Inhalte sind rein virtuell. Eine reale Auszahlung von „virtuellen Erträgen“ ist nur dann möglich, wenn die Teilnahmebedingungen erfüllt und die rechtlichen Voraussetzungen gegeben sind.
+      </p>
+      <p>
+        Provisionen für vermittelte Nutzer werden gemäß den aktuellen Regeln im Partnerbereich angezeigt. Diese basieren auf Aktivität, Reinvests und erfüllen nicht automatisch Anspruch auf Auszahlung. Die Plattform behält sich vor, bei Missbrauch oder unrechtmäßiger Nutzung Konten zu sperren oder auszuschließen.
+      </p>
+      <p>
+        Mit der Registrierung erkennst du diese Bedingungen an. Die Nutzung erfolgt auf eigene Verantwortung.
+      </p>
       <button onclick="closeAGB()">Schließen</button>
     </div>
   </div>
@@ -130,27 +145,27 @@
         return;
       }
 
-      fetch('https://afquciketcteqqynucet.supabase.co/auth/v1/signup', {
+      fetch('https://afqukicketteqqynucet.supabase.co/auth/v1/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXVjaWtldGN0ZXFxeW51Y2V0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE4NzQxODYsImV4cCI6MjA2NzQ1MDE4Nn0.Mg247BH4XribwIICKLHu1IUCX50nbSdmK34JniLBPzY'
+          'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXVraWNrdGV0ZXFxeW51Y2V0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA3MjY0ODUsImV4cCI6MjA2NjMwMjA4NX0.OWHKcJS2xFCDRm9UzyPOQb6-lXGdMM2cRTiBd9_2E4k'
         },
         body: JSON.stringify({ email, password })
       })
-      .then(res => res.json())
-      .then(data => {
-        if (data.user) {
-          localStorage.setItem('user_email', email);
-          localStorage.setItem('username', username);
-          window.location.href = 'index.html';
-        } else {
-          alert('Registrierung fehlgeschlagen:\n' + JSON.stringify(data, null, 2));
-        }
-      })
-      .catch(err => {
-        alert('Verbindung fehlgeschlagen: ' + err.message);
-      });
+        .then(res => res.json())
+        .then(data => {
+          if (data.user) {
+            localStorage.setItem('user_email', email);
+            localStorage.setItem('username', username);
+            window.location.href = 'index.html';
+          } else {
+            alert('Registrierung fehlgeschlagen:\n' + JSON.stringify(data, null, 2));
+          }
+        })
+        .catch(err => {
+          alert('Verbindung fehlgeschlagen: ' + err.message);
+        });
     }
   </script>
 </body>
