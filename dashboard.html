@@ -2,125 +2,203 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Levelsystem – GrowEmpire</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partner – GrowEmpire</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/2f21c5dc5.js" crossorigin="anonymous"></script>
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      background: #f5f5f5;
+      font-family: 'Inter', sans-serif;
+      background: url('./assets/dashboard.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #00ff88;
     }
-    .navbar {
-      background: #222;
-      padding: 10px;
-      color: white;
+
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: rgba(0, 0, 0, 0.85);
+      border-bottom: 2px solid #00ff88;
+      box-shadow: 0 0 10px #00ff88;
+      z-index: 999;
+    }
+
+    .menu-wrapper {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      height: 100%;
+      padding-left: 20px;
     }
-    .dropbtn {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 24px;
+
+    .menu-icon {
+      background: rgba(0, 255, 136, 0.1);
+      color: #00ff88;
+      border: 2px solid #00ff88;
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-size: 22px;
       cursor: pointer;
+      box-shadow: 0 0 10px #00ff88;
     }
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-    .dropdown-content {
+
+    .dropdown-menu {
       display: none;
       position: absolute;
-      right: 0;
-      background-color: #333;
-      min-width: 160px;
-      z-index: 1;
+      top: 60px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.95);
+      border: 2px solid #00ff88;
+      border-radius: 12px;
+      padding: 0.5rem;
+      min-width: 200px;
+      box-shadow: 0 0 12px #00ff88;
+      z-index: 999;
     }
-    .dropdown-content a {
-      color: white;
-      padding: 12px 16px;
+
+    .dropdown-menu a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 10px;
+      color: #00ff88;
       text-decoration: none;
-      display: block;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: background 0.2s;
     }
-    .dropdown-content a:hover {
-      background-color: #444;
+
+    .dropdown-menu a:hover {
+      background: rgba(0, 255, 136, 0.08);
     }
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-    main {
+
+    .container {
+      max-width: 900px;
+      margin: 100px auto 50px;
       padding: 20px;
+      text-align: center;
     }
-    .level-box {
-      background: white;
-      border-radius: 10px;
+
+    .ref-box {
+      margin: 30px auto;
       padding: 15px;
-      margin-bottom: 15px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      background: white;
+      color: black;
+      font-weight: bold;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 0 10px #00ff88;
     }
-    h1 {
-      color: #222;
+
+    .baum-container {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .node {
+      background-color: rgba(0, 255, 136, 0.1);
+      border: 2px solid #00ff88;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      margin: 1rem;
+      box-shadow: 0 0 10px #00ff88;
+      color: #00ff88;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    .children {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
   </style>
 </head>
 <body>
 
-  <div class="navbar">
-    <div>🌱 GrowEmpire</div>
-    <div class="dropdown">
-      <button class="dropbtn">☰</button>
-      <div class="dropdown-content">
-        <a href="dashboard.html">Dashboard</a>
-        <a href="pflanzen.html">Pflanzen</a>
-        <a href="partner.html">Partner</a>
-        <a href="levelsystem.html">Level System</a>
-        <a href="logout.html">Logout</a>
-      </div>
+<!-- Menu -->
+<div class="topbar">
+  <div class="menu-wrapper">
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    <div class="dropdown-menu" id="dropdown">
+      <a href="dashboard.html"><span>📊</span> Dashboard</a>
+      <a href="plants.html"><span🌱></span> Pflanzen</a>
+      <a href="partner.html"><span>🧑‍🤝‍🧑</span> Partner</a>
+      <a href="lizenz.html"><span>📜</span> Lizenz</a>
+      <a href="settings.html"><span>⚙️</span> Einstellungen</a>
+      <a href="payout.html"><span>💸</span> Auszahlung</a>
+      <a href="index.html"><span>🔴</span> Logout</a>
     </div>
   </div>
+</div>
 
-  <main>
-    <h1>Levelsystem</h1>
-    
-    <div class="level-box">
-      <h3>Level 1: Starter</h3>
-      <ul>
-        <li>Lizenz erforderlich</li>
-        <li>Du kannst Pflanzen kaufen und Partner werben</li>
-        <li>3 % Referral-Bonus auf direkte Partner</li>
-      </ul>
-    </div>
+<!-- Inhalt -->
+<div class="container">
+  <h2>🌐 Dein persönlicher Referral-Link</h2>
+  <div class="ref-box" id="refLinkBox">wird geladen...</div>
 
-    <div class="level-box">
-      <h3>Level 2: Aktiv</h3>
-      <ul>
-        <li>Mind. 5 aktive Partner (mit Lizenz)</li>
-        <li>10 % Reinvest-Cashback bei Pflanzen</li>
-        <li>Zugang zu exklusiven Sorten</li>
-      </ul>
-    </div>
+  <h2 style="margin-top: 60px;">📊 Deine Partnerstruktur</h2>
+  <div class="baum-container" id="baumContainer"></div>
+</div>
 
-    <div class="level-box">
-      <h3>Level 3: Leader</h3>
-      <ul>
-        <li>Mind. 10 aktive Partner + CHF 1'000 Umsatz</li>
-        <li>15 % Reinvest-Cashback</li>
-        <li>Exklusive Boni & Grow-Aktionen</li>
-      </ul>
-    </div>
+<!-- Scripts -->
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById("dropdown");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+  }
 
-    <div class="level-box">
-      <h3>Level 4: Elite</h3>
-      <ul>
-        <li>50+ Partner oder CHF 5'000+ Umsatz</li>
-        <li>20 % Reinvest-Cashback</li>
-        <li>Bonus-Zugang zum Monats-Pool</li>
-      </ul>
-    </div>
+  window.addEventListener("click", function (e) {
+    const menu = document.getElementById("dropdown");
+    if (!e.target.closest(".menu-wrapper")) {
+      menu.style.display = "none";
+    }
+  });
 
-  </main>
+  // Referral-Link
+  const email = localStorage.getItem("user_email") || "jaun190@gmail.com";
+  document.getElementById("refLinkBox").textContent = `https://jaun190.github.io/register.html?ref=${email.split("@")[0]}`;
+
+  // Partnerstruktur (Demo)
+  const demoData = [
+    { email: "jaun190@gmail.com", referrer: null },
+    { email: "bob@example.com", referrer: "jaun190@gmail.com" },
+    { email: "carla@example.com", referrer: "bob@example.com" },
+    { email: "dave@example.com", referrer: "bob@example.com" }
+  ];
+
+  function buildTree(data, parent, level = 1, max = 3) {
+    if (level > max) return null;
+    const children = data.filter(p => p.referrer === parent);
+    if (children.length === 0) return null;
+
+    const container = document.createElement("div");
+    container.className = "children";
+
+    for (const child of children) {
+      const node = document.createElement("div");
+      node.className = "node";
+      node.textContent = child.email.split("@")[0];
+      const subtree = buildTree(data, child.email, level + 1, max);
+      if (subtree) node.appendChild(subtree);
+      container.appendChild(node);
+    }
+
+    return container;
+  }
+
+  const root = document.createElement("div");
+  root.className = "node";
+  root.textContent = email.split("@")[0];
+  const tree = buildTree(demoData, email);
+  if (tree) root.appendChild(tree);
+  document.getElementById("baumContainer").appendChild(root);
+</script>
 
 </body>
 </html>
