@@ -1,62 +1,100 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GrowEmpire Login</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  </head>
-  <body>
-    <div class="hero">
-      <h1>Willkommen bei<br /><span>GrowEmpire</span></h1>
-      <p>
-        Baue dein virtuelles Hanf-Imperium auf – starte mit deiner Box,
-        pflanze<br />
-        ernte und verdiene. Alles vollautomatisch.<br />
-        Alles profitabel.
-      </p>
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GrowEmpire Login</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
 
-    <div class="login-box">
-      <h2>GrowEmpire Login</h2>
-      <input type="email" id="email" placeholder="Email" />
-      <input type="password" id="password" placeholder="Passwort" />
-      <button onclick="login()">Einloggen</button>
+    .form-container {
+      max-width: 400px;
+      margin: 40px auto;
+      background-color: #111;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,255,0,0.4);
+    }
 
-      <div class="extras">
-        <p>
-          🔐 <a href="#">Passwort vergessen?</a>
-        </p>
-        <p>
-          Noch kein Account? <a href="register.html">Hier registrieren</a>
-        </p>
-        <p id="error" style="color: red; font-weight: bold"></p>
-      </div>
-    </div>
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: none;
+    }
 
-    <script>
-      const supabase = window.supabase.createClient(
-        'https://hjldtaluigjzvrqlkujb.supabase.co',
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqbGR0YWx1aWdqenZycWxrdWpiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIwNTY3NjcsImV4cCI6MjA2NzYzMjc2N30.LRgNsD7ZsJzPM4QPlv0p9HuBtl4YEYLPgrj7ShKih08'
-      );
+    button {
+      padding: 10px 20px;
+      background-color: #00ff99;
+      border: none;
+      color: black;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-      async function login() {
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
+    a {
+      color: #00ff99;
+      text-decoration: none;
+    }
 
-        const { data, error } = await supabase.auth.signInWithPassword({
-          email: email,
-          password: password,
-        });
+    #error-msg {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
 
-        if (error) {
-          document.getElementById('error').innerText =
-            '❌ Login fehlgeschlagen: ' + error.message;
-        } else {
-          window.location.href = 'dashboard.html';
-        }
+  <div class="form-container">
+    <h2>GrowEmpire Login</h2>
+    <form id="login-form">
+      <input type="email" id="email" placeholder="E-Mail" required />
+      <input type="password" id="password" placeholder="Passwort" required />
+      <button type="submit">Einloggen</button>
+    </form>
+
+    <p>🔐 <a href="forgot.html">Passwort vergessen?</a></p>
+    <p>Noch kein Account? <a href="register.html">Hier registrieren</a></p>
+    <p id="error-msg" class="error-msg"></p>
+  </div>
+
+  <!-- SUPABASE LOGIN -->
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+    const supabase = createClient(
+      'https://hjldtaluigjzvrqlkujb.supabase.co',
+      'eyJh...DEIN_PUBLIC_KEY...'
+    );
+
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const errorMsg = document.getElementById('error-msg');
+
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
+
+      if (error) {
+        errorMsg.textContent = '❌ Login fehlgeschlagen: ' + error.message;
+      } else {
+        window.location.href = 'dashboard.html';
       }
-    </script>
-  </body>
+    });
+  </script>
+
+</body>
 </html>
