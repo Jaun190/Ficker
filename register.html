@@ -2,35 +2,55 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <title>GrowEmpire – Registrierung</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GrowEmpire Registrierung</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body style="font-family:sans-serif;text-align:center;padding:40px;">
-  <h1>Registrieren</h1>
-  <input id="email" type="email" placeholder="E-Mail" /><br><br>
-  <input id="password" type="password" placeholder="Passwort" /><br><br>
-  <button id="registerButton">Jetzt registrieren</button>
+<body>
+  <div class="form-container">
+    <h2>Registrieren bei GrowEmpire</h2>
+    <form id="register-form">
+      <input type="email" id="email" placeholder="E-Mail" required />
+      <input type="password" id="password" placeholder="Passwort" required />
+      <input type="password" id="confirm-password" placeholder="Passwort bestätigen" required />
+      <button type="submit">Registrieren</button>
+    </form>
+    <p>Schon registriert? <a href="index.html">Zum Login</a></p>
+    <p id="error-msg" class="error"></p>
+  </div>
 
+  <!-- Supabase Registrierung -->
   <script type="module">
-    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
     const supabase = createClient(
-      "https://hjldtaluigjzvrqlkujb.supabase.co",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqbGR0YWx1aWdqenZycWxrdWpiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIwNTY3NjcsImV4cCI6MjA2NzYzMjc2N30.LRgNsD7ZsJzPM4QPlv0p9HuBtl4YEYLPgrj7ShKih08"
+      'https://hjldtaluigjzvrqlkujb.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqbGR0YWx1aWdqenZycWxrdWpiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIwNTY3NjcsImV4cCI6MjA2NzYzMjc2N30.LRgNsD7ZsJzPM4QPlv0p9HuBtl4YEYLPgrj7ShKih08'
     );
 
-    document.getElementById("registerButton").addEventListener("click", async () => {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+    document.getElementById('register-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-      const { data, error } = await supabase.auth.signUp({
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirm-password').value;
+      const errorMsg = document.getElementById('error-msg');
+
+      if (password !== confirmPassword) {
+        errorMsg.textContent = '❌ Passwörter stimmen nicht überein.';
+        return;
+      }
+
+      const { error } = await supabase.auth.signUp({
         email,
-        password
+        password,
       });
 
       if (error) {
-        alert("Fehler: " + error.message);
+        errorMsg.textContent = '❌ Registrierung fehlgeschlagen: ' + error.message;
       } else {
-        alert("Erfolg! Bitte bestätige die E-Mail.");
+        alert('✅ Bitte bestätige deine E-Mail. Danach kannst du dich einloggen.');
+        window.location.href = 'index.html';
       }
     });
   </script>
