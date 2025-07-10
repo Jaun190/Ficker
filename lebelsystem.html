@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Levelsystem – GrowEmpire</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: url('assets/dashboard.png') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+    .container {
+      max-width: 800px;
+      margin: 100px auto 50px;
+      background-color: rgba(0, 0, 0, 0.75);
+      padding: 2rem;
+      border-radius: 12px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .level-card {
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid #444;
+      border-radius: 10px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .level-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #7fffd4;
+    }
+    .level-content {
+      margin-top: 0.5rem;
+    }
+    .level-content ul {
+      padding-left: 1.2rem;
+    }
+    .menu {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+    .menu img {
+      width: 30px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Menü oben rechts -->
+  <div class="menu">
+    <a href="dashboard.html"><img src="assets/3dots.png" alt="Menü" /></a>
+  </div>
+
+  <div class="container">
+    <h1>🔝 Levelsystem</h1>
+
+    <div class="level-card">
+      <div class="level-title">🟢 Level 1 – Einsteiger</div>
+      <div class="level-content">
+        <ul>
+          <li>Lizenz gekauft</li>
+          <li>Keine Pflanze oder Werber</li>
+          <li>Kein Bonus</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="level-card">
+      <div class="level-title">🟡 Level 2 – Aktiv</div>
+      <div class="level-content">
+        <ul>
+          <li>1 Pflanze ODER 5 Reinvests</li>
+          <li>5 direkte Werber</li>
+          <li>CHF 20.– pro Box</li>
+          <li>Reinvest-Cashback freigeschaltet</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="level-card">
+      <div class="level-title">🟠 Level 3 – Aufsteiger</div>
+      <div class="level-content">
+        <ul>
+          <li>3 Pflanzen ODER 10 direkte Werber</li>
+          <li>+5 % Ertragsbonus</li>
+          <li>Exklusive Sorten verfügbar</li>
+          <li>50 % mehr Anbaufläche</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="level-card">
+      <div class="level-title">🔴 Level 4 – Profi</div>
+      <div class="level-content">
+        <ul>
+          <li>5 Pflanzen & 20 Werber ODER 5 Downline-Reinvests</li>
+          <li>+10 % Ertrag</li>
+          <li>Doppelte Reinvest-Boni</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="level-card">
+      <div class="level-title">🏆 Elite – Top Performer</div>
+      <div class="level-content">
+        <ul>
+          <li>50+ verkaufte Starterboxen</li>
+          <li>CHF 30.– Provision pro Box</li>
+          <li>VIP-Support & Monatsbonus</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
