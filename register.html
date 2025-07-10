@@ -1,35 +1,40 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GrowEmpire Registrierung</title>
   <style>
     body {
       margin: 0;
-      background-color: black;
-      font-family: Arial, sans-serif;
-      color: white;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #000;
+      color: #0f0;
+      overflow-x: hidden;
     }
 
-    .register-container {
+    .container {
       max-width: 500px;
-      margin: 50px auto;
-      padding: 20px;
-      border: 2px solid lime;
-      border-radius: 10px;
-      background-color: #000;
+      margin: 100px auto;
+      padding: 30px;
+      border: 2px solid #0f0;
+      box-shadow: 0 0 20px #0f0;
+      border-radius: 15px;
+      background-color: #111;
     }
 
     h1 {
       text-align: center;
-      color: lime;
+      font-size: 2em;
+      color: #0f0;
+      margin-bottom: 20px;
     }
 
     label {
       display: block;
       margin-top: 15px;
-      color: white;
+      font-size: 1em;
     }
 
     input[type="text"],
@@ -38,72 +43,74 @@
       width: 100%;
       padding: 10px;
       margin-top: 5px;
-      background-color: #111;
-      border: 1px solid #444;
-      color: white;
+      background-color: #000;
+      border: 1px solid #0f0;
+      color: #0f0;
+      border-radius: 5px;
     }
 
     .checkbox {
       margin-top: 20px;
+      font-size: 0.95em;
     }
 
     .checkbox a {
-      color: lime;
-      cursor: pointer;
+      color: #0f0;
       text-decoration: underline;
+      cursor: pointer;
     }
 
     button {
       width: 100%;
-      margin-top: 20px;
       padding: 12px;
-      background-color: lime;
-      color: black;
+      margin-top: 25px;
+      background-color: #0f0;
+      color: #000;
       font-weight: bold;
+      font-size: 1.1em;
       border: none;
       border-radius: 5px;
       cursor: pointer;
     }
 
-    /* Modal */
+    /* Modal AGB */
     .modal {
       display: none;
       position: fixed;
-      z-index: 99;
+      z-index: 9999;
       left: 0;
       top: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0,0,0,0.9);
+      overflow: auto;
+      background-color: rgba(0,0,0,0.95);
     }
 
     .modal-content {
-      background-color: black;
-      margin: 5% auto;
-      padding: 20px;
-      border: 2px solid lime;
+      background-color: #111;
+      margin: 60px auto;
+      padding: 30px;
+      border: 2px solid #0f0;
+      border-radius: 15px;
       width: 90%;
-      max-width: 600px;
-      border-radius: 10px;
-      color: white;
+      max-width: 800px;
+      color: #0f0;
+      box-shadow: 0 0 20px #0f0;
+      max-height: 80vh;
+      overflow-y: auto;
     }
 
     .modal-content h2 {
-      color: lime;
       margin-top: 0;
-    }
-
-    .agb-scroll {
-      max-height: 400px;
-      overflow-y: scroll;
-      padding-right: 10px;
+      color: #0f0;
+      font-size: 1.5em;
     }
 
     .close {
+      color: #0f0;
       float: right;
       font-size: 28px;
       font-weight: bold;
-      color: lime;
       cursor: pointer;
     }
 
@@ -113,56 +120,61 @@
 
     ol {
       padding-left: 20px;
-      line-height: 1.6;
+    }
+
+    ol li {
+      margin-bottom: 12px;
+      line-height: 1.5;
     }
   </style>
 </head>
 <body>
 
-  <div class="register-container">
+  <div class="container">
     <h1>Registrieren</h1>
     <form>
       <label>Benutzername</label>
-      <input type="text" required>
+      <input type="text" required />
 
       <label>E-Mail</label>
-      <input type="email" required>
+      <input type="email" required />
 
       <label>Passwort</label>
-      <input type="password" required>
+      <input type="password" required />
 
-      <label class="checkbox">
-        <input type="checkbox" required> Ich akzeptiere die <a id="openModal">AGB</a>
-      </label>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" required />
+          Ich akzeptiere die <a id="openModal">AGB</a>
+        </label>
+      </div>
 
-      <button type="submit">Registrieren</button>
+      <button type="submit">Konto erstellen</button>
     </form>
   </div>
 
-  <!-- AGB MODAL -->
+  <!-- AGB Modal -->
   <div id="agbModal" class="modal">
     <div class="modal-content">
       <span class="close" id="closeModal">&times;</span>
-      <h2>AGB</h2>
-      <div class="agb-scroll">
-        <ol>
-          <li>GrowEmpire.store ist ein rein virtuelles System zur symbolischen Darstellung von Wachstum, Ertrag und Gemeinschaft.</li>
-          <li>Alle Käufe und Investitionen sind rein virtuell. Es handelt sich nicht um echte Pflanzen oder physische Produkte.</li>
-          <li>Virtuelle Pflanzen simulieren Wachstum und Ertrag. Der angezeigte Ertrag ist symbolisch, kann aber zur Auszahlung berechtigen.</li>
-          <li>Provisionen für Weiterempfehlungen sind real und können bei aktivem Einsatz zur Auszahlung kommen.</li>
-          <li>Die Auszahlung erfolgt gemäß den aktuellen Partner- und Provisionsbedingungen.</li>
-          <li>Für den Zugang zur Plattform ist eine gültige Lizenz erforderlich. Es besteht kein automatischer Anspruch auf Gewinn.</li>
-          <li>Reinvestitionen, Levelaufstiege und Zusatzboni sind möglich, aber nicht garantiert.</li>
-          <li>Die Plattform kann Funktionen oder Regeln jederzeit ändern oder erweitern.</li>
-          <li>GrowEmpire haftet nicht für persönliche Verluste durch Fehlentscheidungen, mangelnde Aktivität oder Fehlinterpretationen.</li>
-          <li>Alle Angaben dienen nur zu Informationszwecken. Kein Finanz-, Steuer- oder Anlageversprechen.</li>
-          <li>Ein Anspruch auf Auszahlung besteht nur, wenn alle Bedingungen (z. B. Lizenz, Reinvest-Deckung, Downline-Aktivität) erfüllt sind.</li>
-          <li>GrowEmpire ist kein Finanzinstitut, sondern eine Community-Plattform mit virtuellen Elementen.</li>
-          <li>Mit der Registrierung akzeptierst du alle Punkte dieser Bedingungen in vollem Umfang.</li>
-          <li>Verstöße gegen die Regeln können zur Sperrung des Accounts und Verlust aller virtuellen Inhalte führen.</li>
-          <li>Gerichtsstand ist Schweiz. Änderungen dieser AGB behalten wir uns jederzeit vor.</li>
-        </ol>
-      </div>
+      <h2>Allgemeine Geschäftsbedingungen</h2>
+      <ol>
+        <li>GrowEmpire.store ist ein rein virtuelles System zur symbolischen Darstellung von Wachstum, Ertrag und Gemeinschaft.</li>
+        <li>Alle Käufe und Investitionen sind rein virtuell. Es handelt sich nicht um echte Pflanzen oder physische Produkte.</li>
+        <li>Virtuelle Pflanzen simulieren Wachstum und Ertrag. Der angezeigte Ertrag ist symbolisch, kann aber zur Auszahlung berechtigen.</li>
+        <li>Provisionen für Weiterempfehlungen sind real und können bei aktivem Einsatz zur Auszahlung kommen.</li>
+        <li>Die Auszahlung erfolgt gemäß den aktuellen Partner- und Provisionsbedingungen.</li>
+        <li>Für den Zugang zur Plattform ist eine gültige Lizenz erforderlich. Es besteht kein automatischer Anspruch auf Gewinn.</li>
+        <li>Reinvestitionen, Levelaufstiege und Zusatzboni sind möglich, aber nicht garantiert.</li>
+        <li>Die Plattform kann Funktionen oder Regeln jederzeit ändern oder erweitern.</li>
+        <li>GrowEmpire haftet nicht für persönliche Verluste durch Fehlentscheidungen, mangelnde Aktivität oder Fehlinterpretationen.</li>
+        <li>Alle Angaben dienen nur zu Informationszwecken. Kein Finanz-, Steuer- oder Anlageversprechen.</li>
+        <li>Ein Anspruch auf Auszahlung besteht nur, wenn alle Bedingungen (z. B. Lizenz, Reinvest-Deckung, Downline-Aktivität) erfüllt sind.</li>
+        <li>GrowEmpire ist kein Finanzinstitut, sondern eine Community-Plattform mit virtuellen Elementen.</li>
+        <li>Mit der Registrierung akzeptierst du alle Punkte dieser Bedingungen in vollem Umfang.</li>
+        <li>Verstöße gegen die Regeln können zur Sperrung des Accounts und Verlust aller virtuellen Inhalte führen.</li>
+        <li>Gerichtsstand ist Schweiz. Änderungen dieser AGB behalten wir uns jederzeit vor.</li>
+      </ol>
     </div>
   </div>
 
@@ -173,7 +185,7 @@
 
     openModal.onclick = () => modal.style.display = "block";
     closeModal.onclick = () => modal.style.display = "none";
-    window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; }
+    window.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
   </script>
 
 </body>
