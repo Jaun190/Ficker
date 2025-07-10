@@ -72,6 +72,14 @@
       cursor: pointer;
     }
 
+    .error {
+      color: red;
+      font-size: 14px;
+      text-align: center;
+      display: none;
+      margin-top: 10px;
+    }
+
     /* Modal */
     .modal {
       display: none;
@@ -112,10 +120,12 @@
 <body>
   <div class="container">
     <h1>GrowEmpire Registrierung</h1>
-    <input type="text" placeholder="Benutzername" />
-    <input type="email" placeholder="E-Mail-Adresse" />
-    <input type="password" placeholder="Passwort" />
-    <button>Registrieren</button>
+    <input type="text" id="username" placeholder="Benutzername" />
+    <input type="email" id="email" placeholder="E-Mail-Adresse" />
+    <input type="password" id="password" placeholder="Passwort" />
+    <input type="password" id="confirmPassword" placeholder="Passwort bestätigen" />
+    <button onclick="register()">Registrieren</button>
+    <div class="error" id="errorMsg">Die Passwörter stimmen nicht überein!</div>
     <div class="agb">
       Durch die Registrierung akzeptierst du unsere <a id="agbLink">AGB</a>.
     </div>
@@ -149,6 +159,7 @@
     const agbLink = document.getElementById("agbLink");
     const agbModal = document.getElementById("agbModal");
     const closeModal = document.getElementById("closeModal");
+    const errorMsg = document.getElementById("errorMsg");
 
     agbLink.onclick = () => agbModal.style.display = "block";
     closeModal.onclick = () => agbModal.style.display = "none";
@@ -157,6 +168,19 @@
         agbModal.style.display = "none";
       }
     };
+
+    function register() {
+      const pw = document.getElementById("password").value;
+      const confirm = document.getElementById("confirmPassword").value;
+
+      if (pw !== confirm) {
+        errorMsg.style.display = "block";
+      } else {
+        errorMsg.style.display = "none";
+        alert("Registrierung erfolgreich!");
+        // Weiterleitung oder Datenverarbeitung hier
+      }
+    }
   </script>
 </body>
 </html>
