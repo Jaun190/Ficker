@@ -46,55 +46,54 @@
     .level-content li {
       margin-bottom: 6px;
     }
-
-    /* Menü-Button */
-    #menubtn {
+    nav.menu {
       position: fixed;
       top: 20px;
       left: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 10px 15px;
+      border-radius: 10px;
       z-index: 1000;
-      cursor: pointer;
     }
-    #menubtn div {
-      width: 30px;
-      height: 4px;
-      background-color: white;
-      margin: 6px 0;
+    nav.menu a {
+      display: block;
+      color: #00ff88;
+      margin: 5px 0;
+      text-decoration: none;
+      font-weight: bold;
     }
-
-    /* Slide-Out Menü */
+    nav.menu a:hover {
+      text-decoration: underline;
+    }
     #menulist {
       display: none;
       position: fixed;
       top: 70px;
       left: 20px;
-      background-color: rgba(0,0,0,0.8);
+      background-color: rgba(0, 0, 0, 0.8);
       padding: 15px;
       border-radius: 10px;
       z-index: 999;
     }
     #menulist a {
       display: block;
-      margin-bottom: 10px;
       color: white;
+      margin: 5px 0;
       text-decoration: none;
       font-weight: bold;
-    }
-    #menulist a:hover {
-      text-decoration: underline;
     }
   </style>
 </head>
 <body>
 
   <!-- Menü-Button -->
-  <div id="menubtn">
-    <div></div>
-    <div></div>
-    <div></div>
+  <div id="menubtn" style="position: fixed; top: 20px; left: 20px; z-index: 1000;">
+    <div style="width: 30px; height: 4px; background-color: white; margin: 6px 0;"></div>
+    <div style="width: 30px; height: 4px; background-color: white; margin: 6px 0;"></div>
+    <div style="width: 30px; height: 4px; background-color: white; margin: 6px 0;"></div>
   </div>
 
-  <!-- Menü -->
+  <!-- Slide-Out Menü -->
   <div id="menulist">
     <a href="dashboard.html">🏠 Dashboard</a>
     <a href="pflanzen.html">🌱 Pflanzen</a>
@@ -126,7 +125,7 @@
       <div class="level-content">
         <ul>
           <li>👥 3 direkte Partner</li>
-          <li>💸 12 % Provision</li>
+          <li>💸 12 % Provision auf direkte Partner</li>
           <li>📊 Zugriff auf Partner-Statistik</li>
         </ul>
       </div>
@@ -137,11 +136,47 @@
       <div class="level-content">
         <ul>
           <li>👥 5 direkte Partner</li>
-          <li>💸 15 % Provision</li>
+          <li>💸 15 % Provision auf direkte Partner</li>
           <li>🔓 Reinvest-System aktiviert</li>
-          <li>🌱 Bonuspflanzen möglich</li>
+          <li>🌱 Zugriff auf Bonuspflanzen</li>
         </ul>
       </div>
     </div>
 
-    <div class="level
+    <div class="level-card">
+      <div class="level-title">🎯 Level 4 – Profi</div>
+      <div class="level-content">
+        <ul>
+          <li>👥 10 direkte Partner</li>
+          <li>💸 17 % auf direkte Partner</li>
+          <li>📊 +2 % auf 2. Ebene</li>
+          <li>🎁 Monatliche Bonusaktionen</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="level-card">
+      <div class="level-title">👑 Level 5 – Elite</div>
+      <div class="level-content">
+        <ul>
+          <li>👥 20+ direkte Partner</li>
+          <li>💸 20 % direkte Provision</li>
+          <li>📊 +5 % auf 2. Ebene, +2 % auf 3. Ebene</li>
+          <li>💎 VIP-Zugang & exklusiver Support</li>
+          <li>🤑 Monatlicher Elite-Bonus</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const menubtn = document.getElementById("menubtn");
+    const menulist = document.getElementById("menulist");
+    menubtn.addEventListener("click", function () {
+      menulist.style.display = menulist.style.display === "none" ? "block" : "none";
+    });
+  </script>
+
+</body>
+</html>
