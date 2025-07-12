@@ -9,21 +9,17 @@
     body {
       margin: 0;
       font-family: 'Arial', sans-serif;
-      background: url('assets/dashboard.png') no-repeat center center fixed;
+      background: url('assets/dashboard.png') no-repeat center center;
       background-size: cover;
+      background-attachment: fixed;
       color: white;
     }
     .container {
       max-width: 800px;
-      margin: 100px auto 50px;
+      margin: 120px auto 50px;
       background-color: rgba(0, 0, 0, 0.75);
       padding: 2rem;
       border-radius: 12px;
-    }
-    h1 {
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
     }
     .level-card {
       background-color: rgba(255, 255, 255, 0.05);
@@ -33,9 +29,9 @@
       margin-bottom: 1rem;
     }
     .level-title {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       font-weight: bold;
-      color: #7fffd4;
+      color: #fffa74;
     }
     .level-content {
       margin-top: 0.5rem;
@@ -43,84 +39,107 @@
     .level-content ul {
       padding-left: 1.2rem;
     }
-    .menu {
-      position: absolute;
+    nav.menu {
+      position: fixed;
       top: 20px;
-      right: 20px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 10px 15px;
+      border-radius: 10px;
+      z-index: 1000;
     }
-    .menu img {
-      width: 30px;
-      cursor: pointer;
+    nav.menu a {
+      display: block;
+      color: white;
+      margin: 5px 0;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav.menu a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
 
-  <!-- Menü oben rechts -->
-  <div class="menu">
-    <a href="dashboard.html"><img src="assets/3dots.png" alt="Menü" /></a>
-  </div>
+  <!-- Menü -->
+  <nav class="menu">
+    <a href="dashboard.html">🏠 Dashboard</a>
+    <a href="pflanzen.html">🌱 Pflanzen</a>
+    <a href="partner.html">🤝 Partner</a>
+    <a href="lizenz.html">🎫 Lizenz</a>
+    <a href="levelsystem.html">📈 Levelsystem</a>
+    <a href="einstellungen.html">⚙️ Einstellungen</a>
+    <a href="auszahlung.html">💸 Auszahlung</a>
+    <a href="logout.html">🚪 Logout</a>
+  </nav>
 
+  <!-- Inhalt -->
   <div class="container">
-    <h1>🔝 Levelsystem</h1>
+    <h1>🔥 Dein Empire-Level</h1>
 
     <div class="level-card">
-      <div class="level-title">🟢 Level 1 – Einsteiger</div>
+      <div class="level-title">🥉 Level 1 – Einsteiger</div>
       <div class="level-content">
         <ul>
-          <li>Lizenz gekauft</li>
-          <li>Keine Pflanze oder Werber</li>
-          <li>Kein Bonus</li>
+          <li>✅ Lizenz gekauft</li>
+          <li>🚫 Keine Partner</li>
+          <li>❌ Kein Bonus</li>
         </ul>
       </div>
     </div>
 
     <div class="level-card">
-      <div class="level-title">🟡 Level 2 – Aktiv</div>
+      <div class="level-title">🥈 Level 2 – Aktiv</div>
       <div class="level-content">
         <ul>
-          <li>1 Pflanze ODER 5 Reinvests</li>
-          <li>5 direkte Werber</li>
-          <li>CHF 20.– pro Box</li>
-          <li>Reinvest-Cashback freigeschaltet</li>
+          <li>👥 3 direkte Partner</li>
+          <li>💸 12 % Provision</li>
+          <li>🔓 Reinvest-System freigeschaltet</li>
+          <li>🔋 +10 % Anbaufläche</li>
         </ul>
       </div>
     </div>
 
     <div class="level-card">
-      <div class="level-title">🟠 Level 3 – Aufsteiger</div>
+      <div class="level-title">🥇 Level 3 – Aufsteiger</div>
       <div class="level-content">
         <ul>
-          <li>3 Pflanzen ODER 10 direkte Werber</li>
-          <li>+5 % Ertragsbonus</li>
-          <li>Exklusive Sorten verfügbar</li>
-          <li>50 % mehr Anbaufläche</li>
+          <li>👥 5 direkte Partner</li>
+          <li>💸 15 % Provision</li>
+          <li>📈 +2 % Ertragsbonus</li>
+          <li>🌱 Exklusive Pflanzen freigeschaltet</li>
+          <li>🔋 +25 % Anbaufläche</li>
         </ul>
       </div>
     </div>
 
     <div class="level-card">
-      <div class="level-title">🔴 Level 4 – Profi</div>
+      <div class="level-title">🎯 Level 4 – Profi</div>
       <div class="level-content">
         <ul>
-          <li>5 Pflanzen & 20 Werber ODER 5 Downline-Reinvests</li>
-          <li>+10 % Ertrag</li>
-          <li>Doppelte Reinvest-Boni</li>
+          <li>👥 10 direkte Partner</li>
+          <li>💸 17 % Provision</li>
+          <li>📊 +3 % Provision auf 2. Ebene</li>
+          <li>📈 +5 % Ertragsbonus</li>
+          <li>🎁 Bonusaktionen jeden Monat</li>
         </ul>
       </div>
     </div>
 
     <div class="level-card">
-      <div class="level-title">🏆 Elite – Top Performer</div>
+      <div class="level-title">👑 Level 5 – Elite</div>
       <div class="level-content">
         <ul>
-          <li>50+ verkaufte Starterboxen</li>
-          <li>CHF 30.– Provision pro Box</li>
-          <li>VIP-Support & Monatsbonus</li>
+          <li>👥 20+ direkte Partner</li>
+          <li>💸 20 % direkte Provision</li>
+          <li>📊 +5 % auf 2. Ebene, +2 % auf 3. Ebene</li>
+          <li>💎 VIP-Zugang & exklusive Sorten</li>
+          <li>🤑 Monatlicher Elite-Bonus</li>
+          <li>🔋 +50 % Anbaufläche</li>
         </ul>
       </div>
     </div>
-
   </div>
 
 </body>
