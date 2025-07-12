@@ -2,174 +2,156 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard · GrowEmpire</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - GrowEmpire</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="kiffen.png" type="image/png" />
+  <script src="https://kit.fontawesome.com/yourkit.js" crossorigin="anonymous"></script>
   <style>
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: url('./assets/dashboard.png') no-repeat center center fixed;
+      font-family: Arial, sans-serif;
+      background-image: url('dashboard.png');
       background-size: cover;
-      color: #00ff88;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #0f0;
     }
 
-    .topbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 60px;
-      background-color: rgba(0, 0, 0, 0.6);
-      border-bottom: 2px solid #00ff88;
-      box-shadow: 0 0 12px #00ff88;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-    }
-
-    .logo {
-      height: 40px;
-    }
-
-    .dropdown-menu {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-    }
-
-    .dropdown-menu a {
-      text-decoration: none;
-      color: #00ff88;
-      font-weight: bold;
-      font-size: 1rem;
-    }
-
-    .dropdown-menu a:hover {
-      text-shadow: 0 0 8px #00ff88;
-    }
-
-    .dashboard-content {
-      margin-top: 100px;
-      padding: 2rem;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .plant-box {
-      background: rgba(0, 0, 0, 0.75);
-      border: 2px solid #00ff88;
-      border-radius: 16px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 0 12px #00ff88;
-      color: white;
-      text-align: center;
-    }
-
-    .plant-box h1 {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      color: #00ff88;
-    }
-
-    .plant-box p {
-      font-size: 1rem;
-      color: #ccc;
-    }
-
-    .plant-image {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
+    .menu-toggle {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 10;
+      background-color: #0f0;
+      padding: 12px;
       border-radius: 10px;
-      border: 2px solid #00ff88;
-      margin-bottom: 10px;
+      box-shadow: 0 0 15px #0f0;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background: black;
+      margin: 5px 0;
+    }
+
+    .sidebar {
+      display: none;
+      position: absolute;
+      top: 70px;
+      left: 20px;
+      background-color: #000;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #0f0;
+      z-index: 9;
+    }
+
+    .sidebar a {
+      display: block;
+      margin: 10px 0;
+      color: #0f0;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .sidebar a i {
+      margin-right: 10px;
+    }
+
+    .card {
+      background-color: rgba(0, 0, 0, 0.8);
+      border: 2px solid #0f0;
+      border-radius: 15px;
+      padding: 20px;
+      margin: 20px;
+      box-shadow: 0 0 15px #0f0;
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: #0f0;
+    }
+
+    .progress {
+      width: 100%;
+      background-color: #333;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 20px;
+      margin-top: 10px;
     }
 
     .progress-bar {
-      width: 100%;
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      overflow: hidden;
-      height: 12px;
-      margin-top: 10px;
-      border: 1px solid #00ff88;
-    }
-
-    .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, #00ff88, #00cc66);
-      width: 0%;
-      transition: width 0.5s ease-in-out;
+      background-color: #0f0;
     }
 
-    .license-box {
-      background: rgba(0,0,0,0.5);
-      border: 2px solid #00ff88;
-      padding: 10px 20px;
-      margin: 20px auto;
+    .statusbar {
+      background: #000;
+      padding: 10px;
       text-align: center;
-      color: #00ff88;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #00ff88;
+      font-size: 18px;
+      border: 2px solid #0f0;
+      border-radius: 12px;
+      width: fit-content;
+      margin: 20px auto;
     }
   </style>
 </head>
 <body>
-
-  <div class="topbar">
-    <img src="./assets/kiffen.png" alt="Logo" class="logo" />
-    <div class="dropdown-menu">
-      <a href="dashboard.html">🏠 Dashboard</a>
-      <a href="pflanzen.html">🌱 Pflanzen</a>
-      <a href="partner.html">👥 Partner</a>
-      <a href="levelsystem.html">📊 Levelsystem</a>
-      <a href="lizenz.html">🎫 Lizenz</a>
-      <a href="einstellungen.html">⚙️ Einstellungen</a>
-      <a href="logout.html">🔴 Logout</a>
-    </div>
+  <div class="menu-toggle" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
   </div>
 
-  <div class="dashboard-content">
-    <div class="license-box">
+  <div class="sidebar" id="menu">
+    <a href="dashboard.html"><i class="fas fa-seedling"></i> Dashboard</a>
+    <a href="plants.html"><i class="fas fa-vial"></i> Pflanzen</a>
+    <a href="partner.html"><i class="fas fa-briefcase"></i> Partner</a>
+    <a href="lizenz.html"><i class="fas fa-file-alt"></i> Lizenz</a>
+    <a href="einstellungen.html"><i class="fas fa-cog"></i> Einstellungen</a>
+    <a href="auszahlung.html"><i class="fas fa-coins"></i> Auszahlung</a>
+    <a href="index.html"><i class="fas fa-circle text-danger"></i> Logout</a>
+  </div>
+
+  <div style="text-align: center; margin-top: 80px;">
+    <img src="kiffen.png" alt="GrowEmpire Logo" style="width: 150px;" />
+    <h1 style="font-size: 36px; color: #0f0;">GrowEmpire</h1>
+    <div class="statusbar">
       Deine Lizenz ist aktiv bis: <strong>31.12.2025</strong>
     </div>
-
-    <div class="plant-box">
-      <img src="./assets/plant1.jpg" alt="Pflanze" class="plant-image" />
-      <h1>Sortenname: Super Haze</h1>
-      <p>Wachstumsphase abgeschlossen</p>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width: 100%;"></div>
-      </div>
-    </div>
-
-    <div class="plant-box">
-      <img src="./assets/plant2.jpg" alt="Pflanze" class="plant-image" />
-      <h1>Sortenname: White Widow</h1>
-      <p>Blütephase: Tag 32 / 60</p>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width: 53%;"></div>
-      </div>
-    </div>
-
-    <div class="plant-box">
-      <img src="./assets/plant3.jpg" alt="Pflanze" class="plant-image" />
-      <h1>Sortenname: Purple Kush</h1>
-      <p>Wachstumsphase: Tag 7 / 14</p>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width: 50%;"></div>
-      </div>
-    </div>
-
-    <div class="license-box">
-      💡 Hinweis: Ernte möglich nach Blütephase. Aktiviere Benachrichtigungen, um keine Reinvest-Möglichkeit zu verpassen.
-    </div>
   </div>
 
+  <div class="card">
+    <img src="pflanze.png" alt="Pflanze" width="60" />
+    <h2>Sortenname: Super Haze</h2>
+    <p>Wachstumsphase abgeschlossen</p>
+    <div class="progress"><div class="progress-bar" style="width: 100%;"></div></div>
+  </div>
+
+  <div class="card">
+    <img src="pflanze.png" alt="Pflanze" width="60" />
+    <h2>Sortenname: White Widow</h2>
+    <p>Blütephase: Tag 32 / 60</p>
+    <div class="progress"><div class="progress-bar" style="width: 53%;"></div></div>
+  </div>
+
+  <div class="card">
+    <img src="pflanze.png" alt="Pflanze" width="60" />
+    <h2>Sortenname: Purple</h2>
+    <p>Wachstum läuft…</p>
+    <div class="progress"><div class="progress-bar" style="width: 20%;"></div></div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+  </script>
 </body>
 </html>
