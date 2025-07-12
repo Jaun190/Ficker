@@ -4,40 +4,47 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Levelsystem – GrowEmpire</title>
-  <link rel="stylesheet" href="assets/style.css" />
   <style>
     body {
       margin: 0;
       font-family: 'Arial', sans-serif;
-      background: url('assets/dashboard.png') no-repeat center center;
+      background: url('assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
-      background-attachment: fixed;
       color: white;
     }
     .container {
       max-width: 800px;
       margin: 120px auto 50px;
-      background-color: rgba(0, 0, 0, 0.75);
+      background-color: rgba(0, 0, 0, 0.8);
       padding: 2rem;
       border-radius: 12px;
     }
+    h1 {
+      text-align: center;
+      color: #00ff88;
+      margin-bottom: 2rem;
+    }
     .level-card {
       background-color: rgba(255, 255, 255, 0.05);
-      border: 1px solid #444;
+      border: 1px solid #00ff88;
       border-radius: 10px;
       padding: 1.2rem;
       margin-bottom: 1rem;
+      box-shadow: 0 0 12px #00ff8855;
     }
     .level-title {
       font-size: 1.3rem;
       font-weight: bold;
-      color: #fffa74;
+      color: #00ff88;
     }
     .level-content {
       margin-top: 0.5rem;
     }
     .level-content ul {
       padding-left: 1.2rem;
+    }
+    .level-content li {
+      margin-bottom: 6px;
     }
     nav.menu {
       position: fixed;
@@ -50,7 +57,7 @@
     }
     nav.menu a {
       display: block;
-      color: white;
+      color: #00ff88;
       margin: 5px 0;
       text-decoration: none;
       font-weight: bold;
@@ -76,15 +83,15 @@
 
   <!-- Inhalt -->
   <div class="container">
-    <h1>🔥 Dein Empire-Level</h1>
+    <h1>📈 Dein Partner-Levelsystem</h1>
 
     <div class="level-card">
       <div class="level-title">🥉 Level 1 – Einsteiger</div>
       <div class="level-content">
         <ul>
-          <li>✅ Lizenz gekauft</li>
-          <li>🚫 Keine Partner</li>
-          <li>❌ Kein Bonus</li>
+          <li>👥 0 Partner</li>
+          <li>💸 10 % Provision auf direkte Partner</li>
+          <li>🚫 Kein Bonus</li>
         </ul>
       </div>
     </div>
@@ -94,9 +101,8 @@
       <div class="level-content">
         <ul>
           <li>👥 3 direkte Partner</li>
-          <li>💸 12 % Provision</li>
-          <li>🔓 Reinvest-System freigeschaltet</li>
-          <li>🔋 +10 % Anbaufläche</li>
+          <li>💸 12 % Provision auf direkte Partner</li>
+          <li>📊 Zugriff auf Partner-Statistik</li>
         </ul>
       </div>
     </div>
@@ -106,10 +112,9 @@
       <div class="level-content">
         <ul>
           <li>👥 5 direkte Partner</li>
-          <li>💸 15 % Provision</li>
-          <li>📈 +2 % Ertragsbonus</li>
-          <li>🌱 Exklusive Pflanzen freigeschaltet</li>
-          <li>🔋 +25 % Anbaufläche</li>
+          <li>💸 15 % Provision auf direkte Partner</li>
+          <li>🔓 Reinvest-System aktiviert</li>
+          <li>🌱 Zugriff auf Bonuspflanzen</li>
         </ul>
       </div>
     </div>
@@ -119,10 +124,9 @@
       <div class="level-content">
         <ul>
           <li>👥 10 direkte Partner</li>
-          <li>💸 17 % Provision</li>
-          <li>📊 +3 % Provision auf 2. Ebene</li>
-          <li>📈 +5 % Ertragsbonus</li>
-          <li>🎁 Bonusaktionen jeden Monat</li>
+          <li>💸 17 % auf direkte Partner</li>
+          <li>📊 +2 % auf 2. Ebene</li>
+          <li>🎁 Monatliche Bonusaktionen</li>
         </ul>
       </div>
     </div>
@@ -132,14 +136,13 @@
       <div class="level-content">
         <ul>
           <li>👥 20+ direkte Partner</li>
-          <li>💸 20 % direkte Provision</li>
-          <li>📊 +5 % auf 2. Ebene, +2 % auf 3. Ebene</li>
-          <li>💎 VIP-Zugang & exklusive Sorten</li>
+          <li>💸 20 % direkt, +5 % (2. Ebene), +2 % (3. Ebene)</li>
+          <li>💎 VIP-Zugang & exklusiver Support</li>
           <li>🤑 Monatlicher Elite-Bonus</li>
-          <li>🔋 +50 % Anbaufläche</li>
         </ul>
       </div>
     </div>
+
   </div>
 
 </body>
