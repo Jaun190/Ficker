@@ -4,149 +4,161 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GrowEmpire Dashboard</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="style.css" />
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: url('assets/dashboard_bg.png') no-repeat center center fixed;
+      background-image: url('assets/dashboard.png');
       background-size: cover;
-      color: #00ff88;
-    }
-
-    nav {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      z-index: 999;
+      background-attachment: fixed;
+      background-position: center;
+      color: #00ff99;
     }
 
     .menu-toggle {
-      background: none;
-      border: none;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1001;
       cursor: pointer;
     }
 
-    .menu-icon {
-      width: 30px;
-      height: 3px;
-      background-color: #00ff88;
-      margin: 6px 0;
-      box-shadow: 0 0 10px #00ff88;
+    .menu-toggle img {
+      width: 40px;
+      filter: drop-shadow(0 0 5px #00ff99);
     }
 
-    .menu-box {
-      display: none;
-      background: rgba(0, 0, 0, 0.95);
-      border: 2px solid #00ff88;
+    .sidebar {
+      position: fixed;
+      top: 60px;
+      left: 20px;
+      width: 280px;
+      background: black;
       border-radius: 20px;
+      box-shadow: 0 0 15px #00ff99;
       padding: 20px;
-      margin-top: 10px;
-      box-shadow: 0 0 25px #00ff88;
+      display: none;
+      z-index: 1000;
     }
 
-    .menu-box a {
+    .sidebar a {
       display: flex;
       align-items: center;
-      gap: 10px;
+      padding: 10px;
+      color: #00ff99;
       text-decoration: none;
-      margin: 12px 0;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: bold;
     }
 
-    h1 {
+    .sidebar a:hover {
+      background: #111;
+      border-radius: 10px;
+    }
+
+    .sidebar img.icon {
+      width: 24px;
+      margin-right: 10px;
+    }
+
+    .container {
+      padding: 100px 20px 20px 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .dashboard-title {
       text-align: center;
-      margin-top: 120px;
-      font-size: 36px;
-      text-shadow: 0 0 10px #00ff88;
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 30px;
+      text-shadow: 0 0 10px #00ff99;
     }
 
     .plant-box {
-      background: rgba(0, 0, 0, 0.6);
-      border: 2px solid #00ff88;
+      background: rgba(0, 0, 0, 0.7);
       border-radius: 20px;
       padding: 20px;
-      margin: 20px auto;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 0 20px #00ff88;
-      text-align: center;
+      margin-bottom: 20px;
+      box-shadow: 0 0 15px #00ff99;
+    }
+
+    .plant-title {
+      font-size: 24px;
+      margin-bottom: 10px;
     }
 
     .progress-bar {
-      background: #111;
+      height: 20px;
+      background: black;
       border-radius: 10px;
       overflow: hidden;
-      margin-top: 10px;
+      margin-bottom: 10px;
     }
 
-    .progress {
-      height: 14px;
-      background-color: #00ff88;
-      width: 60%; /* Beispiel */
+    .progress-bar-fill {
+      height: 100%;
+      width: 50%;
+      background: #00ff99;
     }
 
-    .btn-kaufen {
-      margin-top: 15px;
-      background-color: red;
+    .bought-button {
+      background: red;
       color: white;
-      padding: 10px;
-      border-radius: 10px;
-      font-weight: bold;
       border: none;
+      border-radius: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
       box-shadow: 0 0 10px red;
+    }
+
+    .bought-button::before {
+      content: '✅';
+      margin-right: 6px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Menü -->
-  <nav>
-    <button class="menu-toggle" onclick="toggleMenu()">
-      <div class="menu-icon"></div>
-      <div class="menu-icon"></div>
-      <div class="menu-icon"></div>
-    </button>
-    <div class="menu-box" id="menu">
-      <a href="dashboard.html">📊 <span style="color: #00ff88;">Dashboard</span></a>
-      <a href="plants.html">🌱 <span style="color: #00ff88;">Pflanzen</span></a>
-      <a href="partner.html">👬 <span style="color: #00ff88;">Partner</span></a>
-      <a href="lizenz.html">📦 <span style="color: #00ff88;">Lizenz</span></a>
-      <a href="einstellungen.html">⚙️ <span style="color: #00ff88;">Einstellungen</span></a>
-      <a href="auszahlung.html">💸 <span style="color: #00ff88;">Auszahlung</span></a>
-      <a href="logout.html">🔴 <span style="color: #00ff88;">Logout</span></a>
-    </div>
-  </nav>
+<div class="menu-toggle" onclick="toggleMenu()">
+  <img src="assets/menu.png" alt="Menü" />
+</div>
 
-  <!-- Titel -->
-  <h1>GrowEmpire Dashboard</h1>
+<div class="sidebar" id="sidebarMenu">
+  <a href="dashboard.html"><img class="icon" src="assets/dashboard-icon.png" alt=""> Dashboard</a>
+  <a href="plants.html"><img class="icon" src="assets/plant.png" alt=""> Pflanzen</a>
+  <a href="partner.html"><img class="icon" src="assets/partner.png" alt=""> Partner</a>
+  <a href="lizenz.html"><img class="icon" src="assets/box.png" alt=""> Lizenz</a>
+  <a href="einstellungen.html"><img class="icon" src="assets/settings.png" alt=""> Einstellungen</a>
+  <a href="auszahlung.html"><img class="icon" src="assets/money.png" alt=""> Auszahlung</a>
+  <a href="logout.html"><img class="icon" src="assets/logout.png" alt=""> Logout</a>
+</div>
 
-  <!-- Pflanzenübersicht -->
+<div class="container">
+  <div class="dashboard-title">GrowEmpire Dashboard</div>
+
   <div class="plant-box">
-    <h2>🌱 Sativa</h2>
-    <p>Dauer: 75 Tage<br>Preis: CHF 190</p>
-    <div class="progress-bar">
-      <div class="progress" style="width: 50%;"></div>
-    </div>
-    <button class="btn-kaufen">✅ Gekauft</button>
+    <div class="plant-title">🌱 Sativa</div>
+    <div>Dauer: 75 Tage<br>Preis: CHF 190</div>
+    <div class="progress-bar"><div class="progress-bar-fill" style="width: 50%;"></div></div>
+    <button class="bought-button">Gekauft</button>
   </div>
 
   <div class="plant-box">
-    <h2>🌱 Haze</h2>
-    <p>Dauer: 60 Tage<br>Preis: CHF 180</p>
-    <div class="progress-bar">
-      <div class="progress" style="width: 30%;"></div>
-    </div>
-    <button class="btn-kaufen">✅ Gekauft</button>
+    <div class="plant-title">🌱 Haze</div>
+    <div>Dauer: 60 Tage<br>Preis: CHF 180</div>
+    <div class="progress-bar"><div class="progress-bar-fill" style="width: 25%;"></div></div>
+    <button class="bought-button">Gekauft</button>
   </div>
+</div>
 
-  <!-- Menü Script -->
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById("menu");
-      menu.style.display = menu.style.display === "block" ? "none" : "block";
-    }
-  </script>
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById("sidebarMenu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+  }
+</script>
+
 </body>
 </html>
