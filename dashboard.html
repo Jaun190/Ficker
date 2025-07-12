@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard - GrowEmpire</title>
+  <title>Dashboard – GrowEmpire</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body {
@@ -23,7 +23,7 @@
       background: rgba(0, 0, 0, 0.6);
       border-bottom: 2px solid #00ff88;
       box-shadow: 0 0 12px #00ff88;
-      z-index: 998;
+      z-index: 99;
     }
 
     .menu-wrapper {
@@ -53,7 +53,7 @@
       background: rgba(0, 0, 0, 0.95);
       border: 2px solid #00ff88;
       border-radius: 14px;
-      padding: 1rem 0;
+      padding: 1rem;
       min-width: 220px;
       box-shadow: 0 0 16px #00ff88;
       z-index: 999;
@@ -149,13 +149,13 @@
     <div class="menu-wrapper">
       <div class="menu-icon" onclick="toggleMenu()">☰</div>
       <div id="dropdown" class="dropdown-menu">
-        <a href="dashboard.html">🧠 Dashboard</a>
-        <a href="pflanzen.html">🧬 Pflanzen</a>
-        <a href="partner.html">👥 Partner</a>
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="dashboard.html#pflanzen">🌿 Pflanzen</a>
+        <a href="partner.html">🤝 Partner</a>
         <a href="levelsystem.html">📈 Levelsystem</a>
-        <a href="lizenz.html">🪪 Lizenz</a>
+        <a href="lizenz.html">📄 Lizenz</a>
         <a href="einstellungen.html">⚙️ Einstellungen</a>
-        <a href="logout.html">🟥 Logout</a>
+        <a href="logout.html">❌ Logout</a>
       </div>
     </div>
   </div>
@@ -165,35 +165,38 @@
       Deine Lizenz ist aktiv bis: <strong>31.12.2025</strong>
     </div>
 
-    <div class="plant-box">
-      <img src="./assets/plant1.jpg" alt="Pflanze" class="plant-image" />
-      <h1>Sortenname: Super Haze</h1>
-      <p>Wachstumsphase abgeschlossen</p>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width: 100%;"></div>
+    <!-- Pflanzenübersicht -->
+    <div id="pflanzen">
+      <div class="plant-box">
+        <img src="./assets/plant1.jpg" alt="Pflanze" class="plant-image" />
+        <h1>Sortenname: Super Haze</h1>
+        <p>Wachstumsphase abgeschlossen</p>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 100%;"></div>
+        </div>
       </div>
-    </div>
 
-    <div class="plant-box">
-      <img src="./assets/plant2.jpg" alt="Pflanze" class="plant-image" />
-      <h1>Sortenname: White Widow</h1>
-      <p>Blütephase: Tag 32 / 60</p>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width: 53%;"></div>
+      <div class="plant-box">
+        <img src="./assets/plant2.jpg" alt="Pflanze" class="plant-image" />
+        <h1>Sortenname: White Widow</h1>
+        <p>Blütephase: Tag 32 / 60</p>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 53%;"></div>
+        </div>
       </div>
-    </div>
 
-    <div class="plant-box">
-      <img src="./assets/plant3.jpg" alt="Pflanze" class="plant-image" />
-      <h1>Sortenname: Purple Kush</h1>
-      <p>Wachstumsphase: Tag 7 / 14</p>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width: 50%;"></div>
+      <div class="plant-box">
+        <img src="./assets/plant3.jpg" alt="Pflanze" class="plant-image" />
+        <h1>Sortenname: Purple Kush</h1>
+        <p>Wachstumsphase: Tag 7 / 14</p>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 50%;"></div>
+        </div>
       </div>
-    </div>
 
-    <div class="license-box">
-      💡 Hinweis: Ernte möglich nach Blütephase. Aktiviere Benachrichtigungen, um keine Reinvest-Möglichkeit zu verpassen.
+      <div class="license-box">
+        💡 Hinweis: Ernte möglich nach Blütephase. Aktiviere Benachrichtigungen, um keine Reinvest-Möglichkeit zu verpassen!
+      </div>
     </div>
   </div>
 
