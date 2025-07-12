@@ -1,8 +1,7 @@
-<!DOCTYPE html>
-<html lang="de">
+<!DOCTYPE html><html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GrowEmpire Dashboard</title>
   <link rel="stylesheet" href="style.css" />
   <style>
@@ -14,96 +13,87 @@
       background-attachment: fixed;
       background-position: center;
       color: #00ff99;
-    }
+    }.menu-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1001;
+  cursor: pointer;
+}
 
-    .menu-toggle {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 1001;
-      cursor: pointer;
-    }
+.menu-toggle img {
+  width: 40px;
+  filter: drop-shadow(0 0 5px #00ff99);
+}
 
-    .menu-toggle img {
-      width: 40px;
-      filter: drop-shadow(0 0 5px #00ff99);
-    }
+.sidebar {
+  position: fixed;
+  top: 60px;
+  left: 20px;
+  width: 280px;
+  background: black;
+  border-radius: 20px;
+  box-shadow: 0 0 15px #00ff99;
+  padding: 20px;
+  z-index: 1000;
+  display: none;
+}
 
-    .sidebar {
-      position: fixed;
-      top: 60px;
-      left: 20px;
-      width: 280px;
-      background: black;
-      border-radius: 20px;
-      box-shadow: 0 0 15px #00ff99;
-      padding: 20px;
-      display: none;
-      z-index: 1000;
-    }
+.sidebar a {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  color: #00ff99;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+}
 
-    .sidebar a {
-      display: flex;
-      align-items: center;
-      padding: 10px;
-      color: #00ff99;
-      text-decoration: none;
-      font-size: 18px;
-      font-weight: bold;
-    }
+.sidebar a:hover {
+  background: #111;
+  border-radius: 10px;
+}
 
-    .sidebar a:hover {
-      background: #111;
-      border-radius: 10px;
-    }
+.sidebar img.icon {
+  width: 24px;
+  margin-right: 10px;
+}
 
-    .sidebar img.icon {
-      width: 24px;
-      margin-right: 10px;
-    }
+.container {
+  padding: 100px 20px 20px 20px;
+  max-width: 600px;
+  margin: auto;
+}
 
-    .container {
-      padding: 100px 20px 20px 20px;
-      max-width: 600px;
-      margin: auto;
-    }
+.dashboard-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-shadow: 0 0 10px #00ff99;
+}
 
-    .dashboard-title {
-      text-align: center;
-      font-size: 32px;
-      font-weight: bold;
-      margin-bottom: 30px;
-      text-shadow: 0 0 10px #00ff99;
-    }
   </style>
 </head>
 <body>
-
-<div class="menu-toggle" onclick="toggleMenu()">
-  <img src="assets/menu.png" alt="Menü" />
-</div>
-
-<div class="sidebar" id="sidebarMenu">
-  <a href="dashboard.html"><img class="icon" src="assets/dashboard-icon.png" alt=""> Dashboard</a>
-  <a href="plants.html"><img class="icon" src="assets/plant.png" alt=""> Pflanzen</a>
-  <a href="partner.html"><img class="icon" src="assets/partner.png" alt=""> Partner</a>
-  <a href="lizenz.html"><img class="icon" src="assets/box.png" alt=""> Lizenz</a>
-  <a href="einstellungen.html"><img class="icon" src="assets/settings.png" alt=""> Einstellungen</a>
-  <a href="auszahlung.html"><img class="icon" src="assets/money.png" alt=""> Auszahlung</a>
-  <a href="logout.html"><img class="icon" src="assets/logout.png" alt=""> Logout</a>
-</div>
-
-<div class="container">
-  <div class="dashboard-title">GrowEmpire Dashboard</div>
-  <!-- Dynamische Inhalte kommen später hierhin -->
-</div>
-
-<script>
-  function toggleMenu() {
-    const menu = document.getElementById("sidebarMenu");
-    menu.style.display = menu.style.display === "block" ? "none" : "block";
-  }
-</script>
-
-</body>
+  <div class="menu-toggle" onclick="toggleMenu()">
+    <img src="assets/menu.png" alt="Menu" />
+  </div>  <div class="sidebar" id="sidebarMenu">
+    <a href="dashboard.html"><img class="icon" src="assets/dashboard-icon.png" alt=""> Dashboard</a>
+    <a href="plants.html"><img class="icon" src="assets/plant.png" alt=""> Pflanzen</a>
+    <a href="partner.html"><img class="icon" src="assets/partner.png" alt=""> Partner</a>
+    <a href="lizens.html"><img class="icon" src="assets/box.png" alt=""> Lizenz</a>
+    <a href="level%20system.html"><img class="icon" src="assets/level.png" alt=""> Level System</a>
+    <a href="setting.html"><img class="icon" src="assets/settings.png" alt=""> Einstellungen</a>
+    <a href="payout.html"><img class="icon" src="assets/money.png" alt=""> Auszahlung</a>
+    <a href="index.html"><img class="icon" src="assets/logout.png" alt=""> Logout</a>
+  </div>  <div class="container">
+    <div class="dashboard-title">GrowEmpire Dashboard</div>
+    <!-- Dynamische Inhalte kommen später hierhin -->
+  </div>  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("sidebarMenu");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+  </script></body>
 </html>
