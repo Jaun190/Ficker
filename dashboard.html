@@ -3,151 +3,173 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GrowEmpire – Dashboard</title>
+  <title>Dashboard · GrowEmpire</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: black;
-      color: #00ff99;
-      font-family: 'Arial', sans-serif;
       margin: 0;
-      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background: url('./assets/dashboard.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #00ff88;
     }
 
-    .menu-toggle {
-      font-size: 26px;
+    .topbar {
       position: fixed;
-      top: 20px;
-      left: 20px;
-      cursor: pointer;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-bottom: 2px solid #00ff88;
+      box-shadow: 0 0 12px #00ff88;
       z-index: 1000;
-      background-color: #00ff99;
-      padding: 8px 12px;
-      border-radius: 8px;
-      box-shadow: 0 0 12px #00ff99;
-      color: black;
-    }
-
-    .menu {
-      position: fixed;
-      top: 70px;
-      left: 20px;
-      background-color: rgba(0, 0, 0, 0.85);
-      border: 2px solid #00ff99;
-      border-radius: 14px;
-      padding: 16px;
-      z-index: 999;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      box-shadow: 0 0 16px #00ff99;
-    }
-
-    .menu a {
-      color: #00ff99;
-      font-weight: bold;
-      text-decoration: none;
-      font-size: 18px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      justify-content: space-between;
+      padding: 0 20px;
     }
 
-    .menu a:hover {
-      color: white;
+    .logo {
+      height: 40px;
     }
 
-    .hidden {
-      display: none;
+    .dropdown-menu {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .dropdown-menu a {
+      text-decoration: none;
+      color: #00ff88;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .dropdown-menu a:hover {
+      text-shadow: 0 0 8px #00ff88;
     }
 
     .dashboard-content {
       margin-top: 100px;
-      padding: 20px;
+      padding: 2rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .plant-card {
-      background-color: #111;
-      border: 2px solid #00ff99;
-      border-radius: 14px;
-      padding: 16px;
-      margin-bottom: 20px;
-      box-shadow: 0 0 10px #00ff99;
+    .plant-box {
+      background: rgba(0, 0, 0, 0.75);
+      border: 2px solid #00ff88;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 0 12px #00ff88;
+      color: white;
+      text-align: center;
     }
 
-    .plant-card h3 {
-      margin: 0 0 10px;
+    .plant-box h1 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #00ff88;
+    }
+
+    .plant-box p {
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    .plant-image {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid #00ff88;
+      margin-bottom: 10px;
     }
 
     .progress-bar {
       width: 100%;
-      height: 12px;
-      background-color: #222;
-      border-radius: 6px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
       overflow: hidden;
+      height: 12px;
+      margin-top: 10px;
+      border: 1px solid #00ff88;
     }
 
     .progress-fill {
       height: 100%;
-      background-color: #00ff99;
-      width: 60%; /* Beispiel */
+      background: linear-gradient(90deg, #00ff88, #00cc66);
+      width: 0%;
+      transition: width 0.5s ease-in-out;
+    }
+
+    .license-box {
+      background: rgba(0,0,0,0.5);
+      border: 2px solid #00ff88;
+      padding: 10px 20px;
+      margin: 20px auto;
+      text-align: center;
+      color: #00ff88;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #00ff88;
     }
   </style>
 </head>
 <body>
 
-  <!-- Menü-Button -->
-  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-
-  <!-- Menü -->
-  <div id="menu" class="menu hidden">
-    <a href="dashboard.html"><span class="icon">🌿</span> Dashboard</a>
-    <a href="plants.html"><span class="icon">🧪</span> Pflanzen</a>
-    <a href="partner.html"><span class="icon">💼</span> Partner</a>
-    <a href="license.html"><span class="icon">📄</span> Lizenz</a>
-    <a href="settings.html"><span class="icon">⚙️</span> Einstellungen</a>
-    <a href="withdraw.html"><span class="icon">✂️</span> Auszahlung</a>
-    <a href="#" onclick="logout()"><span class="icon">🔴</span> Logout</a>
+  <div class="topbar">
+    <img src="./assets/kiffen.png" alt="Logo" class="logo" />
+    <div class="dropdown-menu">
+      <a href="dashboard.html">🏠 Dashboard</a>
+      <a href="pflanzen.html">🌱 Pflanzen</a>
+      <a href="partner.html">👥 Partner</a>
+      <a href="levelsystem.html">📊 Levelsystem</a>
+      <a href="lizenz.html">🎫 Lizenz</a>
+      <a href="einstellungen.html">⚙️ Einstellungen</a>
+      <a href="logout.html">🔴 Logout</a>
+    </div>
   </div>
 
-  <!-- Dashboard-Inhalt -->
   <div class="dashboard-content">
-    <div class="plant-card">
-      <h3>Sortenname: Super Haze</h3>
+    <div class="license-box">
+      Deine Lizenz ist aktiv bis: <strong>31.12.2025</strong>
+    </div>
+
+    <div class="plant-box">
+      <img src="./assets/plant1.jpg" alt="Pflanze" class="plant-image" />
+      <h1>Sortenname: Super Haze</h1>
       <p>Wachstumsphase abgeschlossen</p>
       <div class="progress-bar">
         <div class="progress-fill" style="width: 100%;"></div>
       </div>
     </div>
 
-    <div class="plant-card">
-      <h3>Sortenname: White Widow</h3>
+    <div class="plant-box">
+      <img src="./assets/plant2.jpg" alt="Pflanze" class="plant-image" />
+      <h1>Sortenname: White Widow</h1>
       <p>Blütephase: Tag 32 / 60</p>
       <div class="progress-bar">
         <div class="progress-fill" style="width: 53%;"></div>
       </div>
     </div>
 
-    <div class="plant-card">
-      <h3>Sortenname: Purple</h3>
-      <p>Wachstum läuft...</p>
+    <div class="plant-box">
+      <img src="./assets/plant3.jpg" alt="Pflanze" class="plant-image" />
+      <h1>Sortenname: Purple Kush</h1>
+      <p>Wachstumsphase: Tag 7 / 14</p>
       <div class="progress-bar">
-        <div class="progress-fill" style="width: 20%;"></div>
+        <div class="progress-fill" style="width: 50%;"></div>
       </div>
     </div>
+
+    <div class="license-box">
+      💡 Hinweis: Ernte möglich nach Blütephase. Aktiviere Benachrichtigungen, um keine Reinvest-Möglichkeit zu verpassen.
+    </div>
   </div>
-
-  <!-- JavaScript -->
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById("menu");
-      menu.classList.toggle("hidden");
-    }
-
-    function logout() {
-      alert("Du wurdest ausgeloggt.");
-      window.location.href = "index.html";
-    }
-  </script>
 
 </body>
 </html>
