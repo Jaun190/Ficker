@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GrowEmpire Dashboard</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
-      background: url('assets/dashboard-bg.png') no-repeat center center fixed;
+      font-family: Arial, sans-serif;
+      background: url('assets/dashboard.png') no-repeat center center fixed;
       background-size: cover;
       color: #00ff88;
     }
@@ -18,123 +18,106 @@
       position: fixed;
       top: 20px;
       left: 20px;
-      background: #00ff88;
+      background: rgba(0, 255, 136, 0.15);
+      padding: 12px;
       border-radius: 12px;
-      padding: 10px;
-      box-shadow: 0 0 15px #00ff88;
-      z-index: 10;
+      border: 2px solid #00ff88;
+      box-shadow: 0 0 12px #00ff88;
+      z-index: 1000;
     }
 
     .menu-button i {
-      font-size: 20px;
-      color: #000;
-    }
-
-    .container {
-      max-width: 500px;
-      margin: 100px auto 40px auto;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.6);
-      border-radius: 20px;
-      box-shadow: 0 0 20px #00ff88;
-      text-align: center;
-    }
-
-    .logo {
-      width: 100px;
-      margin-bottom: 10px;
-    }
-
-    h1 {
-      font-size: 36px;
-      margin-bottom: 10px;
+      font-size: 22px;
       color: #00ff88;
     }
 
+    .container {
+      max-width: 600px;
+      margin: 100px auto 60px auto;
+      padding: 20px;
+    }
+
     .license-box {
+      text-align: center;
       border: 2px solid #00ff88;
       border-radius: 12px;
       padding: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
+      background-color: rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 15px #00ff88;
       font-weight: bold;
-      background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 36px;
+      color: #00ff88;
+      text-shadow: 0 0 10px #00ff88;
+      margin-bottom: 20px;
     }
 
     .plant-card {
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.6);
       border: 2px solid #00ff88;
-      border-radius: 15px;
-      padding: 15px;
-      margin-bottom: 20px;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 25px;
       box-shadow: 0 0 15px #00ff88;
-      text-align: left;
     }
 
     .plant-title {
-      font-size: 22px;
+      font-size: 24px;
       font-weight: bold;
-      margin-bottom: 8px;
+      color: #00ff88;
+      margin-bottom: 10px;
     }
 
     .plant-info {
       font-size: 16px;
       margin-bottom: 5px;
+      color: #ffffff;
     }
 
     .progress-bar {
       height: 10px;
-      background: #444;
+      background: transparent;
+      border: 1px solid #00ff88;
       border-radius: 6px;
       overflow: hidden;
+      margin-top: 10px;
     }
 
     .progress {
-      height: 10px;
+      height: 100%;
       background: #00ff88;
-      width: 50%;
-    }
-
-    .icon {
-      margin-right: 5px;
+      width: 4%;
     }
   </style>
 </head>
 <body>
 
-  <!-- Menü-Button -->
   <div class="menu-button">
     <i class="fas fa-bars"></i>
   </div>
 
-  <!-- Dashboard Container -->
   <div class="container">
-    <img src="assets/kiffen.png" alt="GrowEmpire Logo" class="logo" />
+    <div class="license-box">Aktive Lizenz: DEMO</div>
     <h1>GrowEmpire</h1>
-    <div class="license-box">Aktive Lizenz: <strong>DEMO</strong></div>
 
-    <!-- Pflanze 1 -->
     <div class="plant-card">
       <div class="plant-title">🌱 Sativa</div>
-      <div class="plant-info"><i class="fa-solid fa-calendar-days icon"></i> Gekauft am: 7.7.2025</div>
-      <div class="plant-info"><i class="fa-solid fa-hourglass-half icon"></i> Noch 72 Tage bis zur Ernte</div>
+      <div class="plant-info">📅 Gekauft am: 7.7.2025</div>
+      <div class="plant-info">⏳ Noch 72 Tage bis zur Ernte</div>
       <div class="progress-bar"><div class="progress" style="width: 4%;"></div></div>
     </div>
 
-    <!-- Pflanze 2 -->
     <div class="plant-card">
       <div class="plant-title">🌱 Haze</div>
-      <div class="plant-info"><i class="fa-solid fa-calendar-days icon"></i> Gekauft am: 10.7.2025</div>
-      <div class="plant-info"><i class="fa-solid fa-hourglass-half icon"></i> Noch 80 Tage bis zur Ernte</div>
+      <div class="plant-info">📅 Gekauft am: 10.7.2025</div>
+      <div class="plant-info">⏳ Noch 80 Tage bis zur Ernte</div>
       <div class="progress-bar"><div class="progress" style="width: 0%;"></div></div>
     </div>
 
-    <!-- Pflanze 3 -->
-    <div class="plant-card">
-      <div class="plant-title">🌱 OG Kush</div>
-      <div class="plant-info"><i class="fa-solid fa-calendar-days icon"></i> Gekauft am: 10.7.2025</div>
-      <div class="plant-info"><i class="fa-solid fa-hourglass-half icon"></i> Noch 80 Tage bis zur Ernte</div>
-      <div class="progress-bar"><div class="progress" style="width: 0%;"></div></div>
-    </div>
   </div>
 
 </body>
