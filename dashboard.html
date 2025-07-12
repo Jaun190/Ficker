@@ -1,124 +1,152 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GrowEmpire Dashboard</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: url('assets/dashboard.png') no-repeat center center fixed;
+      font-family: 'Segoe UI', sans-serif;
+      background-image: url("assets/dashboard.png");
       background-size: cover;
-      color: #00ff88;
+      background-position: center;
+      background-attachment: fixed;
+      color: #fff;
     }
 
-    .menu-button {
+    .menu-icon {
       position: fixed;
       top: 20px;
       left: 20px;
-      background: rgba(0, 255, 136, 0.15);
-      padding: 12px;
-      border-radius: 12px;
-      border: 2px solid #00ff88;
-      box-shadow: 0 0 12px #00ff88;
-      z-index: 1000;
-    }
-
-    .menu-button i {
-      font-size: 22px;
-      color: #00ff88;
-    }
-
-    .container {
-      max-width: 600px;
-      margin: 100px auto 60px auto;
-      padding: 20px;
-    }
-
-    .license-box {
-      text-align: center;
-      border: 2px solid #00ff88;
-      border-radius: 12px;
+      background: #00ff88;
+      color: black;
       padding: 10px;
-      margin-bottom: 30px;
-      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      z-index: 1000;
+      cursor: pointer;
       box-shadow: 0 0 15px #00ff88;
+    }
+
+    .menu-panel {
+      position: fixed;
+      top: 70px;
+      left: 20px;
+      background-color: rgba(0, 0, 0, 0.9);
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #00ff88;
+      z-index: 999;
+      display: none;
+    }
+
+    .menu-panel a {
+      display: block;
+      color: #00ff88;
+      text-decoration: none;
+      margin: 10px 0;
       font-weight: bold;
     }
 
-    h1 {
+    .title {
       text-align: center;
-      font-size: 36px;
+      font-size: 3rem;
+      margin-top: 100px;
+      color: #bfffcc;
+      text-shadow: 0 0 15px #00ff88;
+    }
+
+    .license {
+      text-align: center;
+      margin: 20px auto;
+      font-weight: bold;
       color: #00ff88;
-      text-shadow: 0 0 10px #00ff88;
-      margin-bottom: 20px;
+      border: 2px solid #00ff88;
+      border-radius: 15px;
+      padding: 10px;
+      width: fit-content;
+      box-shadow: 0 0 10px #00ff88;
     }
 
     .plant-card {
-      background: rgba(0, 0, 0, 0.6);
-      border: 2px solid #00ff88;
-      border-radius: 16px;
+      background-color: rgba(0, 0, 0, 0.8);
+      margin: 20px auto;
       padding: 20px;
-      margin-bottom: 25px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 500px;
       box-shadow: 0 0 15px #00ff88;
     }
 
-    .plant-title {
-      font-size: 24px;
-      font-weight: bold;
+    .plant-card h2 {
       color: #00ff88;
       margin-bottom: 10px;
     }
 
-    .plant-info {
-      font-size: 16px;
-      margin-bottom: 5px;
-      color: #ffffff;
+    .plant-card p {
+      margin: 5px 0;
     }
 
     .progress-bar {
+      background-color: #222;
+      border-radius: 20px;
       height: 10px;
-      background: transparent;
-      border: 1px solid #00ff88;
-      border-radius: 6px;
-      overflow: hidden;
       margin-top: 10px;
+      overflow: hidden;
     }
 
-    .progress {
+    .progress-bar-fill {
       height: 100%;
-      background: #00ff88;
-      width: 4%;
+      background-color: #00ff88;
+      width: 20%; /* Beispielwert */
     }
   </style>
 </head>
 <body>
 
-  <div class="menu-button">
+  <!-- Menü Button -->
+  <div class="menu-icon" onclick="toggleMenu()">
     <i class="fas fa-bars"></i>
   </div>
 
-  <div class="container">
-    <div class="license-box">Aktive Lizenz: DEMO</div>
-    <h1>GrowEmpire</h1>
-
-    <div class="plant-card">
-      <div class="plant-title">🌱 Sativa</div>
-      <div class="plant-info">📅 Gekauft am: 7.7.2025</div>
-      <div class="plant-info">⏳ Noch 72 Tage bis zur Ernte</div>
-      <div class="progress-bar"><div class="progress" style="width: 4%;"></div></div>
-    </div>
-
-    <div class="plant-card">
-      <div class="plant-title">🌱 Haze</div>
-      <div class="plant-info">📅 Gekauft am: 10.7.2025</div>
-      <div class="plant-info">⏳ Noch 80 Tage bis zur Ernte</div>
-      <div class="progress-bar"><div class="progress" style="width: 0%;"></div></div>
-    </div>
-
+  <!-- Menü Panel -->
+  <div class="menu-panel" id="menuPanel">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="pflanzen.html">Meine Pflanzen</a>
+    <a href="partner.html">Partner</a>
+    <a href="logout.html">Logout</a>
   </div>
+
+  <!-- Titel & Lizenz -->
+  <h1 class="title">GrowEmpire</h1>
+  <div class="license">Aktive Lizenz: DEMO</div>
+
+  <!-- Pflanzen -->
+  <div class="plant-card">
+    <h2>🌱 Sativa</h2>
+    <p>📅 Gekauft am: 7.7.2025</p>
+    <p>⏳ Noch 72 Tage bis zur Ernte</p>
+    <div class="progress-bar">
+      <div class="progress-bar-fill" style="width: 15%;"></div>
+    </div>
+  </div>
+
+  <div class="plant-card">
+    <h2>🌱 Haze</h2>
+    <p>📅 Gekauft am: 10.7.2025</p>
+    <p>⏳ Noch 80 Tage bis zur Ernte</p>
+    <div class="progress-bar">
+      <div class="progress-bar-fill" style="width: 0%;"></div>
+    </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const panel = document.getElementById('menuPanel');
+      panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
 
 </body>
 </html>
