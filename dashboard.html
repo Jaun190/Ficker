@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard – GrowEmpire</title>
+  <title>Pflanzen – GrowEmpire</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body {
@@ -23,11 +23,9 @@
       background: rgba(0, 0, 0, 0.6);
       border-bottom: 2px solid #00ff88;
       box-shadow: 0 0 12px #00ff88;
-      z-index: 99;
     }
 
     .menu-wrapper {
-      position: relative;
       height: 100%;
       display: flex;
       align-items: center;
@@ -53,22 +51,18 @@
       background: rgba(0, 0, 0, 0.95);
       border: 2px solid #00ff88;
       border-radius: 14px;
-      padding: 1rem;
-      min-width: 220px;
-      box-shadow: 0 0 16px #00ff88;
-      z-index: 999;
+      padding: 12px 14px;
+      z-index: 99;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
     .dropdown-menu a {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 18px;
       color: #00ff88;
       text-decoration: none;
       font-weight: bold;
       font-size: 1.05rem;
-      transition: background 0.2s ease;
     }
 
     .dropdown-menu a:hover {
@@ -111,7 +105,7 @@
       object-fit: cover;
       border-radius: 10px;
       border: 2px solid #00ff88;
-      box-shadow: 0 0 10px #00ff88;
+      box-shadow: 0 10px #00ff88;
       margin-bottom: 10px;
     }
 
@@ -131,17 +125,6 @@
       width: 0%;
       transition: width 0.5s ease-in-out;
     }
-
-    .license-box {
-      background: rgba(0,0,0,0.5);
-      border: 2px solid #00ff88;
-      padding: 10px 20px;
-      margin: 20px auto;
-      text-align: center;
-      color: #00ff88;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #00ff88;
-    }
   </style>
 </head>
 <body>
@@ -149,11 +132,11 @@
     <div class="menu-wrapper">
       <div class="menu-icon" onclick="toggleMenu()">☰</div>
       <div id="dropdown" class="dropdown-menu">
-        <a href="dashboard.html">🏠 Dashboard</a>
-        <a href="dashboard.html#pflanzen">🌿 Pflanzen</a>
-        <a href="partner.html">🤝 Partner</a>
+        <a href="dashboard.html">📊 Dashboard</a>
+        <a href="plants.html">🌿 Pflanzen</a>
+        <a href="partner.html">👥 Partner</a>
         <a href="levelsystem.html">📈 Levelsystem</a>
-        <a href="lizenz.html">📄 Lizenz</a>
+        <a href="lizenz.html">💳 Lizenz</a>
         <a href="einstellungen.html">⚙️ Einstellungen</a>
         <a href="logout.html">❌ Logout</a>
       </div>
@@ -161,41 +144,30 @@
   </div>
 
   <div class="dashboard-content">
-    <div class="license-box">
-      Deine Lizenz ist aktiv bis: <strong>31.12.2025</strong>
+    <div class="plant-box">
+      <img src="./assets/plant1.jpg" alt="Pflanze" class="plant-image" />
+      <h1>Sortenname: Super Haze</h1>
+      <p>Wachstumsphase abgeschlossen</p>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 100%;"></div>
+      </div>
     </div>
 
-    <!-- Pflanzenübersicht -->
-    <div id="pflanzen">
-      <div class="plant-box">
-        <img src="./assets/plant1.jpg" alt="Pflanze" class="plant-image" />
-        <h1>Sortenname: Super Haze</h1>
-        <p>Wachstumsphase abgeschlossen</p>
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: 100%;"></div>
-        </div>
+    <div class="plant-box">
+      <img src="./assets/plant2.jpg" alt="Pflanze" class="plant-image" />
+      <h1>Sortenname: White Widow</h1>
+      <p>Blütephase: Tag 32 / 60</p>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 53%;"></div>
       </div>
+    </div>
 
-      <div class="plant-box">
-        <img src="./assets/plant2.jpg" alt="Pflanze" class="plant-image" />
-        <h1>Sortenname: White Widow</h1>
-        <p>Blütephase: Tag 32 / 60</p>
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: 53%;"></div>
-        </div>
-      </div>
-
-      <div class="plant-box">
-        <img src="./assets/plant3.jpg" alt="Pflanze" class="plant-image" />
-        <h1>Sortenname: Purple Kush</h1>
-        <p>Wachstumsphase: Tag 7 / 14</p>
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: 50%;"></div>
-        </div>
-      </div>
-
-      <div class="license-box">
-        💡 Hinweis: Ernte möglich nach Blütephase. Aktiviere Benachrichtigungen, um keine Reinvest-Möglichkeit zu verpassen!
+    <div class="plant-box">
+      <img src="./assets/plant3.jpg" alt="Pflanze" class="plant-image" />
+      <h1>Sortenname: Purple Kush</h1>
+      <p>Wachstumsphase: Tag 7 / 14</p>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 50%;"></div>
       </div>
     </div>
   </div>
