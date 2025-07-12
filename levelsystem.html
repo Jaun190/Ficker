@@ -46,31 +46,56 @@
     .level-content li {
       margin-bottom: 6px;
     }
-    nav.menu {
+
+    /* Menü-Button */
+    #menubtn {
       position: fixed;
       top: 20px;
       left: 20px;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 10px 15px;
-      border-radius: 10px;
       z-index: 1000;
+      cursor: pointer;
     }
-    nav.menu a {
+    #menubtn div {
+      width: 30px;
+      height: 4px;
+      background-color: white;
+      margin: 6px 0;
+    }
+
+    /* Slide-Out Menü */
+    #menulist {
+      display: none;
+      position: fixed;
+      top: 70px;
+      left: 20px;
+      background-color: rgba(0,0,0,0.8);
+      padding: 15px;
+      border-radius: 10px;
+      z-index: 999;
+    }
+    #menulist a {
       display: block;
-      color: #00ff88;
-      margin: 5px 0;
+      margin-bottom: 10px;
+      color: white;
       text-decoration: none;
       font-weight: bold;
     }
-    nav.menu a:hover {
+    #menulist a:hover {
       text-decoration: underline;
     }
   </style>
 </head>
 <body>
 
+  <!-- Menü-Button -->
+  <div id="menubtn">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
   <!-- Menü -->
-  <nav class="menu">
+  <div id="menulist">
     <a href="dashboard.html">🏠 Dashboard</a>
     <a href="pflanzen.html">🌱 Pflanzen</a>
     <a href="partner.html">🤝 Partner</a>
@@ -79,7 +104,7 @@
     <a href="einstellungen.html">⚙️ Einstellungen</a>
     <a href="auszahlung.html">💸 Auszahlung</a>
     <a href="logout.html">🚪 Logout</a>
-  </nav>
+  </div>
 
   <!-- Inhalt -->
   <div class="container">
@@ -101,7 +126,7 @@
       <div class="level-content">
         <ul>
           <li>👥 3 direkte Partner</li>
-          <li>💸 12 % Provision auf direkte Partner</li>
+          <li>💸 12 % Provision</li>
           <li>📊 Zugriff auf Partner-Statistik</li>
         </ul>
       </div>
@@ -112,38 +137,11 @@
       <div class="level-content">
         <ul>
           <li>👥 5 direkte Partner</li>
-          <li>💸 15 % Provision auf direkte Partner</li>
+          <li>💸 15 % Provision</li>
           <li>🔓 Reinvest-System aktiviert</li>
-          <li>🌱 Zugriff auf Bonuspflanzen</li>
+          <li>🌱 Bonuspflanzen möglich</li>
         </ul>
       </div>
     </div>
 
-    <div class="level-card">
-      <div class="level-title">🎯 Level 4 – Profi</div>
-      <div class="level-content">
-        <ul>
-          <li>👥 10 direkte Partner</li>
-          <li>💸 17 % auf direkte Partner</li>
-          <li>📊 +2 % auf 2. Ebene</li>
-          <li>🎁 Monatliche Bonusaktionen</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="level-card">
-      <div class="level-title">👑 Level 5 – Elite</div>
-      <div class="level-content">
-        <ul>
-          <li>👥 20+ direkte Partner</li>
-          <li>💸 20 % direkt, +5 % (2. Ebene), +2 % (3. Ebene)</li>
-          <li>💎 VIP-Zugang & exklusiver Support</li>
-          <li>🤑 Monatlicher Elite-Bonus</li>
-        </ul>
-      </div>
-    </div>
-
-  </div>
-
-</body>
-</html>
+    <div class="level
