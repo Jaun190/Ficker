@@ -3,150 +3,144 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GrowEmpire Dashboard</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Dashboard – GrowEmpire</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-image: url("assets/dashboard.png");
+      font-family: Arial, sans-serif;
+      background: url("assets/dashboard.png") no-repeat center center fixed;
       background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      color: #fff;
+      color: #00ff88;
+    }
+
+    nav {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+    }
+
+    .menu-toggle {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
     }
 
     .menu-icon {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background: #00ff88;
-      color: black;
-      padding: 10px;
-      border-radius: 10px;
-      z-index: 1000;
-      cursor: pointer;
-      box-shadow: 0 0 15px #00ff88;
+      width: 30px;
+      height: 3px;
+      background-color: #00ff88;
+      margin: 6px 0;
+      box-shadow: 0 0 10px #00ff88;
     }
 
-    .menu-panel {
-      position: fixed;
-      top: 70px;
-      left: 20px;
-      background-color: rgba(0, 0, 0, 0.9);
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px #00ff88;
-      z-index: 999;
+    .menu-box {
       display: none;
+      background-color: rgba(0, 0, 0, 0.95);
+      border: 2px solid #00ff88;
+      border-radius: 15px;
+      padding: 20px;
+      margin-top: 10px;
+      box-shadow: 0 0 20px #00ff88;
     }
 
-    .menu-panel a {
+    .menu-box a {
       display: block;
       color: #00ff88;
       text-decoration: none;
       margin: 10px 0;
       font-weight: bold;
+      font-size: 16px;
     }
 
-    .title {
-      text-align: center;
-      font-size: 3rem;
-      margin-top: 100px;
-      color: #bfffcc;
-      text-shadow: 0 0 15px #00ff88;
+    .menu-box a:hover {
+      color: #ffffff;
     }
 
-    .license {
-      text-align: center;
-      margin: 20px auto;
-      font-weight: bold;
-      color: #00ff88;
-      border: 2px solid #00ff88;
-      border-radius: 15px;
-      padding: 10px;
-      width: fit-content;
-      box-shadow: 0 0 10px #00ff88;
-    }
-
-    .plant-card {
-      background-color: rgba(0, 0, 0, 0.8);
-      margin: 20px auto;
+    .content {
+      margin-top: 120px;
       padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3em;
+      text-shadow: 0 0 20px #00ff88;
+    }
+
+    .section {
+      background-color: rgba(0, 0, 0, 0.7);
+      border: 2px solid #00ff88;
       border-radius: 20px;
-      width: 90%;
+      padding: 20px;
+      margin: 30px auto;
       max-width: 500px;
       box-shadow: 0 0 15px #00ff88;
     }
 
-    .plant-card h2 {
-      color: #00ff88;
+    .section h2 {
       margin-bottom: 10px;
-    }
-
-    .plant-card p {
-      margin: 5px 0;
     }
 
     .progress-bar {
       background-color: #222;
-      border-radius: 20px;
-      height: 10px;
-      margin-top: 10px;
+      border: 1px solid #00ff88;
+      border-radius: 10px;
       overflow: hidden;
+      height: 14px;
+      margin-top: 10px;
     }
 
-    .progress-bar-fill {
+    .progress-fill {
       height: 100%;
       background-color: #00ff88;
-      width: 20%; /* Beispielwert */
+      width: 30%; /* Beispielwert */
     }
+
   </style>
 </head>
 <body>
-
-  <!-- Menü Button -->
-  <div class="menu-icon" onclick="toggleMenu()">
-    <i class="fas fa-bars"></i>
-  </div>
-
-  <!-- Menü Panel -->
-  <div class="menu-panel" id="menuPanel">
-    <a href="dashboard.html">Dashboard</a>
-    <a href="pflanzen.html">Meine Pflanzen</a>
-    <a href="partner.html">Partner</a>
-    <a href="logout.html">Logout</a>
-  </div>
-
-  <!-- Titel & Lizenz -->
-  <h1 class="title">GrowEmpire</h1>
-  <div class="license">Aktive Lizenz: DEMO</div>
-
-  <!-- Pflanzen -->
-  <div class="plant-card">
-    <h2>🌱 Sativa</h2>
-    <p>📅 Gekauft am: 7.7.2025</p>
-    <p>⏳ Noch 72 Tage bis zur Ernte</p>
-    <div class="progress-bar">
-      <div class="progress-bar-fill" style="width: 15%;"></div>
+  <!-- Navigation -->
+  <nav>
+    <button class="menu-toggle" onclick="toggleMenu()">
+      <div class="menu-icon"></div>
+      <div class="menu-icon"></div>
+      <div class="menu-icon"></div>
+    </button>
+    <div class="menu-box" id="menu">
+      <a href="dashboard.html">📈 Dashboard</a>
+      <a href="plants.html">🌱 Pflanzen</a>
+      <a href="partner.html">🧑‍🤝‍🧑 Partner</a>
+      <a href="lizenz.html">📦 Lizenz</a>
+      <a href="einstellungen.html">⚙️ Einstellungen</a>
+      <a href="auszahlung.html">💸 Auszahlung</a>
+      <a href="logout.html">🔴 Logout</a>
     </div>
-  </div>
+  </nav>
 
-  <div class="plant-card">
-    <h2>🌱 Haze</h2>
-    <p>📅 Gekauft am: 10.7.2025</p>
-    <p>⏳ Noch 80 Tage bis zur Ernte</p>
-    <div class="progress-bar">
-      <div class="progress-bar-fill" style="width: 0%;"></div>
+  <!-- Inhalt -->
+  <div class="content">
+    <h1>GrowEmpire Dashboard</h1>
+
+    <div class="section">
+      <h2>🌱 Sativa</h2>
+      <p>Dauer: 75 Tage<br>Preis: CHF 190</p>
+      <div class="progress-bar"><div class="progress-fill" style="width: 40%;"></div></div>
+    </div>
+
+    <div class="section">
+      <h2>🌱 Haze</h2>
+      <p>Dauer: 60 Tage<br>Preis: CHF 180</p>
+      <div class="progress-bar"><div class="progress-fill" style="width: 20%;"></div></div>
     </div>
   </div>
 
   <script>
     function toggleMenu() {
-      const panel = document.getElementById('menuPanel');
-      panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+      const menu = document.getElementById("menu");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
     }
   </script>
-
 </body>
 </html>
