@@ -3,132 +3,117 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pflanzen kaufen – GrowEmpire</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>GrowEmpire – Pflanzen</title>
   <style>
     body {
-      background: #000;
-      color: #0f0;
+      margin: 0;
       font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
+      background-color: #000;
+      color: #00ff66;
     }
 
-    header {
-      background-color: #111;
-      padding: 20px;
+    .navbar {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      background-color: #000;
+      border-bottom: 2px solid #00ff66;
+    }
+
+    .navbar .menu-icon {
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .header {
       text-align: center;
-      border-bottom: 2px solid #0f0;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 28px;
-    }
-
-    .plant-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      padding: 20px;
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin: 1rem 0;
+      color: #00ff66;
+      text-shadow: 0 0 10px #00ff66;
     }
 
     .plant-card {
+      margin: 1.5rem auto;
+      padding: 1.5rem;
+      width: 90%;
+      max-width: 400px;
       background-color: #111;
-      border: 1px solid #0f0;
-      border-radius: 8px;
-      padding: 15px;
+      border: 2px solid #00ff66;
+      border-radius: 20px;
+      box-shadow: 0 0 10px #00ff66;
       text-align: center;
     }
 
     .plant-card img {
       width: 100%;
-      max-height: 180px;
+      max-height: 400px;
       object-fit: contain;
-      border-radius: 5px;
-      margin-bottom: 10px;
+      border-radius: 10px;
+      margin-bottom: 1rem;
     }
 
-    .buy-button {
-      background-color: #0f0;
-      color: #000;
+    .plant-card h3 {
+      margin: 0.5rem 0;
+      font-size: 1.8rem;
+      color: #00ff66;
+    }
+
+    .plant-card p {
+      margin: 0.3rem 0;
+      font-size: 1.1rem;
+    }
+
+    .plant-card .buy-btn {
+      margin-top: 1rem;
+      background-color: #ff0000;
+      color: white;
+      padding: 0.8rem 1.2rem;
       border: none;
-      padding: 10px 15px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: bold;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: default;
     }
 
-    .buy-button:hover {
-      background-color: #0c0;
+    .buy-btn:before {
+      content: '✅ ';
     }
 
-    nav {
-      background-color: #000;
-      padding: 10px;
-      text-align: center;
-      border-top: 2px solid #0f0;
-    }
+    @media (max-width: 500px) {
+      .plant-card {
+        padding: 1rem;
+      }
 
-    nav a {
-      color: #0f0;
-      text-decoration: none;
-      margin: 0 15px;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
+      .plant-card h3 {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Pflanzen kaufen</h1>
-    <p>Wähle deine Sorte und beginne deinen Grow</p>
-  </header>
 
-  <div class="plant-grid">
-    <div class="plant-card">
-      <img src="assets/haze1.png" alt="Haze 1" />
-      <h3>Haze 1</h3>
-      <p>CHF 150.–</p>
-      <button class="buy-button">Jetzt kaufen</button>
-    </div>
-
-    <div class="plant-card">
-      <img src="assets/kush2.png" alt="Kush 2" />
-      <h3>Kush 2</h3>
-      <p>CHF 160.–</p>
-      <button class="buy-button">Jetzt kaufen</button>
-    </div>
-
-    <div class="plant-card">
-      <img src="assets/kiffen.png" alt="Kiffen" />
-      <h3>Kiffen</h3>
-      <p>CHF 140.–</p>
-      <button class="buy-button">Jetzt kaufen</button>
-    </div>
-
-    <div class="plant-card">
-      <img src="assets/ogkush.png" alt="OG Kush" />
-      <h3>OG Kush</h3>
-      <p>CHF 170.–</p>
-      <button class="buy-button">Jetzt kaufen</button>
-    </div>
-
-    <div class="plant-card">
-      <img src="assets/sativa1.png" alt="Sativa 1" />
-      <h3>Sativa 1</h3>
-      <p>CHF 155.–</p>
-      <button class="buy-button">Jetzt kaufen</button>
-    </div>
+  <div class="navbar">
+    <div class="menu-icon">☰</div>
   </div>
 
-  <nav>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="levelsystem.html">Levelsystem</a>
-    <a href="lizenz.html">Lizenz</a>
-    <a href="index.html">Logout</a>
-  </nav>
+  <div class="header">GrowEmpire</div>
+
+  <div class="plant-card">
+    <img src="images/sativa.jpg" alt="Sativa Pflanze">
+    <h3>Sativa</h3>
+    <p>Dauer: 75 Tage</p>
+    <p>Preis: CHF 190</p>
+    <button class="buy-btn">Gekauft</button>
+  </div>
+
+  <div class="plant-card">
+    <img src="images/ogkush.jpg" alt="OG Kush Pflanze">
+    <h3>OG Kush</h3>
+    <p>Dauer: 75 Tage</p>
+    <p>Preis: CHF 170</p>
+    <button class="buy-btn">Gekauft</button>
+  </div>
+
 </body>
 </html>
