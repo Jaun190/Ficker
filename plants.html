@@ -59,8 +59,8 @@
       padding: 12px 10px;
       color: #00ff88;
       text-decoration: none;
-      font-size: 1rem;
       font-weight: bold;
+      font-size: 1rem;
       transition: background 0.25s;
     }
 
@@ -80,47 +80,41 @@
 </head>
 <body>
 
-  <!-- Menü -->
-  <div class="topbar">
-    <div class="menu-wrapper">
-      <div class="menu-icon" onclick="toggleMenu()">☰</div>
-      <div class="dropdown-menu" id="dropdown">
-        <a href="dashboard.html"><span>🏠</span> Dashboard</a>
-        <a href="plants.html"><span>🌿</span> Pflanzen</a>
-        <a href="partner.html"><span>🧑‍🤝‍🧑</span> Partner</a>
-        <a href="lizenz.html"><span>📜</span> Lizenz</a>
-        <a href="levelsystem.html"><span>📶</span> Levelsystem</a>
-        <a href="settings.html"><span>⚙️</span> Einstellungen</a>
-        <a href="payout.html"><span>💸</span> Auszahlung</a>
-        <a href="#" onclick="logoutAndRedirect()"><span>🔴</span> Logout</a>
-      </div>
+<!-- Menu -->
+<div class="topbar">
+  <div class="menu-wrapper">
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    <div class="dropdown-menu" id="dropdown">
+      <a href="dashboard.html"><span>📈</span> Dashboard</a>
+      <a href="plants.html"><span>🌿</span> Pflanzen</a>
+      <a href="partner.html"><span>🤝</span> Partner</a>
+      <a href="lizenz.html"><span>🎫</span> Lizenz</a>
+      <a href="settings.html"><span>⚙️</span> Einstellungen</a>
+      <a href="payout.html"><span>💸</span> Auszahlung</a>
+      <a href="index.html"><span>🔴</span> Logout</a>
     </div>
   </div>
+</div>
 
-  <!-- Dashboard-Inhalt -->
-  <div class="content">
-    <h1>Pflanzenübersicht</h1>
-    <p>Hier findest du alle Informationen zu deinen angebauten Pflanzen.</p>
-  </div>
+<!-- Seiteninhalt -->
+<div class="content">
+  <h1>Pflanzenübersicht</h1>
+  <p>Hier erscheinen bald deine gekauften Pflanzen und deren Wachstumsstatus.</p>
+</div>
 
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById("dropdown");
-      menu.style.display = menu.style.display === "block" ? "none" : "block";
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById("dropdown");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+  }
+
+  window.addEventListener("click", function (e) {
+    const menu = document.getElementById("dropdown");
+    if (!e.target.closest(".menu-wrapper")) {
+      menu.style.display = "none";
     }
-
-    window.addEventListener("click", function (e) {
-      const menu = document.getElementById("dropdown");
-      if (!e.target.closest(".menu-wrapper")) {
-        menu.style.display = "none";
-      }
-    });
-
-    function logoutAndRedirect() {
-      localStorage.clear();
-      window.location.href = "index.html";
-    }
-  </script>
+  });
+</script>
 
 </body>
 </html>
