@@ -3,122 +3,163 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GrowEmpire - Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <title>Dashboard – HashCore</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: url('./assets/dashboard.png') no-repeat center center fixed;
-      background-size: cover;
-      color: #00ff88;
+      font-family: 'Orbitron', sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
     }
 
-    .topbar {
-      position: relative;
-      background: rgba(0, 0, 0, 0.95);
-      width: 100%;
-      height: 60px;
-      display: flex;
-      border-bottom: 2px solid #00ff88;
-      box-shadow: 0 0 12px #00ff88;
-      z-index: 9999;
-      align-items: center;
-      padding-left: 20px;
+    .container {
+      padding: 30px;
+      max-width: 1200px;
+      margin: auto;
     }
 
-    .menu-icon {
-      background: rgba(0, 255, 136, 0.1);
-      border: 2px solid #00ff88;
-      color: #00ff88;
-      padding: 6px 12px;
-      border-radius: 10px;
-      font-size: 22px;
-      cursor: pointer;
-      box-shadow: 0 0 10px #00ff88;
-    }
-
-    .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 60px;
-      left: 20px;
-      background: rgba(0, 0, 0, 0.95);
-      border: 2px solid #00ff88;
-      border-radius: 12px;
-      padding: 0.5rem;
-      min-width: 200px;
-      box-shadow: 0 0 12px #00ff88;
-      z-index: 999;
-    }
-
-    .dropdown-menu a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 10px;
-      color: #00ff88;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1rem;
-      transition: background 0.25s;
-    }
-
-    .dropdown-menu a:hover {
-      background: rgba(0, 255, 136, 0.08);
-    }
-
-    .content {
-      padding: 2rem;
+    h1 {
       text-align: center;
+      color: #a259ff;
+      text-shadow: 0 0 10px #a259ff;
+      margin-bottom: 40px;
     }
 
-    .content h1 {
-      color: #00ff88;
+    .card {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 0 15px #a259ff88;
+      margin-bottom: 20px;
+    }
+
+    .button {
+      background: #a259ff;
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      font-size: 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+      display: inline-block;
+      margin: 10px 0;
+    }
+
+    .button:hover {
+      background: #842fff;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup-content {
+      background: #1a1a1a;
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 500px;
+      text-align: center;
+      color: white;
+      box-shadow: 0 0 20px #a259ff;
+    }
+
+    .popup-content h2 {
+      margin-bottom: 20px;
+      color: #a259ff;
+    }
+
+    .popup-content .button {
+      width: 100%;
+    }
+
+    .close {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      font-size: 24px;
+      cursor: pointer;
+      color: white;
+    }
+
+    @media(max-width: 600px) {
+      .popup-content {
+        width: 90%;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Menu -->
-  <div class="topbar">
-    <div class="menu-wrapper">
-      <div class="menu-icon" onclick="toggleMenu()">☰</div>
-      <div class="dropdown-menu" id="dropdown">
-        <a href="dashboard.html"><span>📊</span> Dashboard</a>
-        <a href="plants.html"><span>🌿</span> Pflanzen</a>
-        <a href="partner.html"><span>👥</span> Partner</a>
-        <a href="lizenz.html"><span>📜</span> Lizenz</a>
-        <a href="levelsystem.html"><span>📈</span> Levelsystem</a>
-        <a href="settings.html"><span>⚙️</span> Einstellungen</a>
-        <a href="payout.html"><span>💸</span> Auszahlung</a>
-        <a href="#" onclick="logoutAndRedirect()"><span>🔴</span> Logout</a>
-      </div>
-    </div>
+
+<div class="container">
+  <h1>Willkommen bei HashCore</h1>
+
+  <div class="card">
+    <h2>Deine Pakete</h2>
+    <p>Du hast noch keine Starterbox gekauft.</p>
+    <button class="button" onclick="openPackagePopup()">Starterbox kaufen</button>
   </div>
 
-  <!-- Dashboard-Inhalt -->
-  <div class="content">
-    <!-- Text entfernt wie gewünscht -->
+  <div class="card">
+    <h2>Dein Kontostand</h2>
+    <p><strong>CHF 0.00</strong></p>
+    <button class="button" onclick="openWithdrawPopup()">Auszahlung beantragen</button>
   </div>
+</div>
 
-  <!-- Menü-Logik -->
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById("dropdown");
-      menu.style.display = menu.style.display === "block" ? "none" : "block";
-    }
+<!-- Paket-Popup -->
+<div class="popup" id="packagePopup">
+  <div class="popup-content">
+    <span class="close" onclick="closePackagePopup()">&times;</span>
+    <h2>Starte jetzt mit deinem Paket</h2>
+    <p>Du benötigst eine Starterbox, um HashCore zu nutzen.</p>
+    <button class="button" onclick="buyStarterbox()">Starterbox für CHF 49.– kaufen</button>
+  </div>
+</div>
 
-    window.addEventListener("click", function (e) {
-      const menu = document.getElementById("dropdown");
-      if (!e.target.closest(".menu-wrapper")) {
-        menu.style.display = "none";
-      }
-    });
+<!-- Auszahlung-Popup -->
+<div class="popup" id="withdrawPopup">
+  <div class="popup-content">
+    <span class="close" onclick="closeWithdrawPopup()">&times;</span>
+    <h2>Auszahlung</h2>
+    <p>Dein Guthaben: CHF 0.00</p>
+    <input type="text" placeholder="Wallet-Adresse" style="width:100%;padding:10px;margin:15px 0;border-radius:8px;border:none;">
+    <button class="button">Auszahlung anfordern</button>
+  </div>
+</div>
 
-    function logoutAndRedirect() {
-      localStorage.clear();
-      window.location.href = "index.html";
-    }
-  </script>
+<script>
+  function openPackagePopup() {
+    document.getElementById("packagePopup").style.display = "flex";
+  }
+  function closePackagePopup() {
+    document.getElementById("packagePopup").style.display = "none";
+  }
+
+  function openWithdrawPopup() {
+    document.getElementById("withdrawPopup").style.display = "flex";
+  }
+  function closeWithdrawPopup() {
+    document.getElementById("withdrawPopup").style.display = "none";
+  }
+
+  function buyStarterbox() {
+    alert("Stripe-Zahlung wird implementiert…");
+    closePackagePopup();
+  }
+</script>
+
 </body>
 </html>
