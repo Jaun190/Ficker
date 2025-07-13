@@ -2,146 +2,148 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pflanzen kaufen – GrowEmpire</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GrowEmpire – Pflanzen</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #041d10;
-      color: white;
+      font-family: 'Orbitron', sans-serif;
+      background: url('assets/dashboard.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #0f0;
     }
 
-    h1 {
-      text-align: center;
-      margin: 20px 0;
-      font-size: 2rem;
+    .navbar {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 10;
     }
 
     .menu-button {
-      position: absolute;
-      top: 15px;
-      left: 15px;
-      font-size: 24px;
-      background: none;
-      border: none;
-      color: white;
-      z-index: 1000;
+      background: #000;
+      border: 2px solid #0f0;
+      padding: 10px;
+      border-radius: 5px;
       cursor: pointer;
+      box-shadow: 0 0 10px #0f0;
     }
 
-    .dropdown {
+    .menu {
       display: none;
       flex-direction: column;
-      background-color: #072a14;
-      padding: 10px;
-      position: absolute;
-      top: 50px;
-      left: 15px;
-      border-radius: 8px;
-      z-index: 999;
+      background: rgba(0, 0, 0, 0.95);
+      border: 2px solid #0f0;
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 10px;
+      box-shadow: 0 0 15px #0f0;
     }
 
-    .dropdown a {
-      color: #00ff99;
+    .menu a {
+      color: #0f0;
       text-decoration: none;
-      margin: 5px 0;
+      padding: 8px 0;
+      display: flex;
+      align-items: center;
     }
 
-    .plant-grid {
+    .menu a:hover {
+      text-decoration: underline;
+    }
+
+    .plants-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
-      padding: 20px;
-      max-width: 900px;
-      margin: 0 auto;
+      padding: 120px 20px 40px;
     }
 
     .plant-card {
-      background-color: #083a1d;
-      border-radius: 20px;
-      overflow: hidden;
+      background: rgba(0, 0, 0, 0.85);
+      border: 2px solid #0f0;
+      border-radius: 15px;
       padding: 15px;
+      box-shadow: 0 0 15px #0f0;
       text-align: center;
-      box-shadow: 0 0 15px rgba(0, 255, 100, 0.2);
+      color: #0f0;
     }
 
     .plant-card img {
       width: 100%;
+      height: 200px;
+      object-fit: cover;
       border-radius: 10px;
     }
 
-    .plant-card h2 {
-      font-size: 1.2rem;
-      margin: 10px 0 5px 0;
-    }
-
-    .plant-card p {
-      margin: 5px 0 10px;
-      color: #ccc;
-    }
-
-    button {
-      background-color: #00ffcc;
+    .buy-button {
+      margin-top: 10px;
+      background: red;
+      color: white;
+      padding: 10px;
       border: none;
-      border-radius: 10px;
-      padding: 10px 20px;
+      border-radius: 8px;
       font-weight: bold;
       cursor: pointer;
-      color: black;
+      box-shadow: 0 0 10px red;
     }
 
-    button:hover {
-      background-color: #00ccaa;
+    .menu-icon {
+      margin-right: 8px;
     }
   </style>
 </head>
 <body>
-
-  <!-- Burger-Menü -->
-  <button class="menu-button" onclick="toggleMenu()">☰</button>
-  <div id="dropdown" class="dropdown">
-    <a href="dashboard.html">📊 Dashboard</a>
-    <a href="partner.html">🤝 Partner</a>
-    <a href="settings.html">⚙️ Einstellungen</a>
-    <a href="index.html">🚪 Logout</a>
+  <div class="navbar">
+    <div class="menu-button" onclick="toggleMenu()">☰</div>
+    <div class="menu" id="menu">
+      <a href="plants.html"><span class="menu-icon">🌱</span>Pflanzen</a>
+      <a href="dashboard.html"><span class="menu-icon">📈</span>Dashboard</a>
+      <a href="partner.html"><span class="menu-icon">🧑‍🤝‍🧑</span>Partner</a>
+      <a href="lizenz.html"><span class="menu-icon">📦</span>Lizenz</a>
+      <a href="levelsystem.html"><span class="menu-icon">🎯</span>Levelsystem</a>
+      <a href="settings.html"><span class="menu-icon">⚙️</span>Einstellungen</a>
+      <a href="auszahlung.html"><span class="menu-icon">💸</span>Auszahlung</a>
+      <a href="index.html"><span class="menu-icon">🔴</span>Logout</a>
+    </div>
   </div>
 
-  <h1>🌿 Pflanzen kaufen</h1>
+  <div class="plants-container">
+    <div class="plant-card">
+      <img src="assets/sativa1.png" alt="Sativa" />
+      <h3>Sativa</h3>
+      <p>Dauer: 75 Tage<br>Preis: CHF 190</p>
+      <button class="buy-button">✅ Gekauft</button>
+    </div>
 
-  <div class="plant-grid">
     <div class="plant-card">
-      <img src="ogkush.png" alt="OG Kush" />
-      <h2>OG Kush</h2>
-      <p>Kräftige Blüte, Klassiker unter den Strains.</p>
-      <button>Kaufen</button>
+      <img src="assets/haze1.png" alt="Haze" />
+      <h3>Haze</h3>
+      <p>Dauer: 75 Tage<br>Preis: CHF 180</p>
+      <button class="buy-button">Kaufen</button>
     </div>
+
     <div class="plant-card">
-      <img src="purplehaze.png" alt="Purple Haze" />
-      <h2>Purple Haze</h2>
-      <p>Fruchtiger Geschmack mit starkem High.</p>
-      <button>Kaufen</button>
+      <img src="assets/kush2.png" alt="Kush" />
+      <h3>Kush</h3>
+      <p>Dauer: 75 Tage<br>Preis: CHF 185</p>
+      <button class="buy-button">Kaufen</button>
     </div>
+
     <div class="plant-card">
-      <img src="gelato.png" alt="Gelato" />
-      <h2>Gelato</h2>
-      <p>Süß & cremig – perfekt für Genießer.</p>
-      <button>Kaufen</button>
-    </div>
-    <div class="plant-card">
-      <img src="amnesia.png" alt="Amnesia" />
-      <h2>Amnesia</h2>
-      <p>Stark & legendär – für erfahrene Grower.</p>
-      <button>Kaufen</button>
+      <img src="assets/ogkush.png" alt="OG Kush" />
+      <h3>OG Kush</h3>
+      <p>Dauer: 75 Tage<br>Preis: CHF 200</p>
+      <button class="buy-button">Kaufen</button>
     </div>
   </div>
 
   <script>
     function toggleMenu() {
-      const menu = document.getElementById("dropdown");
-      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+      const menu = document.getElementById('menu');
+      menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
     }
   </script>
-
 </body>
 </html>
