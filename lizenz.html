@@ -13,7 +13,6 @@
       background-size: cover;
       color: #00ff88;
     }
-
     .topbar {
       position: relative;
       background: rgba(0, 0, 0, 0.95);
@@ -23,14 +22,12 @@
       box-shadow: 0 0 12px #00ff88;
       z-index: 9999;
     }
-
     .menu-wrapper {
       height: 100%;
       display: flex;
       align-items: center;
       padding-left: 20px;
     }
-
     .menu-icon {
       background: rgba(0, 255, 136, 0.1);
       border: 2px solid #00ff88;
@@ -41,7 +38,6 @@
       cursor: pointer;
       box-shadow: 0 0 10px #00ff88;
     }
-
     .dropdown-menu {
       display: none;
       position: absolute;
@@ -55,7 +51,6 @@
       box-shadow: 0 0 12px #00ff88;
       z-index: 999;
     }
-
     .dropdown-menu a {
       display: flex;
       align-items: center;
@@ -67,11 +62,9 @@
       font-size: 1rem;
       transition: background 0.2s;
     }
-
     .dropdown-menu a:hover {
       background: rgba(0, 255, 136, 0.08);
     }
-
     .content {
       margin-top: 60px;
       padding: 2rem;
@@ -80,7 +73,6 @@
       gap: 1.5rem;
       justify-content: center;
     }
-
     .box {
       background: rgba(0, 0, 0, 0.85);
       border: 2px solid #00ff88;
@@ -89,29 +81,24 @@
       width: 300px;
       box-shadow: 0 0 16px #00ff88;
     }
-
     .box h2 {
       font-size: 1.3rem;
       color: #00ff88;
       margin-bottom: 1rem;
     }
-
     .box ul {
       list-style: none;
       padding: 0;
       margin: 0 1rem 0;
     }
-
     .box ul li::before {
       content: "✅ ";
       color: #00ff88;
     }
-
     .box ul li {
       color: #ccc;
       margin-bottom: 0.4rem;
     }
-
     .btn {
       display: block;
       width: 100%;
@@ -128,7 +115,7 @@
 </head>
 <body>
 
-  <!-- Menu -->
+  <!-- Menü -->
   <div class="topbar">
     <div class="menu-wrapper">
       <div class="menu-icon" onclick="toggleMenu()">☰</div>
@@ -140,12 +127,12 @@
         <a href="levelsystem.html"><span>🎯</span> Levelsystem</a>
         <a href="settings.html"><span>⚙️</span> Einstellungen</a>
         <a href="payout.html"><span>🌿</span> Auszahlung</a>
-        <a href="logout.html"><span>🔴</span> Logout</a>
+        <a href="#" onclick="logoutAndRedirect()"><span>🔴</span> Logout</a>
       </div>
     </div>
   </div>
 
-  <!-- Inhalt -->
+  <!-- Lizenzinhalt -->
   <div class="content">
     <div class="box">
       <h2>🥉 Basic Lizenz<br><small>CHF 49.– (einmalig)</small></h2>
@@ -195,6 +182,12 @@
         menu.style.display = "none";
       }
     });
+
+    function logoutAndRedirect() {
+      localStorage.clear();
+      window.location.href = "index.html";
+    }
   </script>
+
 </body>
 </html>
