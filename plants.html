@@ -15,24 +15,22 @@
     }
 
     .topbar {
-      position: fixed;
-      top: 0;
-      left: 0;
+      position: relative;
+      background: rgba(0, 0, 0, 0.95);
       width: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      border-bottom: 2px solid #00ff88;
       box-shadow: 0 0 12px #00ff88;
-      z-index: 998;
+      border-bottom: 2px solid #00ff88;
+      height: 60px;
       display: flex;
       align-items: center;
       padding-left: 20px;
-      height: 100px;
+      z-index: 9999;
     }
 
     .menu-icon {
       background: rgba(0, 255, 136, 0.1);
-      color: #00ff88;
       border: 2px solid #00ff88;
+      color: #00ff88;
       padding: 6px 12px;
       border-radius: 10px;
       font-size: 22px;
@@ -62,159 +60,67 @@
       color: #00ff88;
       text-decoration: none;
       font-size: 1rem;
-      transition: background 0.2s;
+      font-weight: bold;
+      transition: background 0.25s;
     }
 
     .dropdown-menu a:hover {
       background: rgba(0, 255, 136, 0.08);
     }
 
-    .grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding-top: 100px;
-    }
-
-    .pflanze {
-      background-color: rgba(0, 0, 0, 0.85);
-      border: 2px solid #00ff88;
-      border-radius: 15px;
-      margin: 15px;
-      width: 250px;
+    .content {
+      padding: 2rem;
       text-align: center;
-      box-shadow: 0 0 15px #00ff88;
-      padding: 15px;
     }
 
-    .pflanze img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
-    }
-
-    .pflanze button {
-      background-color: #00ff66;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 8px;
-      font-weight: bold;
-      color: #000;
-      margin-top: 10px;
-      cursor: pointer;
-    }
-
-    .gekauft-btn {
-      background-color: #f00 !important;
-      color: #000 !important;
-    }
-
-    .rabatt {
-      font-size: 0.9rem;
-      color: #ff0;
-      margin-bottom: 5px;
+    .content h1 {
+      color: #00ff88;
     }
   </style>
 </head>
 <body>
+
   <!-- Menü -->
   <div class="topbar">
     <div class="menu-wrapper">
       <div class="menu-icon" onclick="toggleMenu()">☰</div>
       <div class="dropdown-menu" id="dropdown">
-        <a href="dashboard.html"><span>📈</span> Dashboard</a>
-        <a href="plants.html"><span>🌱</span> Pflanzen</a>
+        <a href="dashboard.html"><span>🏠</span> Dashboard</a>
+        <a href="plants.html"><span>🌿</span> Pflanzen</a>
         <a href="partner.html"><span>🧑‍🤝‍🧑</span> Partner</a>
-        <a href="lizenz.html"><span>📦</span> Lizenz</a>
+        <a href="lizenz.html"><span>📜</span> Lizenz</a>
+        <a href="levelsystem.html"><span>📶</span> Levelsystem</a>
         <a href="settings.html"><span>⚙️</span> Einstellungen</a>
         <a href="payout.html"><span>💸</span> Auszahlung</a>
-        <a href="index.html"><span>🔴</span> Logout</a>
+        <a href="#" onclick="logoutAndRedirect()"><span>🔴</span> Logout</a>
       </div>
     </div>
   </div>
 
-  <!-- Pflanzen -->
-  <div class="grid" id="pflanzenContainer"></div>
+  <!-- Dashboard-Inhalt -->
+  <div class="content">
+    <h1>Pflanzenübersicht</h1>
+    <p>Hier findest du alle Informationen zu deinen angebauten Pflanzen.</p>
+  </div>
 
   <script>
     function toggleMenu() {
-      const menu = document.getElementById('dropdown');
-      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+      const menu = document.getElementById("dropdown");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
     }
 
-    window.addEventListener('click', function (e) {
-      const menu = document.getElementById('dropdown');
-      if (!e.target.closest('.menu-wrapper')) {
-        menu.style.display = 'none';
+    window.addEventListener("click", function (e) {
+      const menu = document.getElementById("dropdown");
+      if (!e.target.closest(".menu-wrapper")) {
+        menu.style.display = "none";
       }
     });
 
-    const pflanzen = [
-      { name: "Sativa", tage: 75, preis: 190, bild: "assets/sativa1.png" },
-      { name: "Haze", tage: 80, preis: 180, bild: "assets/haze1.png" },
-      { name: "Kush 2", tage: 90, preis: 200, bild: "assets/kush2.png" },
-      { name: "OG Kush", tage: 85, preis: 210, bild: "assets/ogkush.png" },
-      { name: "Bubble Gum", tage: 78, preis: 195, bild: "assets/bubblegum.png" }
-    ];
-
-    function kaufen(name, tage, preis) {
-      let gekauft = JSON.parse(localStorage.getItem("purchases") || "[]");
-      if (!gekauft.find(p => p.name === name)) {
-        gekauft.push({ name, tage, preis, date: new Date().toISOString() });
-      }
-      localStorage.setItem("purchases", JSON.stringify(gekauft));
-      window.location.reload();
+    function logoutAndRedirect() {
+      localStorage.clear();
+      window.location.href = "index.html";
     }
-
-    function renderPflanzen() {
-      const container = document.getElementById("pflanzenContainer");
-      const gekauft = JSON.parse(localStorage.getItem("purchases") || "[]");
-      const gekauftSet = new Set(gekauft.map(p => p.name));
-
-      const lizenz = localStorage.getItem("lizenz") || "";
-      const reinvestAktiv = localStorage.getItem("reinvestAktiv") === "true";
-      const rabatt = (lizenz === "premium" && reinvestAktiv) ? 0.10 : 0;
-
-      pflanzen.forEach(p => {
-        const div = document.createElement("div");
-        div.className = "pflanze";
-        div.setAttribute("data-name", p.name);
-
-        const img = document.createElement("img");
-        img.src = p.bild;
-        img.alt = p.name;
-
-        const name = document.createElement("h2");
-        name.textContent = p.name;
-
-        const rabattText = rabatt > 0 ? `<div class="rabatt">🌟 10% Reinvest-Rabatt</div>` : '';
-        const neuerPreis = rabatt > 0 ? (p.preis * (1 - rabatt)).toFixed(2) : p.preis;
-
-        const info = document.createElement("p");
-        info.innerHTML = `${rabattText}Dauer: ${p.tage} Tage<br>Preis: CHF ${neuerPreis}`;
-
-        const btn = document.createElement("button");
-        if (gekauftSet.has(p.name)) {
-          btn.textContent = "✅ Gekauft";
-          btn.className = "gekauft-btn";
-          btn.disabled = true;
-        } else {
-          btn.textContent = "🛒 Kaufen";
-          btn.onclick = () => kaufen(p.name, p.tage, neuerPreis);
-        }
-
-        div.appendChild(img);
-        div.appendChild(name);
-        div.appendChild(info);
-        div.appendChild(btn);
-        container.appendChild(div);
-      });
-
-      // Reinvest-Modus zurücksetzen nach dem Kauf
-      localStorage.removeItem("reinvestAktiv");
-    }
-
-    renderPflanzen();
   </script>
+
 </body>
 </html>
