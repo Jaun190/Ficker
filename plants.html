@@ -3,147 +3,150 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GrowEmpire – Pflanzen</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <title>Pflanzen kaufen – GrowEmpire</title>
   <style>
     body {
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
       margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      background: url('assets/dashboard.png') no-repeat center center fixed;
-      background-size: cover;
-      color: #0f0;
+      padding: 0;
     }
 
-    .navbar {
+    /* Menü */
+    .menu-container {
       position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 10;
+      top: 15px;
+      left: 15px;
+      z-index: 1000;
     }
 
-    .menu-button {
-      background: #000;
-      border: 2px solid #0f0;
-      padding: 10px;
-      border-radius: 5px;
+    .menu-toggle {
+      font-size: 30px;
+      color: lime;
+      background-color: black;
+      padding: 10px 12px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px lime;
       cursor: pointer;
-      box-shadow: 0 0 10px #0f0;
     }
 
-    .menu {
+    .menu-dropdown {
       display: none;
       flex-direction: column;
-      background: rgba(0, 0, 0, 0.95);
-      border: 2px solid #0f0;
-      border-radius: 10px;
-      padding: 15px;
       margin-top: 10px;
-      box-shadow: 0 0 15px #0f0;
+      background-color: #000;
+      border: 2px solid lime;
+      border-radius: 15px;
+      padding: 15px;
+      box-shadow: 0 0 15px lime;
     }
 
-    .menu a {
-      color: #0f0;
+    .menu-dropdown a {
+      color: white;
+      padding: 10px 5px;
       text-decoration: none;
-      padding: 8px 0;
+      font-size: 18px;
+    }
+
+    .menu-dropdown a:hover {
+      background-color: #111;
+      border-radius: 10px;
+    }
+
+    /* Pflanzenkarten */
+    .plant-container {
       display: flex;
-      align-items: center;
-    }
-
-    .menu a:hover {
-      text-decoration: underline;
-    }
-
-    .plants-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      padding: 120px 20px 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 120px;
+      padding: 20px;
     }
 
     .plant-card {
-      background: rgba(0, 0, 0, 0.85);
-      border: 2px solid #0f0;
-      border-radius: 15px;
+      background-color: #111;
+      border: 2px solid lime;
+      border-radius: 20px;
+      box-shadow: 0 0 15px lime;
+      margin: 15px;
       padding: 15px;
-      box-shadow: 0 0 15px #0f0;
+      width: 280px;
       text-align: center;
-      color: #0f0;
     }
 
     .plant-card img {
       width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 10px;
+      border-radius: 12px;
+      margin-bottom: 10px;
     }
 
-    .buy-button {
+    .plant-card h3 {
+      color: lime;
+    }
+
+    .plant-card button {
       margin-top: 10px;
-      background: red;
-      color: white;
-      padding: 10px;
+      background-color: lime;
+      color: black;
+      padding: 10px 15px;
       border: none;
-      border-radius: 8px;
-      font-weight: bold;
+      border-radius: 10px;
       cursor: pointer;
-      box-shadow: 0 0 10px red;
+      font-weight: bold;
     }
 
-    .menu-icon {
-      margin-right: 8px;
+    .plant-card button:hover {
+      background-color: #aaff00;
     }
   </style>
 </head>
 <body>
-  <div class="navbar">
-    <div class="menu-button" onclick="toggleMenu()">☰</div>
-    <div class="menu" id="menu">
-      <a href="plants.html"><span class="menu-icon">🌱</span>Pflanzen</a>
-      <a href="dashboard.html"><span class="menu-icon">📈</span>Dashboard</a>
-      <a href="partner.html"><span class="menu-icon">🧑‍🤝‍🧑</span>Partner</a>
-      <a href="lizenz.html"><span class="menu-icon">📦</span>Lizenz</a>
-      <a href="levelsystem.html"><span class="menu-icon">🎯</span>Levelsystem</a>
-      <a href="settings.html"><span class="menu-icon">⚙️</span>Einstellungen</a>
-      <a href="auszahlung.html"><span class="menu-icon">💸</span>Auszahlung</a>
-      <a href="index.html"><span class="menu-icon">🔴</span>Logout</a>
+
+  <!-- Menü -->
+  <div class="menu-container">
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <div class="menu-dropdown" id="menuDropdown">
+      <a href="dashboard.html">📈 <b style="color:lime">Dashboard</b></a>
+      <a href="plants.html">🌱 <b style="color:lime">Pflanzen</b></a>
+      <a href="partner.html">🧑‍🤝‍🧑 <b style="color:lime">Partner</b></a>
+      <a href="lizenz.html">📦 <b style="color:lime">Lizenz</b></a>
+      <a href="levelsystem.html">🎯 <b style="color:lime">Levelsystem</b></a>
+      <a href="settings.html">⚙️ <b style="color:lime">Einstellungen</b></a>
+      <a href="auszahlung.html">🌿 <b style="color:lime">Auszahlung</b></a>
+      <a href="index.html">🔴 <b style="color:red">Logout</b></a>
     </div>
   </div>
 
-  <div class="plants-container">
+  <!-- Pflanzenbereich -->
+  <div class="plant-container">
     <div class="plant-card">
-      <img src="assets/sativa1.png" alt="Sativa" />
-      <h3>Sativa</h3>
-      <p>Dauer: 75 Tage<br>Preis: CHF 190</p>
-      <button class="buy-button">✅ Gekauft</button>
+      <img src="pflanze1.jpg" alt="Pflanze 1">
+      <h3>Hanf Sativa</h3>
+      <p>CHF 150.– | Ertrag: 20%</p>
+      <button>Kaufen</button>
     </div>
 
     <div class="plant-card">
-      <img src="assets/haze1.png" alt="Haze" />
-      <h3>Haze</h3>
-      <p>Dauer: 75 Tage<br>Preis: CHF 180</p>
-      <button class="buy-button">Kaufen</button>
+      <img src="pflanze2.jpg" alt="Pflanze 2">
+      <h3>Hanf Indica</h3>
+      <p>CHF 180.– | Ertrag: 25%</p>
+      <button>Kaufen</button>
     </div>
 
     <div class="plant-card">
-      <img src="assets/kush2.png" alt="Kush" />
-      <h3>Kush</h3>
-      <p>Dauer: 75 Tage<br>Preis: CHF 185</p>
-      <button class="buy-button">Kaufen</button>
-    </div>
-
-    <div class="plant-card">
-      <img src="assets/ogkush.png" alt="OG Kush" />
-      <h3>OG Kush</h3>
-      <p>Dauer: 75 Tage<br>Preis: CHF 200</p>
-      <button class="buy-button">Kaufen</button>
+      <img src="pflanze3.jpg" alt="Pflanze 3">
+      <h3>Pro Hybrid</h3>
+      <p>CHF 200.– | Ertrag: 30%</p>
+      <button>Kaufen</button>
     </div>
   </div>
 
   <script>
     function toggleMenu() {
-      const menu = document.getElementById('menu');
-      menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex';
+      var menu = document.getElementById("menuDropdown");
+      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
     }
   </script>
+
 </body>
 </html>
